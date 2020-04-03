@@ -29,8 +29,11 @@ def create_app(config_class = Config):
     from emergencyassistant.users.routes import users
     from emergencyassistant.posts.routes import posts
     from emergencyassistant.main.routes import main
+    from emergencyassistant.errors.handlers import errors
+
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
+    app.register_blueprint(errors)
 
     return app
