@@ -1,4 +1,4 @@
-from emergencyassistant import create_app
+from emas import create_app
 
 app = create_app()
 

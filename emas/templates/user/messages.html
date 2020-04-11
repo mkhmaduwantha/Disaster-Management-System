@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>{{ 'Messages' }}</h1>
+    {% for message in messages %}
+ 
+        
+        <p>{{ message.author.username }}</p>
+        <p>{{ message.body }}</p>
+        <p>{{ message.timestamp }}</p>
+        <p><a href="{{ url_for('users.send_message', recipient = message.author.username)}}"> Reply to {{ message.author.username }}</a></p>
+    
+
+    {% endfor %}
+    
+{% endblock %}
