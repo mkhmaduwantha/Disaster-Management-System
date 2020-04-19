@@ -12,7 +12,7 @@ import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MyMap from "./MyMap";
 import Test from "./Test";
-import { FaHome, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import { FaHome, FaMapMarkerAlt, FaPhone, FaMapPin } from "react-icons/fa";
 import { IoIosChatbubbles } from "react-icons/io";
 import Home from "./Home";
 import PhoneBook from "./PhoneBook";
