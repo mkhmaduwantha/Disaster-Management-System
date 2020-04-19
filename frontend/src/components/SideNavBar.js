@@ -27,6 +27,7 @@ export class SideNavBar extends Component {
             render={({ location, history }) => (
               <React.Fragment>
                 <SideNav
+                  style={{ "background-color": "#298F9E" }}
                   onSelect={(selected) => {
                     const to = "/" + selected;
                     if (location.pathname !== to) {
