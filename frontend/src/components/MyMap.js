@@ -16,6 +16,7 @@ import "./styles/MyMap.css";
 import { FaHome, FaMapMarkerAlt, FaPhone, FaMapPin } from "react-icons/fa";
 import iconFixed from "leaflet/dist/images/fixed-location.png";
 import iconDrag from "leaflet/dist/images/drag-location.png";
+import iconUser from "leaflet/dist/images/user-location.png";
 
 var myIcon = L.icon({
   iconUrl: iconDrag,
@@ -31,26 +32,12 @@ var myIconFixed = L.icon({
   popupAnchor: [0, -41],
 });
 
-// var options = {
-//   enableHighAccuracy: true,
-//   timeout: 5000,
-//   maximumAge: 0
-// };
-
-// function success(pos) {
-//   var crd = pos.coords;
-
-//   console.log('Your current position is:');
-//   console.log(`Latitude : ${crd.latitude}`);
-//   console.log(`Longitude: ${crd.longitude}`);
-//   console.log(`More or less ${crd.accuracy} meters.`);
-// }
-
-// function error(err) {
-//   console.warn(`ERROR(${err.code}): ${err.message}`);
-// }
-
-// navigator.geolocation.getCurrentPosition(success, error, options);
+var myIconUser = L.icon({
+  iconUrl: iconUser,
+  iconSize: [25, 41],
+  iconAnchor: [12.5, 41],
+  popupAnchor: [0, -41],
+});
 
 export class MyMap extends Component {
   state = {
@@ -148,14 +135,26 @@ export class MyMap extends Component {
     const markerPosition = [this.state.marker.lat, this.state.marker.lng];
 
     return (
-      <div style={{ marginLeft: 64 }}>
-        <Map className="map" center={position} zoom={this.state.zoom}>
+      <div style={{ marginLeft: 64 }} id="map">
+        <Map
+          className="map"
+          id="mapid"
+          center={position}
+          zoom={this.state.zoom}
+        >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {this.state.haveUsersLocation ? (
             <div>
+              <Marker
+                position={position}
+                ref={this.refmarker}
+                icon={myIconUser}
+              >
+                <Popup>MY LOCATION</Popup>
+              </Marker>
               <Marker
                 draggable={this.state.draggable}
                 ondragend={this.updatePosition}
@@ -181,6 +180,7 @@ export class MyMap extends Component {
                   </span>
                 </Popup>
               </Marker>
+              7.314546, 81.513023
             </div>
           ) : (
             ""

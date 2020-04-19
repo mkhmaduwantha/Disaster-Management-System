@@ -7,7 +7,7 @@ import Test from "./components/Test";
 class App extends Component {
   render() {
     return (
-      <div>
+      <div id="leafletmap">
         <SideNavBar />
       </div>
     );

@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "leaflet": "^1.6.0",
+    "leaflet-routing-machine": "^3.2.12",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.6.3",
