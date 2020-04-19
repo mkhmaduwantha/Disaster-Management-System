@@ -113,7 +113,7 @@ export class MyMap extends Component {
     const position = [this.state.location.lat, this.state.location.lng];
 
     return (
-      <div>
+      <div  style={{ marginLeft: 64}}>
         <Map className="map" center={position} zoom={this.state.zoom}>
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
