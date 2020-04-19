@@ -93,7 +93,7 @@ class App extends Component {
     event.preventDefault();
     console.log(this.state.userMessage);
 
-    axios.get("http://lcoalhost:5000/mapMessage").then((res) => {
+    axios.get("http://lcoalhost:5000/map/Message").then((res) => {
       console.log(res.data);
     });
   };

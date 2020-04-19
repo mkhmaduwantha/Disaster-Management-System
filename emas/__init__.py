@@ -35,10 +35,12 @@ def create_app(config_class = Config):
     from emas.users.routes import users
     from emas.main.routes import main
     from emas.errors.handlers import errors
+    from emas.map.routes import my_map
 
     app.register_blueprint(users)
     app.register_blueprint(main)
     app.register_blueprint(errors)
+    app.register_blueprint(my_map)
 
     
 

@@ -167,3 +167,15 @@ class Notification(db.Model):
         return json.loads(str(self.payload_json))
 
 
+# ---------------------------Map Models-------------------------------
+class MapMessage(db.Model):
+    __tablename__= 'map_messages'
+    id= db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    message = db.Column(db.String(100))
+    longitude =db.Column(db.Integer)
+    lattitude = db.Column(db.Integer)
+    time_stamp = date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f"MapMessage('{self.name}', '{self.message}')"
