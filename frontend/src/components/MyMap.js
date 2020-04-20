@@ -1,7 +1,17 @@
 import React, { Component, createRef } from "react";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  Map,
+  TileLayer,
+  Marker,
+  Popup,
+  withLeaflet,
+  MapControl,
+  Polyline,
+  Path,
+} from "react-leaflet";
 import axios from "axios";
-import L from "leaflet";
+import L, { map, Control } from "leaflet";
+
 import {
   Card,
   Button,
@@ -13,10 +23,13 @@ import {
   Input,
 } from "reactstrap";
 import "./styles/MyMap.css";
-import { FaHome, FaMapMarkerAlt, FaPhone, FaMapPin } from "react-icons/fa";
 import iconFixed from "leaflet/dist/images/fixed-location.png";
 import iconDrag from "leaflet/dist/images/drag-location.png";
 import iconUser from "leaflet/dist/images/user-location.png";
+import AntPath from "react-leaflet-ant-path";
+import { antPath } from "leaflet-ant-path";
+import "leaflet-routing-machine";
+import RoutingMachine from "./RoutingMachine";
 
 var myIcon = L.icon({
   iconUrl: iconDrag,
@@ -42,12 +55,12 @@ var myIconUser = L.icon({
 export class MyMap extends Component {
   state = {
     location: {
-      lat: 51.505,
-      lng: -0.09,
+      lat: 6.016255,
+      lng: 80.647191,
     },
     marker: {
-      lat: 51.505,
-      lng: -0.09,
+      lat: 7.426861,
+      lng: 80.504022,
     },
     haveUsersLocation: false,
     zoom: 2,
@@ -56,6 +69,7 @@ export class MyMap extends Component {
       message: "",
     },
     draggable: true,
+    isMapInit: false,
   };
 
   componentDidMount() {
@@ -93,6 +107,39 @@ export class MyMap extends Component {
       }
     );
   }
+
+  createLeafletElement() {
+    const { map } = this.props;
+    let leafletElement = L.Routing.control({
+      waypoints: [
+        L.latLng(16.506, 80.648),
+        L.latLng(17.384, 78.4866),
+        L.latLng(12.971, 77.5945),
+      ],
+      // router: new L.Routing.Google(),
+      lineOptions: {
+        styles: [
+          {
+            color: "blue",
+            opacity: 0.6,
+            weight: 4,
+          },
+        ],
+      },
+      addWaypoints: false,
+      draggableWaypoints: false,
+      fitSelectedRoutes: false,
+      showAlternatives: false,
+    }).addTo(map.leafletElement);
+    return leafletElement.getPlan();
+  }
+
+  saveMap = (map) => {
+    this.map = map;
+    this.setState({
+      isMapInit: true,
+    });
+  };
 
   // $FlowFixMe: ref
   refmarker = createRef();
@@ -137,6 +184,7 @@ export class MyMap extends Component {
     return (
       <div style={{ marginLeft: 64 }} id="map">
         <Map
+          ref={this.saveMap}
           className="map"
           id="mapid"
           center={position}
@@ -146,6 +194,21 @@ export class MyMap extends Component {
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+
+          {/* {this.state.isMapInit && (
+            <RoutingMachine
+              map={this.map}
+              location={this.state.location}
+              marker={this.state.marker}
+            />
+          )} */}
+          {/* <AntPath
+            positions={[
+              [this.state.location.lat, this.state.location.lng],
+              [this.state.marker.lat, this.state.marker.lng],
+            ]}
+          /> */}
+
           {this.state.haveUsersLocation ? (
             <div>
               <Marker
@@ -180,7 +243,6 @@ export class MyMap extends Component {
                   </span>
                 </Popup>
               </Marker>
-              7.314546, 81.513023
             </div>
           ) : (
             ""

@@ -13,10 +13,12 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MyMap from "./MyMap";
 import Test from "./Test";
 import { FaHome, FaMapMarkerAlt, FaPhone, FaMapPin } from "react-icons/fa";
+import { GiPathDistance } from "react-icons/gi";
 import { IoIosChatbubbles } from "react-icons/io";
 import Home from "./Home";
 import PhoneBook from "./PhoneBook";
 import Chat from "./Chat";
+import LeafletMap from "./LeafletMap";
 
 export class SideNavBar extends Component {
   render() {
@@ -49,6 +51,12 @@ export class SideNavBar extends Component {
                       </NavIcon>
                       <NavText>Map</NavText>
                     </NavItem>
+                    <NavItem eventKey="path">
+                      <NavIcon>
+                        <GiPathDistance style={{ fontSize: "1.75em" }} />
+                      </NavIcon>
+                      <NavText>Path</NavText>
+                    </NavItem>
                     <NavItem eventKey="phonebook">
                       <NavIcon>
                         <FaPhone style={{ fontSize: "1.75em" }} />
@@ -67,6 +75,7 @@ export class SideNavBar extends Component {
                 <main>
                   <Route path="/" exact component={(props) => <Home />} />
                   <Route path="/map" component={(props) => <MyMap />} />
+                  <Route path="/path" component={(props) => <LeafletMap />} />
                   <Route
                     path="/phonebook"
                     component={(props) => <PhoneBook />}
