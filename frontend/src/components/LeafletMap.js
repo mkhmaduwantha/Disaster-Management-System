@@ -122,35 +122,6 @@ export class LeafletMap extends Component {
     );
   }
 
-  geoCoder() {
-    const map = this.leafletMap.leafletElement;
-    const geocoder = L.Control.Geocoder.nominatim();
-    let marker;
-
-    map.on("click", (e) => {
-      geocoder.reverse(
-        e.latlng,
-        map.options.crs.scale(map.getZoom()),
-        (results) => {
-          var r = results[0];
-          if (r) {
-            if (marker) {
-              marker
-                .setLatLng(r.center)
-                .setPopupContent(r.html || r.name)
-                .openPopup();
-            } else {
-              marker = L.marker(r.center)
-                .bindPopup(r.name)
-                .addTo(map)
-                .openPopup();
-            }
-          }
-        }
-      );
-    });
-  }
-
   // $FlowFixMe: ref
   refmarker = createRef();
 

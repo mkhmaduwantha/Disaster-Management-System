@@ -12,6 +12,7 @@ class Routing extends MapLayer {
         L.latLng(this.props.location.lat, this.props.location.lng),
         L.latLng(this.props.location.lat, this.props.location.lng),
       ],
+      geocoder: L.Control.Geocoder.nominatim(),
       routeWhileDragging: true,
       fitSelectedRoutes: false,
       zoom: 10,

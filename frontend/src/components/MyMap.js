@@ -67,6 +67,7 @@ export class MyMap extends Component {
   };
 
   componentDidMount() {
+    this.geoCoder();
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.props.setLocation({
@@ -114,12 +115,34 @@ export class MyMap extends Component {
     );
   }
 
-  saveMap = (map) => {
-    this.map = map;
-    this.setState({
-      isMapInit: true,
+  geoCoder() {
+    const map = this.leafletMap.leafletElement;
+    const geocoder = L.Control.Geocoder.nominatim();
+    let marker;
+
+    map.on("click", (e) => {
+      geocoder.reverse(
+        e.latlng,
+        map.options.crs.scale(map.getZoom()),
+        (results) => {
+          var r = results[0];
+          if (r) {
+            if (marker) {
+              marker
+                .setLatLng(r.center)
+                .setPopupContent(r.html || r.name)
+                .openPopup();
+            } else {
+              marker = L.marker(r.center)
+                .bindPopup(r.name)
+                .addTo(map)
+                .openPopup();
+            }
+          }
+        }
+      );
     });
-  };
+  }
 
   // $FlowFixMe: ref
   refmarker = createRef();
@@ -162,7 +185,9 @@ export class MyMap extends Component {
     return (
       <div style={{ marginLeft: 64 }} id="map">
         <Map
-          ref={this.saveMap}
+          ref={(m) => {
+            this.leafletMap = m;
+          }}
           className="map"
           id="mapid"
           center={position}
