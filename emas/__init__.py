@@ -7,10 +7,9 @@ from emas.config import Config
 from flask_admin import Admin
 
 
-
 db = SQLAlchemy()
 bcrypt = Bcrypt()
-login_manager = LoginManager(  )
+login_manager = LoginManager()
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 
@@ -19,9 +18,7 @@ mail = Mail()
 
 admin = Admin()
 
-
-
-def create_app(config_class = Config):
+def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
 
@@ -35,13 +32,12 @@ def create_app(config_class = Config):
     from emas.users.routes import users
     from emas.main.routes import main
     from emas.errors.handlers import errors
+    from emas.map.routes import my_map
 
     app.register_blueprint(users)
     app.register_blueprint(main)
     app.register_blueprint(errors)
-
-    
+    app.register_blueprint(my_map)
 
     return app
-
 

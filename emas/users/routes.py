@@ -54,7 +54,6 @@ def request_confirm():
     flash('An email has been sent with instructions to rest your password', 'info')
     return redirect(url_for('users.account'))
 
-
 @users.route('/confirm_email/<token>')
 @login_required
 def confirm_email(token):
@@ -80,7 +79,6 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
@@ -317,7 +315,6 @@ def user(email):
         {'author': user, 'body': 'Test post #2'}
     ]
     return render_template('user/profile.html', user=user, posts=posts)
-
 
 @users.before_request
 def before_request():
