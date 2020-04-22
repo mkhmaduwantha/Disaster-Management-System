@@ -87,6 +87,7 @@ export class MyMap extends Component {
           zoom: 13,
         });
         console.log(position);
+        console.log("");
       },
       () => {
         console.log("no given location!");
