@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+{% for camp in camps %}
+<article class="media content-section">
+  <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + camp.image_file) }}">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="{{ url_for('users.user', email=camp.email) }}">{{ camp.camp_name}}</a>
+      {% if camp.camp_number != None %}
+
+      <small class="text-muted">{{ camp.camp_address[0].city}}</small>
+    </div>
+    <p class="article-content">Total Beds: {{ camp.total_number }}</p>
+
+    <p class="article-content">Ocuupied Beds: {{ camp.occupied }}</p>
+    <p class="article-content">Distance: {{ camp.no }}</p>
+
+
+  </div>
+
+</article>
+{% endif %}
+{% endfor %}
+{% endblock content %}

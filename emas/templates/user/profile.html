@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="">{{ user.camp_name }}</a>
+
+
+
+            {% if user.user_type == 'Camp' %}
+            <small class="text-muted">{{ user.camp_address[0].city}}</small>
+            <br>
+            <small class="text-muted">Last Seen: {{ user.last_seen}}</small>
+        </div>
+        <p class="article-content">Total Beds: {{ user.total_number }}</p>
+
+        <p class="article-content">Ocuupied Beds: {{ user.occupied }}</p>
+        <p class="article-content">Distance: {{ user.no }}</p>
+
+
+
+        {% endif %}
+        {% if user != current_user %}
+        <p>
+            <a class="btn btn-primary" href="{{ url_for('users.send_message', recipient=user.email) }}">
+                {{'Send private message' }}
+            </a>
+        </p>
+        {% endif %}
+    </div>
+
+</article>
+{% endblock %}
