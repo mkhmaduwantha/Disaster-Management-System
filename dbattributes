@@ -33,6 +33,17 @@ User: Military
         mobile
         home_number
 
+<<<<<<< HEAD
+=======
+MapMessage:
+    message_id
+    name
+    message
+    longitude
+    lattitude
+    timestamp
+    
+>>>>>>> e7ed1caa2fef5124d1bd21f8de3737a2d1569673
 
     
     
