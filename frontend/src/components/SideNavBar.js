@@ -53,9 +53,9 @@ export class SideNavBar extends Component {
                     </NavItem>
                     <NavItem eventKey="path">
                       <NavIcon>
-                        <GiPathDistance style={{ fontSize: "1.75em" }} />
+                        <GiPathDistance style={{ fontSize: "2.15em", fontWeight : 'bold' }} />
                       </NavIcon>
-                      <NavText>Path</NavText>
+                      <NavText>Path Distance</NavText>
                     </NavItem>
                     <NavItem eventKey="phonebook">
                       <NavIcon>

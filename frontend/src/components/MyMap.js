@@ -30,6 +30,8 @@ import AntPath from "react-leaflet-ant-path";
 import { antPath } from "leaflet-ant-path";
 import "leaflet-routing-machine";
 import RoutingMachine from "./RoutingMachine";
+import { setLocation, setMarker } from "../redux/actions/Location";
+import { connect } from "react-redux";
 
 var myIcon = L.icon({
   iconUrl: iconDrag,
@@ -54,14 +56,6 @@ var myIconUser = L.icon({
 
 export class MyMap extends Component {
   state = {
-    location: {
-      lat: 6.016255,
-      lng: 80.647191,
-    },
-    marker: {
-      lat: 7.426861,
-      lng: 80.504022,
-    },
     haveUsersLocation: false,
     zoom: 2,
     userMessage: {
@@ -75,15 +69,19 @@ export class MyMap extends Component {
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.setState({
+        this.props.setLocation({
           location: {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           },
+        });
+        this.props.setMarker({
           marker: {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           },
+        });
+        this.setState({
           haveUsersLocation: true,
           zoom: 13,
         });
@@ -95,43 +93,25 @@ export class MyMap extends Component {
           .then((res) => res.json())
           .then((location) => {
             console.log(location);
-            this.setState({
+            this.props.setLocation({
               location: {
                 lat: location.latitude,
                 lng: location.longitude,
               },
+            });
+            this.props.setMarker({
+              marker: {
+                lat: location.latitude,
+                lng: location.longitude,
+              },
+            });
+            this.setState({
               haveUsersLocation: true,
               zoom: 13,
             });
           });
       }
     );
-  }
-
-  createLeafletElement() {
-    const { map } = this.props;
-    let leafletElement = L.Routing.control({
-      waypoints: [
-        L.latLng(16.506, 80.648),
-        L.latLng(17.384, 78.4866),
-        L.latLng(12.971, 77.5945),
-      ],
-      // router: new L.Routing.Google(),
-      lineOptions: {
-        styles: [
-          {
-            color: "blue",
-            opacity: 0.6,
-            weight: 4,
-          },
-        ],
-      },
-      addWaypoints: false,
-      draggableWaypoints: false,
-      fitSelectedRoutes: false,
-      showAlternatives: false,
-    }).addTo(map.leafletElement);
-    return leafletElement.getPlan();
   }
 
   saveMap = (map) => {
@@ -151,9 +131,7 @@ export class MyMap extends Component {
   updatePosition = () => {
     const marker = this.refmarker.current;
     if (marker != null) {
-      this.setState({
-        marker: marker.leafletElement.getLatLng(),
-      });
+      this.props.setMarker({ marker: marker.leafletElement.getLatLng() });
     }
   };
 
@@ -178,8 +156,8 @@ export class MyMap extends Component {
   };
 
   render() {
-    const position = [this.state.location.lat, this.state.location.lng];
-    const markerPosition = [this.state.marker.lat, this.state.marker.lng];
+    const position = [this.props.location.lat, this.props.location.lng];
+    const markerPosition = [this.props.marker.lat, this.props.marker.lng];
 
     return (
       <div style={{ marginLeft: 64 }} id="map">
@@ -194,20 +172,6 @@ export class MyMap extends Component {
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-
-          {/* {this.state.isMapInit && (
-            <RoutingMachine
-              map={this.map}
-              location={this.state.location}
-              marker={this.state.marker}
-            />
-          )} */}
-          {/* <AntPath
-            positions={[
-              [this.state.location.lat, this.state.location.lng],
-              [this.state.marker.lat, this.state.marker.lng],
-            ]}
-          /> */}
 
           {this.state.haveUsersLocation ? (
             <div>
@@ -287,4 +251,17 @@ export class MyMap extends Component {
   }
 }
 
-export default MyMap;
+const mapStateToProps = (state) => {
+  return {
+    location: state.LocationReducer.location,
+    marker: state.LocationReducer.marker,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLocation: (data) => dispatch(setLocation(data)),
+    setMarker: (data) => dispatch(setMarker(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyMap);
