@@ -74,7 +74,6 @@ export class LeafletMap extends Component {
   };
 
   componentDidMount() {
-    // this.geoCoder();
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.props.setLocation({
