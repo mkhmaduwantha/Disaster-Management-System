@@ -164,7 +164,6 @@ export class LeafletMap extends Component {
           center={position}
           zoom={this.state.zoom}
           ref={this.saveMap}
-          className="container"
         >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
