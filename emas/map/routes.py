@@ -24,16 +24,18 @@ def message():
         message=request_data['message']
         longitude=request_data['longitude']
         lattitude=request_data['lattitude']
+        
         try:
             mapMessage = MapMessage(name=name, message=message, longitude=longitude, lattitude= lattitude)
             db.session.add(mapMessage)
             db.session.commit()
             resp={
             "status":"success",
-            "data":{}
+            "data":{
+            }
             }
 
-        except exc.SQLAlchemyError:
+        except exec.SQLAlchemyError:
             db.session.rollback()
             resp={
             "status":"db_fail",

@@ -11,6 +11,7 @@ import SideNav, {
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MyMap from "./MyMap";
+import MapDev from "./MapDev";
 import Test from "./Test";
 import { FaHome, FaMapMarkerAlt, FaPhone, FaMapPin } from "react-icons/fa";
 import { GiPathDistance } from "react-icons/gi";
@@ -53,7 +54,9 @@ export class SideNavBar extends Component {
                     </NavItem>
                     <NavItem eventKey="path">
                       <NavIcon>
-                        <GiPathDistance style={{ fontSize: "2.15em", fontWeight : 'bold' }} />
+                        <GiPathDistance
+                          style={{ fontSize: "2.15em", fontWeight: "bold" }}
+                        />
                       </NavIcon>
                       <NavText>Path Distance</NavText>
                     </NavItem>
@@ -74,7 +77,7 @@ export class SideNavBar extends Component {
                 </SideNav>
                 <main>
                   <Route path="/" exact component={(props) => <Home />} />
-                  <Route path="/map" component={(props) => <MyMap />} />
+                  <Route path="/map" component={(props) => <MapDev />} />
                   <Route path="/path" component={(props) => <LeafletMap />} />
                   <Route
                     path="/phonebook"

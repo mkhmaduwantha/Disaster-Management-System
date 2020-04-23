@@ -23,9 +23,9 @@ import {
   Input,
 } from "reactstrap";
 import "./styles/MyMap.css";
-import iconFixed from "leaflet/dist/images/fixed-location.png";
-import iconDrag from "leaflet/dist/images/drag-location.png";
-import iconUser from "leaflet/dist/images/user-location.png";
+import iconFixed from "leaflet/dist/images/marker-icon.png";
+import iconDrag from "leaflet/dist/images/marker-icon.png";
+import iconUser from "leaflet/dist/images/marker-icon.png";
 import AntPath from "react-leaflet-ant-path";
 import { antPath } from "leaflet-ant-path";
 import "leaflet-routing-machine";
