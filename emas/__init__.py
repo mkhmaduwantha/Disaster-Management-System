@@ -24,14 +24,14 @@ admin = Admin()
 def create_app(config_class = Config):
     app = Flask(__name__)
     app.config.from_object(Config)
-
+    
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
 
     admin.init_app(app)
-
+    
     from emas.users.routes import users
     from emas.main.routes import main
     from emas.errors.handlers import errors
