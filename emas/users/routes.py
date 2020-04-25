@@ -41,7 +41,7 @@ def register():
         flash(
             f'Account created for {form.fname.data}!. A confirmation email has been sent via email.', 'success')
         return redirect(url_for('users.login'))
-    return render_template('user/register.html', title='Register', form=form)
+    return render_template('user/register_new.html', title='Register', form=form)
 
 
 @users.route("/confirm_email", methods=['GET', 'POST'])
@@ -87,7 +87,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('user/login.html', title='Login', form=form)
+    return render_template('user/login_new.html', title='Login', form=form)
 
 
 @users.route("/logout")
