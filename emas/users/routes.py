@@ -133,7 +133,7 @@ def account():
         flash('User information has not been updated', 'danger')
         return redirect(url_for('users.account'))
 
-    return render_template('user/account.html', title='Account', is_confirmed=user_confirmed, image_file=image_file, form=form,)
+    return render_template('user/account_new.html', title='Account', is_confirmed=user_confirmed, image_file=image_file, form=form,)
 
    # elif request.method == 'GET':
 
@@ -145,7 +145,7 @@ def account():
     #        print (user.roles[0].name)
 
 
-@users.route("/account/contact", methods=['GET', 'POST'])
+@users.route("/contact", methods=['GET', 'POST'])
 @login_required
 def account_contact():
     user_confirmed = current_user.confirmed
@@ -244,7 +244,7 @@ def account_contact():
         flash('Contact information has not been updated', 'danger')
         return redirect(url_for('users.account_contact'))
 
-    return render_template('user/contact.html', title='Contact', image_file=image_file, is_confirmed=user_confirmed, form=form, user_type=user_type)
+    return render_template('user/contact_new.html', title='Contact', image_file=image_file, is_confirmed=user_confirmed, form=form, user_type=user_type)
 
 
 @users.route("/reset_password", methods=['GET', 'POST'])
@@ -303,12 +303,12 @@ def send_message(recipient):
         db.session.add(msg)
         db.session.commit()
         flash('Your message has been sent.', 'success')
-        return redirect(url_for('main.home', email=recipient))
+        return redirect(url_for('users.user', email=recipient))
     return render_template('user/send_message.html', title='Send Message',
                            form=form, recipient=recipient, user=user)
 
 
-@users.route('/user/<email>')
+@users.route('/<email>')
 @login_required
 def user(email):
     user = User.query.filter_by(email=email).first_or_404()
@@ -335,7 +335,7 @@ def messages():
     messages = current_user.messages_received
     messages_out = current_user.messages_sent
 
-    return render_template('user/messages.html', messages=messages, messages_out=messages_out)
+    return render_template('user/message_new.html', messages=messages, messages_out=messages_out)
 
 
 @users.route('/notifications')

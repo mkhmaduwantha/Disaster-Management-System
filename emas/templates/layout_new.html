@@ -30,7 +30,7 @@
     <link href="static/assets/index/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="static/assets/index/vendor/line-awesome/css/line-awesome.min.css" rel="stylesheet">
     <link href="static/assets/index/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="static/assets/index/vendor/owl.carousel/static/assets/index/owl.carousel.min.css" rel="stylesheet">
+    <link href="static/assets/index/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="static/assets/index/vendor/aos/aos.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
@@ -43,6 +43,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='alert.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
 
 
@@ -69,19 +70,32 @@
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{{ url_for('main.index') }}">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#portfolio">Disaster Details</a></li>
                     <!--li><a href="#pricing">Pricing</a></li>
           <li><a href="#team">Team</a></li-->
-                    <li class="drop-down"><a href="">Profile</a>
+                    <li class="drop-down"><a href="">Profile
+                            {% if current_user.is_authenticated %}
+
+                            {% set new_messages = current_user.new_messages() %}
+                            <span id="message_count" class="badge"
+                                style="visibility: {% if new_messages %}visible
+                                                                                                 {% else %}hidden {% endif %};">
+                                {{ new_messages }}
+
+                                {% endif %}
+                        </a>
                         <ul>
                             {% if current_user.is_authenticated %}
                             <li><a href="{{ url_for('users.account') }}">Account</a></li>
                             {% endif %}
                             <li class="drop-down"><a href="#">User</a>
                                 <ul>
+                                    {% if not current_user.is_authenticated %}
                                     <li><a href="{{ url_for('users.register') }}">Register</a></li>
+                                    {% endif %}
+
                                     <li><a href="{{ url_for('users.login') }}">Login</a></li>
                                     {% if current_user.is_authenticated %}
                                     <li><a href="{{ url_for('users.logout') }}">Logout</a></li>
@@ -92,16 +106,18 @@
                                 </ul>
                             </li>
                             {% if current_user.is_authenticated %}
-                            <li><a href="{{ url_for('users.messages') }}">Messages</a></li>
+
+                            <li><a href="{{ url_for('users.messages') }}">Requests
 
 
-                            {% set new_messages = current_user.new_messages() %}
-                            <span id="message_count" class="badge" style="visibility: {% if new_messages %}visible
+                                    {% set new_messages = current_user.new_messages() %}
+                                    <span id="message_count" class="badge" style="visibility: {% if new_messages %}visible
                                                                          {% else %}hidden {% endif %};">
-                                {{ new_messages }}
+                                        {{ new_messages }}
 
-                                {% endif %}
-                                <!--li><a href="#">Outbox</a></li>
+                                        {% endif %}
+                                </a></li>
+                            <!--li><a href="#">Outbox</a></li>
               <li><a href="#">Drop Down 5</a></li-->
                         </ul>
                     </li>
@@ -164,13 +180,21 @@
     <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
 
     <!-- Vendor JS Files -->
+
     <script src="static/assets/index/vendor/jquery/jquery.min.js"></script>
+
     <script src="static/assets/index/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
     <script src="static/assets/index/vendor/jquery.easing/jquery.easing.min.js"></script>
+
     <script src="static/assets/index/vendor/php-email-form/validate.js"></script>
+
     <script src="static/assets/index/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
     <script src="static/assets/index/vendor/venobox/venobox.min.js"></script>
+
     <script src="static/assets/index/vendor/owl.carousel/owl.carousel.min.js"></script>
+
     <script src="static/assets/index/vendor/aos/aos.js"></script>
     <script src="jquery.twbs-alert-overlay.min.js"></script>
 
@@ -220,6 +244,7 @@
             overlay: "#alert-overlay",
             overlayAuto: true, // show/hide overlay
         })
+
 
     </script>
     {% endblock %}

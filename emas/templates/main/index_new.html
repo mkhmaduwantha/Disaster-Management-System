@@ -275,6 +275,42 @@
   </section>
   <!-- End Cta Section -->
 
+  <!--======= Pricing Section=======-->
+  <section id="pricing" class="pricing">
+    <div class="container">
+
+      <div class="section-title" data-aos="zoom-out">
+        <h2>Camps</h2>
+        <p>Nearby Camp Details</p>
+      </div>
+
+      <div class="row">
+
+
+        {% for camp in camps %}
+        <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+          <div class="box featured" data-aos="zoom-in" data-aos-delay="100">
+            <h3>{{ camp.camp_name }}</h3>
+            <h4>{{camp.camp_address[0].city}}</span></h4>
+            <ul>
+              <li>Total: {{camp.total_number}}</li>
+              <li>Nec feugiat nisl</li>
+              <li>Nulla at volutpat dola</li>
+              <li>Pharetra massa</li>
+              <li class="na">Massa ultricies mi</li>
+            </ul>
+            <div class="btn-wrap">
+              <a href="{{ url_for('users.user', email=camp.email) }}" class="btn-buy">View</a>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+
+    </div>
+  </section><!-- End Pricing Section -->
 
   <!-- ======= Portfolio Section ======= -->
   <section id="portfolio" class="portfolio">
@@ -456,7 +492,7 @@
 
     </div>
   </section>
-  <End F.A.Q Section -->
+  <End> F.A.Q Section -->
 
 
 
