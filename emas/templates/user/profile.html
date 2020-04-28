@@ -25,9 +25,14 @@
         <div class="portfolio-details-container" data-aos="fade-up">
 
             <div class="owl-carousel portfolio-details-carousel">
-                <img src="static/assets/index/img/portfolio/portfolio-details-1.jpg" class="img-fluid" alt="">
-                <img src="static/assets/index/img/portfolio/portfolio-details-2.jpg" class="img-fluid" alt="">
-                <img src="static/assets/index/img/portfolio/portfolio-details-3.jpg" class="img-fluid" alt="">
+
+                <img src="{{ url_for('static', filename='/assets/index/img/portfolio/portfolio-details-1.jpg') }}"
+                    class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/assets/index/img/portfolio/portfolio-details-2.jpg') }}"
+                    class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/assets/index/img/portfolio/portfolio-details-3.jpg') }}"
+                    class="img-fluid" alt="">
+
             </div>
 
             <div class="portfolio-info">
@@ -41,7 +46,7 @@
 
                     <li>{% if user != current_user %}
                         <p>
-                            <button class="btn btn-primary" id="getform" onclick="openNav()">
+                            <button class="btn btn-primary" id="getform" onclick="openForm()">
                                 Send a Request
                             </button>
                         </p>
@@ -63,21 +68,44 @@
 </section><!-- End Portfolio Details Section -->
 {% endif %}
 
-<div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div class="overlay-content">
-        <iframe src="{{ url_for('users.send_message', recipient=user.email) }}"></iframe>
-    </div>
+
+<div class="form-popup" id="myForm">
+    <form action="" method="POST" class="form-container" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{'Send Message to ' + user.fname}}</legend>
+            <div class="form-group">
+                {{ form.message.label(class="form-control-label") }}
+
+                {% if form.message.errors %}
+                {{ form.message(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.message.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.message(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+
+            <button type="button" class="btn btn-outline-danger" onclick="closeForm()">Close</button>
+        </div>
+    </form>
 </div>
 
 
 <script>
-    function openNav() {
-        document.getElementById("myNav").style.width = "100%";
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
     }
 
-    function closeNav() {
-        document.getElementById("myNav").style.width = "0%";
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
     }
 </script>
 

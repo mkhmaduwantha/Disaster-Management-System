@@ -308,15 +308,26 @@ def send_message(recipient):
                            form=form, recipient=recipient, user=user)
 
 
-@users.route('/<email>')
+@users.route('/user/<email>', methods=['GET', 'POST'])
 @login_required
 def user(email):
     user = User.query.filter_by(email=email).first_or_404()
+
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user,
+                      body=form.message.data)
+        current_user.messages_sent.append(msg)
+        user.add_notification('unread_message_count', user.new_messages())
+        db.session.add(msg)
+        db.session.commit()
+        flash('Your message has been sent.', 'success')
+        return redirect(url_for('users.user', email=user.email))
     posts = [
         {'author': user, 'body': 'Test post #1'},
         {'author': user, 'body': 'Test post #2'}
     ]
-    return render_template('user/profile.html', user=user, posts=posts)
+    return render_template('user/profile.html', user=user, posts=posts, form=form)
 
 
 @users.before_request

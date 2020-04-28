@@ -14,8 +14,10 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="static/assets/index/img/favicon.png" rel="icon">
-    <link href="static/assets/index/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ url_for('static', filename='/assets/index/img/favicon.png') }}" rel="icon">
+
+    <link href="{{ url_for('static', filename='static/assets/index/img/apple-touch-icon.png') }}"
+        rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -23,18 +25,30 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="static/assets/index/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/assets/index/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="static/assets/index/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="static/assets/index/vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="static/assets/index/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="static/assets/index/vendor/line-awesome/css/line-awesome.min.css" rel="stylesheet">
-    <link href="static/assets/index/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="static/assets/index/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="static/assets/index/vendor/aos/aos.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='/assets/index/vendor/bootstrap/css/bootstrap.min.css') }}"
+        rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='/assets/index/vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='/assets/index/vendor/boxicons/css/boxicons.min.css') }}"
+        rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='/assets/index/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='/assets/index/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='/assets/index/vendor/line-awesome/css/line-awesome.min.css') }}"
+        rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='/assets/index/vendor/venobox/venobox.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='/assets/index/vendor/owl.carousel/assets/owl.carousel.min.css') }}"
+        rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='/assets/index/vendor/aos/aos.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="static/assets/index/css/style.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='/assets/index/css/style.css') }}" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: Selecao - v2.1.0
@@ -180,27 +194,36 @@
     <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
 
     <!-- Vendor JS Files -->
-
+    <script src="{{ url_for('static', filename='/assets/index/vendor/jquery/jquery.min.js') }}"></script>
     <script src="static/assets/index/vendor/jquery/jquery.min.js"></script>
 
+    <script
+        src="{{ url_for('static', filename='/assets/index/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="static/assets/index/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <script src="{{ url_for('static', filename='/assets/index/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
     <script src="static/assets/index/vendor/jquery.easing/jquery.easing.min.js"></script>
 
+    <script src="{{ url_for('static', filename='/assets/index/vendor/php-email-form/validate.js') }}"></script>
     <script src="static/assets/index/vendor/php-email-form/validate.js"></script>
 
+    <script src="{{ url_for('static', filename='/assets/index/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="static/assets/index/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
+    <script src="{{ url_for('static', filename='/assets/index/vendor/venobox/venobox.min.js') }}"></script>
     <script src="static/assets/index/vendor/venobox/venobox.min.js"></script>
 
+    <script src="{{ url_for('static', filename='/assets/index/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
     <script src="static/assets/index/vendor/owl.carousel/owl.carousel.min.js"></script>
 
+    <script src="{{ url_for('static', filename='/assets/index/vendor/aos/aos.js') }}"></script>
     <script src="static/assets/index/vendor/aos/aos.js"></script>
+
     <script src="jquery.twbs-alert-overlay.min.js"></script>
 
 
     <!-- Template Main JS File -->
-    <script src="static/assets/index/js/main.js"></script>
+    <script src="{{ url_for('static', filename='/assets/index/js/main.js') }}"></script>
     {% block scripts %}
     <script>
         // ...
