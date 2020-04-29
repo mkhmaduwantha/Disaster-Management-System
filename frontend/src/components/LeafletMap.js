@@ -8,6 +8,7 @@ import {
   MapControl,
   Polyline,
   Path,
+  Circle,
 } from "react-leaflet";
 import {
   Card,
@@ -23,7 +24,7 @@ import axios from "axios";
 import "./styles/MyMap.css";
 import L, { map, Control } from "leaflet";
 import iconFixed from "leaflet/dist/images/marker-icon.png";
-import iconDrag from "leaflet/dist/images/marker-icon.png";
+import iconDrag from "leaflet/dist/images/drag-location.png";
 import iconUser from "leaflet/dist/images/marker-icon.png";
 import AntPath from "react-leaflet-ant-path";
 import { antPath } from "leaflet-ant-path";
@@ -55,15 +56,24 @@ var myIconUser = L.icon({
 });
 
 export class LeafletMap extends Component {
-  state = {
-    haveUsersLocation: false,
-    zoom: 2,
-    userMessage: {
-      name: "",
-      message: "",
-    },
-    draggable: true,
-    isMapInit: false,
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      haveUsersLocation: false,
+      zoom: 2,
+      userMessage: {
+        name: "",
+        message: "",
+      },
+      draggable: true,
+      isMapInit: false,
+      currentPos: null,
+    };
+  }
+
+  handleClick = (e) => {
+    this.setState({ currentPos: e.latlng });
   };
 
   saveMap = (map) => {
@@ -164,6 +174,7 @@ export class LeafletMap extends Component {
           center={position}
           zoom={this.state.zoom}
           ref={this.saveMap}
+          onClick={this.handleClick}
         >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -171,41 +182,22 @@ export class LeafletMap extends Component {
           />
 
           {this.state.isMapInit && <Routing map={this.map} />}
-        </Map>
-        {/* <Card body className="message-form">
-          <CardTitle>Welcome to EmergencyAssistant!</CardTitle>
-          <CardText>Leave a message with your location</CardText>
-          <CardText>Thanks for stopping by!</CardText>
-          <Form onSubmit={this.formSubmitted}>
-            <FormGroup>
-              <Label for="name">Name</Label>
-              <Input
-                onChange={this.valueChanged}
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Enter your name"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="message">Message</Label>
-              <Input
-                onChange={this.valueChanged}
-                type="textarea"
-                name="message"
-                id="message"
-                placeholder="Enter a Message"
-              />
-            </FormGroup>
-            <Button
-              type="submit"
-              disabled={!this.state.haveUsersLocation}
-              color="info"
+          <Circle center={position} radius={5000} color="red" />
+
+          {/* Position On click on map  */}
+          {this.state.currentPos && (
+            <Marker
+              position={this.state.currentPos}
+              draggable={true}
+              icon={myIcon}
             >
-              Send
-            </Button>
-          </Form>
-        </Card> */}
+              <Popup position={this.state.currentPos}>
+                Current location:{" "}
+                <pre>{JSON.stringify(this.state.currentPos, null, 2)}</pre>
+              </Popup>
+            </Marker>
+          )}
+        </Map>
       </div>
     );
   }
