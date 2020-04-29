@@ -1,13 +1,24 @@
 import React, { Component } from "react";
+import { popup } from "leaflet";
+import axios from "axios";
 
 class Message extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //change the user id
+      my_location: this.props.location,
+      user_id: 1,
       currentStep: 1,
-      email: "",
-      username: "",
-      password: "",
+      subject: "",
+      message: "",
+      selected: false,
+      radius: 0,
+      military: false,
+      ref_camp: false,
+      dmc: false,
+      other: false,
+      all_user: false,
     };
   }
 
@@ -20,13 +31,44 @@ class Message extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { email, username, password } = this.state;
-    alert(`Your registration detail: \n 
-             Email: ${email} \n 
-             Username: ${username} \n
-             Password: ${password}`);
+    // console.log(this.props.props.history.push("/"));
+    let data = {
+      my_location: this.props.location,
+      user_id: this.state.user_id,
+      subject: this.state.subject,
+      message: this.state.message,
+      radius: this.state.radius,
+      user_type: {
+        military: this.state.military,
+        ref_camp: this.state.ref_camp,
+        dmc: this.state.dmc,
+        other: this.state.other,
+        all_user: this.state.all_user,
+      },
+    };
+    axios({
+      method: "post",
+      url: "http://localhost:5000/map/notify",
+      data: data,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(function (response) {
+        console.log(response);
+        alert(`Your Message Sent Successfully`);
+      })
+      .catch(function (response) {
+        console.log(response);
+        alert(response);
+      });
+    // axios.get("http://lcoalhost:5000/map/Message").then((res) => {
+    //   console.log(res.data);
+    // });
+    // this.props.history.push("/chat");
   };
-
   _next = () => {
     let currentStep = this.state.currentStep;
     currentStep = currentStep >= 2 ? 3 : currentStep + 1;
@@ -51,7 +93,7 @@ class Message extends Component {
     if (currentStep !== 1) {
       return (
         <button
-          className="btn btn-secondary"
+          className="btn btn-secondary prev-button"
           type="button"
           onClick={this._prev}
         >
@@ -81,9 +123,9 @@ class Message extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1>React Wizard Form </h1>
+        <h1>Notify Nearby Users </h1>
         <p>Step {this.state.currentStep} </p>
-
+        <button onClick={this.props.closePopup}>close me</button>
         <form onSubmit={this.handleSubmit}>
           {/* 
           render the form steps and pass required props in
@@ -91,17 +133,22 @@ class Message extends Component {
           <Step1
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
-            email={this.state.email}
+            subject={this.state.subject}
+            message={this.state.message}
           />
           <Step2
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
-            username={this.state.username}
+            radius={this.state.radius}
           />
           <Step3
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
-            password={this.state.password}
+            military={this.state.military}
+            dmc={this.state.dmc}
+            ref_camp={this.state.ref_camp}
+            other={this.state.other}
+            all_user={this.state.all_user}
           />
           {this.previousButton()}
           {this.nextButton()}
@@ -117,14 +164,24 @@ function Step1(props) {
   }
   return (
     <div className="form-group">
-      <label htmlFor="email">Email address</label>
+      <label htmlFor="subject">Subject</label>
       <input
         className="form-control"
-        id="email"
-        name="email"
+        id="subject"
+        name="subject"
         type="text"
-        placeholder="Enter email"
-        value={props.email}
+        placeholder="Enter Subject"
+        value={props.subject}
+        onChange={props.handleChange}
+      />
+      <label htmlFor="message">Message</label>
+      <input
+        className="form-control"
+        id="message"
+        name="message"
+        type="text"
+        placeholder="Enter Message"
+        value={props.message}
         onChange={props.handleChange}
       />
     </div>
@@ -137,14 +194,14 @@ function Step2(props) {
   }
   return (
     <div className="form-group">
-      <label htmlFor="username">Username</label>
+      <label htmlFor="radius">Input a Radius (e.g: 1000 KM)</label>
       <input
         className="form-control"
-        id="username"
-        name="username"
-        type="text"
-        placeholder="Enter username"
-        value={props.username}
+        id="radius"
+        name="radius"
+        type="number"
+        placeholder="Enter radius"
+        value={props.radius}
         onChange={props.handleChange}
       />
     </div>
@@ -158,18 +215,76 @@ function Step3(props) {
   return (
     <React.Fragment>
       <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <input
-          className="form-control"
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Enter password"
-          value={props.password}
-          onChange={props.handleChange}
-        />
+        <p>Receiver-Type</p>
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="military"
+            name="military"
+            checked={props.military}
+            onChange={props.handleChange}
+          />
+          <label className="custom-control-label" htmlFor="military">
+            Military
+          </label>
+        </div>
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="dmc"
+            name="dmc"
+            checked={props.dmc}
+            onChange={props.handleChange}
+          />
+          <label className="custom-control-label" htmlFor="dmc">
+            Disaster Management Centers
+          </label>
+        </div>
+
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="ref_camp"
+            name="ref_camp"
+            checked={props.ref_camp}
+            onChange={props.handleChange}
+          />
+          <label className="custom-control-label" htmlFor="ref_camp">
+            Refugee Camp
+          </label>
+        </div>
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="other"
+            name="other"
+            checked={props.other}
+            onChange={props.handleChange}
+          />
+          <label className="custom-control-label" htmlFor="other">
+            Other
+          </label>
+        </div>
+
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="all_user"
+            name="all_user"
+            checked={props.all_user}
+            onChange={props.handleChange}
+          />
+          <label className="custom-control-label" htmlFor="all_user">
+            All
+          </label>
+        </div>
       </div>
-      <button className="btn btn-success btn-block">Sign up</button>
+      <button className="btn btn-success btn-block">Submit</button>
     </React.Fragment>
   );
 }

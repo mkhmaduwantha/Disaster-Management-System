@@ -160,7 +160,7 @@ export class LeafletMap extends Component {
     const position = [this.props.location.lat, this.props.location.lng];
     const markerPosition = [this.props.marker.lat, this.props.marker.lng];
     return (
-      <div>
+      <div className="map-container">
         <Map
           center={position}
           zoom={this.state.zoom}
@@ -174,40 +174,6 @@ export class LeafletMap extends Component {
 
           {this.state.isMapInit && <Routing map={this.map} />}
         </Map>
-        {/* <Card body className="message-form">
-          <CardTitle>Welcome to EmergencyAssistant!</CardTitle>
-          <CardText>Leave a message with your location</CardText>
-          <CardText>Thanks for stopping by!</CardText>
-          <Form onSubmit={this.formSubmitted}>
-            <FormGroup>
-              <Label for="name">Name</Label>
-              <Input
-                onChange={this.valueChanged}
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Enter your name"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="message">Message</Label>
-              <Input
-                onChange={this.valueChanged}
-                type="textarea"
-                name="message"
-                id="message"
-                placeholder="Enter a Message"
-              />
-            </FormGroup>
-            <Button
-              type="submit"
-              disabled={!this.state.haveUsersLocation}
-              color="info"
-            >
-              Send
-            </Button>
-          </Form>
-        </Card> */}
       </div>
     );
   }

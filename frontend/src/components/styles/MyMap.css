@@ -14,8 +14,17 @@ body {
 }
 .map-container {
   margin-left: 64px;
-}
+  height: 100%;
 
+  min-width: 1000px;
+  max-width: 1500px;
+}
+.map-container .leaflet-container {
+  height: 100vh;
+  margin: 0;
+  min-width: 1000px;
+  max-width: 1500px;
+}
 .map-container .message-form {
   background-color: white;
   left: 20%;
@@ -36,4 +45,7 @@ body {
   margin-right: 10px;
   right: 0;
   opacity: 0.9;
+}
+.prev-button {
+  margin: 1px;
 }

@@ -21,6 +21,8 @@ import PhoneBook from "./PhoneBook";
 import Chat from "./Chat";
 import LeafletMap from "./LeafletMap";
 
+// import { history } from "../redux/Store";
+
 export class SideNavBar extends Component {
   render() {
     return (
@@ -76,14 +78,27 @@ export class SideNavBar extends Component {
                   </SideNav.Nav>
                 </SideNav>
                 <main>
-                  <Route path="/" exact component={(props) => <Home />} />
-                  <Route path="/map" component={(props) => <MapDev />} />
-                  <Route path="/path" component={(props) => <LeafletMap />} />
+                  <Route
+                    path="/"
+                    exact
+                    component={(props) => <Home {...props} />}
+                  />
+                  <Route
+                    path="/map"
+                    component={(props) => <MapDev {...props} />}
+                  />
+                  <Route
+                    path="/path"
+                    component={(props) => <LeafletMap {...props} />}
+                  />
                   <Route
                     path="/phonebook"
-                    component={(props) => <PhoneBook />}
+                    component={(props) => <PhoneBook {...props} />}
                   />
-                  <Route path="/chat" component={(props) => <Chat />} />
+                  <Route
+                    path="/chat"
+                    component={(props) => <Chat {...props} />}
+                  />
                 </main>
               </React.Fragment>
             )}

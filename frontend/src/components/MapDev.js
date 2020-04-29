@@ -44,23 +44,29 @@ var myIcon = L.icon({
 // navigator.geolocation.getCurrentPosition(success, error, options);
 
 class MapDev extends Component {
-  state = {
-    messageButton: false,
-    location: {
-      lat: 51.505,
-      lng: -0.09,
-    },
-    haveUsersLocation: false,
-    zoom: 2,
-    userMessage: {
-      name: "",
-      message: "",
-    },
-  };
+  constructor(props) {
+    super(props);
 
-  onMessageClick = () => {
-    this.setState({ messageButton: true });
-  };
+    this.state = {
+      showPopup: false,
+      location: {
+        lat: 51.505,
+        lng: -0.09,
+      },
+      haveUsersLocation: false,
+      zoom: 2,
+      userMessage: {
+        name: "",
+        message: "",
+      },
+    };
+  }
+  //   togglePopup() {
+  //     this.setState({
+  //       showPopup: !this.state.showPopup,
+  //     });
+  //     console.log(!this.state.showPopup);
+  //   }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
@@ -147,7 +153,7 @@ class MapDev extends Component {
             ""
           )}
         </Map>
-        <Card className="message-form">
+        {/* <Card className="message-form">
           <CardTitle>Welcome to EmergencyAssistant!</CardTitle>
           <CardText>Leave a message with your location</CardText>
           <CardText>Thanks for stopping by!</CardText>
@@ -180,10 +186,9 @@ class MapDev extends Component {
               Send
             </Button>
           </Form>
-        </Card>
-
+        </Card> */}
         {/* <div className="message-form">
-          {this.state.showPopop ? <Message /> : null}
+          <Message closePopup={this.props.closePopup} />
         </div> */}
       </div>
     );
