@@ -3,6 +3,7 @@ import L from "leaflet";
 import "leaflet-routing-machine";
 import { withLeaflet } from "react-leaflet";
 import { connect } from "react-redux";
+import React from "react";
 
 class Routing extends MapLayer {
   createLeafletElement() {

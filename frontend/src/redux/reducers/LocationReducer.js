@@ -1,4 +1,9 @@
-import { SET_LOCATION, SET_MARKER } from "../actions/Types";
+import {
+  SET_LOCATION,
+  SET_MARKER,
+  SET_START_LOCATION,
+  SET_END_LOCATION,
+} from "../actions/Types";
 
 const initialState = {
   location: {
@@ -6,6 +11,14 @@ const initialState = {
     lng: 80.483939,
   },
   marker: {
+    lat: 7.445866,
+    lng: 79.99842,
+  },
+  startLocation: {
+    lat: 6.038171,
+    lng: 80.483939,
+  },
+  endLocation: {
     lat: 7.445866,
     lng: 79.99842,
   },
@@ -27,6 +40,23 @@ export const LocationReducer = (state = initialState, action) => {
         marker: {
           lat: action.data.marker.lat,
           lng: action.data.marker.lng,
+        },
+      };
+    case SET_START_LOCATION:
+      return {
+        ...state,
+        startLocation: {
+          lat: action.data.lat,
+          lng: action.data.lng,
+        },
+      };
+
+    case SET_END_LOCATION:
+      return {
+        ...state,
+        endLocation: {
+          lat: action.data.lat,
+          lng: action.data.lng,
         },
       };
     default:
