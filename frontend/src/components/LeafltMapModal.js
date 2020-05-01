@@ -102,6 +102,21 @@ export class LeafltMapModal extends Component {
                   ) {
                     this.submitData();
                     this.setState({ isUploading: false });
+                    setTimeout(() => {
+                      this.setState({
+                        name: "",
+                        phoneNo: "",
+                        category: "",
+                        noOfRefugees: "",
+                        headerImage: null,
+                        headerImgUrl: "",
+                        images: [],
+                        imagesUrls: [],
+                        progress: 0,
+                        isUploading: false,
+                        preview: [],
+                      });
+                    }, 4000);
                     alert("Submitted Successfully!");
                   }
                 }

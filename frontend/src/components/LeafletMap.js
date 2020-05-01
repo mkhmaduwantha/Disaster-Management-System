@@ -1,5 +1,5 @@
 import React, { Component, createRef } from "react";
-import { Modal, Button, Card, Row, Col } from "react-bootstrap";
+import { Modal, Button, Card, Row, Col, Carousel } from "react-bootstrap";
 import { FaPhoneAlt } from "react-icons/fa";
 import {
   Map,
@@ -31,7 +31,6 @@ import { connect } from "react-redux";
 import Routing from "./RoutingMachine2";
 import { storage, firebasedb } from "../config/firebasedb";
 import LeafltMapModal from "./LeafltMapModal";
-import SafePlaceDetailsModal from "./SafePlaceDetailsModal";
 //Icons
 var myIcon = L.icon({
   iconUrl: iconDrag,
@@ -99,6 +98,7 @@ export class LeafletMap extends Component {
       modalShow: false,
       detailsmodalShow: false,
       safeLocations: [],
+      currentSafeLocation: {},
     };
   }
 
@@ -265,12 +265,41 @@ export class LeafletMap extends Component {
               return (
                 <Marker position={location.position} icon={icon}>
                   <Popup>
-                    <Button
-                      variant="success"
-                      onClick={() => this.setState({ detailsmodalShow: true })}
-                    >
-                      Show Details
-                    </Button>
+                    <div>
+                      <h4 style={{ width: "300px", textAlign: "center" }}>
+                        {location.name}
+                      </h4>
+                      <Row style={{ margin: "auto" }}>
+                        <FaPhoneAlt size={19} /> &nbsp; &nbsp;
+                        <h5>{location.phoneNo}</h5>
+                      </Row>
+                      <h5>
+                        No. of refugees that can be retained :{" "}
+                        {location.noOfRefugees}
+                      </h5>
+
+                      <Carousel>
+                        {location.imagesUrls.map((url) => {
+                          return (
+                            <Carousel.Item>
+                              <img
+                                width="100%"
+                                className="d-block w-100"
+                                src={url}
+                                alt="First slide"
+                              />
+                              <Carousel.Caption>
+                                {/* <h3>First slide label</h3>
+                            <p>
+                              Nulla vitae elit libero, a pharetra augue mollis
+                              interdum.
+                            </p> */}
+                              </Carousel.Caption>
+                            </Carousel.Item>
+                          );
+                        })}
+                      </Carousel>
+                    </div>
                   </Popup>
                 </Marker>
               );
@@ -282,13 +311,6 @@ export class LeafletMap extends Component {
           position={this.state.currentPos}
           show={this.state.modalShow}
           onHide={() => this.setState({ modalShow: false })}
-        />
-
-        {/* Modal of safe place details  */}
-        <SafePlaceDetailsModal
-          safeLocations={this.state.safeLocations}
-          show={this.state.detailsmodalShow}
-          onHide={() => this.setState({ detailsmodalShow: false })}
         />
       </div>
     );
