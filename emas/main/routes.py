@@ -107,7 +107,6 @@ def getmap():
         'name': ['Buenos Aires', 'Paris', 'melbourne', 'St Petersbourg'],
         'value': [1, 2, 3, 4]
     })
-
     data
 
     # Make an empty map
