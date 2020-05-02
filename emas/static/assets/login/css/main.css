@@ -148,6 +148,7 @@ iframe {
 }
 
 
+
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
 
@@ -212,7 +213,10 @@ iframe {
 .login100-pic {
   width: 316px;
 }
-
+.login100-pic-rest img {
+  max-width: 100%;
+    padding-bottom: 150px;
+}
 .login100-pic-reg img {
   max-width: 100%;
   padding-top: 150px;

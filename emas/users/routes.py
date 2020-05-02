@@ -41,7 +41,7 @@ def register():
         flash(
             f'Account created for {form.fname.data}!. A confirmation email has been sent via email.', 'success')
         return redirect(url_for('users.login'))
-    return render_template('user/register_new.html', title='Register', form=form)
+    return render_template('user/register.html', title='Register', form=form)
 
 
 @users.route("/confirm_email", methods=['GET', 'POST'])
@@ -87,7 +87,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('user/login_new.html', title='Login', form=form)
+    return render_template('user/login.html', title='Login', form=form)
 
 
 @users.route("/logout")
@@ -133,7 +133,7 @@ def account():
         flash('User information has not been updated', 'danger')
         return redirect(url_for('users.account'))
 
-    return render_template('user/account_new.html', title='Account', is_confirmed=user_confirmed, image_file=image_file, form=form,)
+    return render_template('user/account.html', title='Account', is_confirmed=user_confirmed, image_file=image_file, form=form,)
 
    # elif request.method == 'GET':
 
@@ -244,7 +244,7 @@ def account_contact():
         flash('Contact information has not been updated', 'danger')
         return redirect(url_for('users.account_contact'))
 
-    return render_template('user/contact_new.html', title='Contact', image_file=image_file, is_confirmed=user_confirmed, form=form, user_type=user_type)
+    return render_template('user/contact.html', title='Contact', image_file=image_file, is_confirmed=user_confirmed, form=form, user_type=user_type)
 
 
 @users.route("/reset_password", methods=['GET', 'POST'])
@@ -308,15 +308,26 @@ def send_message(recipient):
                            form=form, recipient=recipient, user=user)
 
 
-@users.route('/<email>')
+@users.route('/user/<email>', methods=['GET', 'POST'])
 @login_required
 def user(email):
     user = User.query.filter_by(email=email).first_or_404()
+
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user,
+                      body=form.message.data)
+        current_user.messages_sent.append(msg)
+        user.add_notification('unread_message_count', user.new_messages())
+        db.session.add(msg)
+        db.session.commit()
+        flash('Your message has been sent.', 'success')
+        return redirect(url_for('users.user', email=user.email))
     posts = [
         {'author': user, 'body': 'Test post #1'},
         {'author': user, 'body': 'Test post #2'}
     ]
-    return render_template('user/profile.html', user=user, posts=posts)
+    return render_template('user/profile.html', user=user, posts=posts, form=form)
 
 
 @users.before_request
@@ -335,7 +346,7 @@ def messages():
     messages = current_user.messages_received
     messages_out = current_user.messages_sent
 
-    return render_template('user/message_new.html', messages=messages, messages_out=messages_out)
+    return render_template('user/message.html', messages=messages, messages_out=messages_out)
 
 
 @users.route('/notifications')
