@@ -9,14 +9,6 @@ from emas.models import User
 from emas.config import Config
 
 from selenium.webdriver.chrome.options import Options
-options = Options()
-options.binary_location = "/usr/bin/google-chrome"
-options.add_argument("--start-maximized")  # open Browser in maximized mode
-options.add_argument("--no-sandbox")  # bypass OS security model
-# overcome limited resource problems
-options.add_argument("--disable-dev-shm-usage")
-options.add_experimental_option("excludeSwitches", ["enable-automation"])
-options.add_experimental_option('useAutomationExtension', False)
 
 
 class TestBase(LiveServerTestCase):
@@ -33,7 +25,9 @@ class TestBase(LiveServerTestCase):
 
     def setUp(self):
         """Setup the test driver and create test users"""
-        self.driver = webdriver.Chrome()
+        options = Options()
+        options.binary_location = "/usr/bin/chromium-browser"
+        self.driver = webdriver.Chrome(chrome_options=options)
         self.driver.get(self.get_server_url())
 
         db.session.commit()
