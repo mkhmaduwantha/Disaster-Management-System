@@ -20,6 +20,7 @@ admin = Admin()
 
 
 def create_app(config_class=Config):
+
     app = Flask(__name__)
     app.config.from_object(Config)
 
@@ -31,11 +32,13 @@ def create_app(config_class=Config):
     admin.init_app(app)
 
     from emas.users.routes import users
-    from emas.main.routes import main
+
+    from emas.home.routes import home
+
     from emas.errors.handlers import errors
 
     app.register_blueprint(users)
-    app.register_blueprint(main)
+    app.register_blueprint(home)
     app.register_blueprint(errors)
 
     return app

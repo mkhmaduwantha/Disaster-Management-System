@@ -15,12 +15,12 @@ users = Blueprint('users', __name__)
 
 @users.route("/register", methods=['GET', 'POST'])
 def register():
-    print('hey')
+    # print('hey')
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        print('hey1.5')
+        # print('hey1.5')
         hashed_password = bcrypt.generate_password_hash(
             form.password.data).decode('utf-8')
         user = User(title=form.title.data,
@@ -31,12 +31,12 @@ def register():
                     user_type=form.user_type.data,
                     password=hashed_password,
                     )
-        print('hey1')
+        # print('hey1')
         #user.confirmed = True
         db.session.add(user)
         db.session.commit()
         send_confirmation_email(user)
-        print('hey2')
+        # print('hey2')
 
         flash(
             f'Account created for {form.fname.data}!. A confirmation email has been sent via email.', 'success')
@@ -76,7 +76,7 @@ def confirm_email(token):
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -84,16 +84,17 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('main.home'))
+            return redirect(next_page) if next_page else redirect(url_for('home.home_page'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('user/login.html', title='Login', form=form)
 
 
 @users.route("/logout")
+@login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.home'))
+    return redirect(url_for('home.home_page'))
 
 
 @users.route("/account", methods=['GET', 'POST'])
@@ -250,7 +251,7 @@ def account_contact():
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -263,7 +264,7 @@ def reset_request():
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     user = User.verify_reset_token(token)
     if user is None:
         flash('That is an invalidor expired token', 'warning')
@@ -323,10 +324,6 @@ def user(email):
         db.session.commit()
         flash('Your message has been sent.', 'success')
         return redirect(url_for('users.user', email=user.email))
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
     return render_template('user/profile.html', user=user, posts=posts, form=form)
 
 
