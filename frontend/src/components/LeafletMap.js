@@ -1,5 +1,13 @@
 import React, { Component, createRef } from "react";
-import { Modal, Button, Card, Row, Col, Carousel } from "react-bootstrap";
+import {
+  Modal,
+  Button,
+  Card,
+  Row,
+  Col,
+  Carousel,
+  Spinner,
+} from "react-bootstrap";
 import { FaPhoneAlt } from "react-icons/fa";
 import {
   Map,
@@ -31,6 +39,7 @@ import { connect } from "react-redux";
 import Routing from "./RoutingMachine2";
 import { storage, firebasedb } from "../config/firebasedb";
 import LeafltMapModal from "./LeafltMapModal";
+
 //Icons
 var myIcon = L.icon({
   iconUrl: iconDrag,
@@ -99,6 +108,7 @@ export class LeafletMap extends Component {
       detailsmodalShow: false,
       safeLocations: [],
       currentSafeLocation: {},
+      isLoadingImages: true,
     };
   }
 
@@ -282,12 +292,21 @@ export class LeafletMap extends Component {
                         {location.imagesUrls.map((url) => {
                           return (
                             <Carousel.Item>
-                              <img
-                                width="100%"
-                                className="d-block w-100"
-                                src={url}
-                                alt="First slide"
-                              />
+                              <div
+                                style={{
+                                  width: "300px",
+                                  height: "200px",
+                                  textAlign: "center",
+                                }}
+                              >
+                                <img
+                                  width="100%"
+                                  className="d-block w-100"
+                                  src={url}
+                                  alt="First slide"
+                                />
+                              </div>
+
                               <Carousel.Caption>
                                 {/* <h3>First slide label</h3>
                             <p>
