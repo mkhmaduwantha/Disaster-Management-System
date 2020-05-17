@@ -38,6 +38,21 @@ body {
   padding: 10px;
   border-radius: 10px;
 }
+.map-container .marker-form {
+  background-color: white;
+  left: 25%;
+  width: 50%;
+  height: auto;
+  margin-top: 10%;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.9;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 /* .map-container .button-bar {
   z-index: 2;
   position: absolute;
@@ -55,7 +70,7 @@ body {
   background-color: white;
   position: absolute;
   left: 64px;
-  width: 200px;
+  width: 300px;
   height: 100vh;
   opacity: 0.9;
 }
@@ -85,3 +100,10 @@ body {
   height: 100vh;
   opacity: 0.9;
 } */
+.btn-primary {
+  color: #000;
+  background-color: #2e4c80;
+  background-color: cutom-color;
+  border-color: #2e4c80;
+  border-color: cutom-cor;
+}

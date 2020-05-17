@@ -204,3 +204,9 @@ class NotifyMessage(db.Model):
     
     def __repr__(self):
         return f"UserLocation('{self.user_id}','{self.message_id}','{self.subject}','{self.message}')"
+
+# new map modules
+
+class UserMarker(db.Model):
+    __tablename__='user_marker'
+    

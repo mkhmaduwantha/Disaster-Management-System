@@ -7,35 +7,13 @@ import sqlalchemy as sa
 from sqlalchemy.exc import IntegrityError
 from flask import app
 import math
+import emas.map.MyMap
 from flask_cors import CORS
 
 
 my_map = Blueprint('my_map', __name__)
 # CORS(my_map)
-def distance(center_lat, center_lng, end_lat, end_lng):
-    # convert to radian
-    rad_center_lat = math.pi * center_lat / 180
-    rad_center_lng = math.pi * center_lng / 180
-    rad_end_lat = math.pi * end_lat / 180
-    rad_end_lng = math.pi * end_lng / 180
 
-    theta= center_lng-end_lng
-    radtheta = math.pi * theta /180
-    dist= math.sin(rad_center_lat) * math.sin(rad_end_lat) + math.cos(rad_center_lat) * math.cos(rad_end_lat) * math.cos(radtheta)
-    dist= math.acos(dist)
-    dist= dist * 180/math.pi
-    dist= dist * 60*1.1515
-    
-    #get in KM
-    dist= dist * 1.609344
-    return dist
-
-def getrecievers(center_lat, center_lng, end_lat, end_lng, radius, user_id):
-    dist=distance(center_lat, center_lng, end_lat, end_lng)
-    if(radius<dist):
-        return True
-    else:
-        return False
 
 @my_map.route("/map")
 def index():

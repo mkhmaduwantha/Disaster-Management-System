@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { popup } from "leaflet";
 import axios from "axios";
+import { Form, Button } from "react-bootstrap";
+import { FaWindowClose } from "react-icons/fa";
 
 class Message extends Component {
   constructor(props) {
@@ -15,10 +17,10 @@ class Message extends Component {
       selected: false,
       radius: 0,
       military: false,
-      ref_camp: false,
+      refCamp: false,
       dmc: false,
       other: false,
-      all_user: false,
+      all: false,
     };
   }
 
@@ -27,6 +29,29 @@ class Message extends Component {
     this.setState({
       [name]: value,
     });
+  };
+  getOptionValue = (value) => {
+    if (value === "military") {
+      this.setState({
+        military: !this.state.military,
+      });
+    } else if (value === "refCamp") {
+      this.setState({
+        refCamp: !this.state.refCamp,
+      });
+    } else if (value === "dmc") {
+      this.setState({
+        dmc: !this.state.dmc,
+      });
+    } else if (value === "other") {
+      this.setState({
+        other: !this.state.other,
+      });
+    } else if (value === "all") {
+      this.setState({
+        all: !this.state.all,
+      });
+    }
   };
 
   handleSubmit = (event) => {
@@ -125,7 +150,23 @@ class Message extends Component {
       <React.Fragment>
         <h1>Notify Nearby Users </h1>
         <p>Step {this.state.currentStep} </p>
-        <button onClick={this.props.closePopup}>close me</button>
+        <Button
+          variant="secondary"
+          onClick={this.props.closePopup}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+            top: "1rem",
+            position: "absolute",
+            right: "1rem",
+            padding: "0px",
+            contentAlign: "center",
+          }}
+        >
+          <FaWindowClose style={{ height: "1.5rem", width: "1.5rem" }} />
+        </Button>
         <form onSubmit={this.handleSubmit}>
           {/* 
           render the form steps and pass required props in
@@ -149,6 +190,7 @@ class Message extends Component {
             ref_camp={this.state.ref_camp}
             other={this.state.other}
             all_user={this.state.all_user}
+            getOptionValue={this.getOptionValue}
           />
           {this.previousButton()}
           {this.nextButton()}
@@ -208,6 +250,88 @@ function Step2(props) {
   );
 }
 
+// function Step3(props) {
+//   if (props.currentStep !== 3) {
+//     return null;
+//   }
+//   return (
+//     <React.Fragment>
+//       <div className="form-group">
+//         <p>Receiver-Type</p>
+//         <div className="custom-control custom-checkbox">
+
+//           <input
+//             type="checkbox"
+//             className="custom-control-input"
+//             id="military"
+//             name="military"
+//             checked={props.military}
+//             onChange={props.handleChange}
+//           />
+//           <label className="custom-control-label" htmlFor="military">
+//             Military
+//           </label>
+//         </div>
+//         <div className="custom-control custom-checkbox">
+//           <input
+//             type="checkbox"
+//             className="custom-control-input"
+//             id="dmc"
+//             name="dmc"
+//             checked={props.dmc}
+//             onChange={props.handleChange}
+//           />
+//           <label className="custom-control-label" htmlFor="dmc">
+//             Disaster Management Centers
+//           </label>
+//         </div>
+
+//         <div className="custom-control custom-checkbox">
+//           <input
+//             type="checkbox"
+//             className="custom-control-input"
+//             id="ref_camp"
+//             name="ref_camp"
+//             checked={props.ref_camp}
+//             onChange={props.handleChange}
+//           />
+//           <label className="custom-control-label" htmlFor="ref_camp">
+//             Refugee Camp
+//           </label>
+//         </div>
+//         <div className="custom-control custom-checkbox">
+//           <input
+//             type="checkbox"
+//             className="custom-control-input"
+//             id="other"
+//             name="other"
+//             checked={props.other}
+//             onChange={props.handleChange}
+//           />
+//           <label className="custom-control-label" htmlFor="other">
+//             Other
+//           </label>
+//         </div>
+
+//         <div className="custom-control custom-checkbox">
+//           <input
+//             type="checkbox"
+//             className="custom-control-input"
+//             id="all_user"
+//             name="all_user"
+//             checked={props.all_user}
+//             onChange={props.handleChange}
+//           />
+//           <label className="custom-control-label" htmlFor="all_user">
+//             All
+//           </label>
+//         </div>
+//       </div>
+//       <button className="btn btn-success btn-block">Submit</button>
+//     </React.Fragment>
+//   );
+// }
+
 function Step3(props) {
   if (props.currentStep !== 3) {
     return null;
@@ -217,74 +341,30 @@ function Step3(props) {
       <div className="form-group">
         <p>Receiver-Type</p>
         <div className="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="military"
-            name="military"
-            checked={props.military}
-            onChange={props.handleChange}
-          />
-          <label className="custom-control-label" htmlFor="military">
-            Military
-          </label>
-        </div>
-        <div className="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="dmc"
-            name="dmc"
-            checked={props.dmc}
-            onChange={props.handleChange}
-          />
-          <label className="custom-control-label" htmlFor="dmc">
-            Disaster Management Centers
-          </label>
-        </div>
-
-        <div className="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="ref_camp"
-            name="ref_camp"
-            checked={props.ref_camp}
-            onChange={props.handleChange}
-          />
-          <label className="custom-control-label" htmlFor="ref_camp">
-            Refugee Camp
-          </label>
-        </div>
-        <div className="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="other"
-            name="other"
-            checked={props.other}
-            onChange={props.handleChange}
-          />
-          <label className="custom-control-label" htmlFor="other">
-            Other
-          </label>
-        </div>
-
-        <div className="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="all_user"
-            name="all_user"
-            checked={props.all_user}
-            onChange={props.handleChange}
-          />
-          <label className="custom-control-label" htmlFor="all_user">
-            All
-          </label>
+          <>
+            <Form.Group
+              onChange={(e) => props.getOptionValue(e.target.value)}
+              controlId="formBasicCheckbox"
+            >
+              <Form.Check value="military" type="checkbox" label="Military" />
+              <Form.Check value="dmc" type="checkbox" label="DMC" />
+              <Form.Check
+                value="refCamp"
+                type="checkbox"
+                label="Refugee Camp"
+              />
+              <Form.Check value="other" type="checkbox" label="Other" />
+              <Form.Check value="all" type="checkbox" label="All" />
+            </Form.Group>
+          </>
         </div>
       </div>
-      <button className="btn btn-success btn-block">Submit</button>
+      <button
+        style={{ float: "right", width: "85%" }}
+        className="btn btn-success btn-block"
+      >
+        Submit
+      </button>
     </React.Fragment>
   );
 }
