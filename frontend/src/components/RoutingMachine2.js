@@ -5,6 +5,7 @@ import { withLeaflet } from "react-leaflet";
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import { MAPBOX_TOKEN, MAPBOX_SERVICE_URL } from "consts";
+import { Button } from "react-bootstrap";
 
 class Routing extends Component {
   constructor(props) {
@@ -99,7 +100,7 @@ class Routing extends Component {
 
       geocoder: L.Control.Geocoder.nominatim(),
       fitSelectedRoutes: false,
-      zoom: 10,
+      zoom: "auto",
     })
       .on("routesfound", function (e) {
         var routes = e.routes;
@@ -136,12 +137,29 @@ class Routing extends Component {
       this.setRoutingPopUp(null);
     };
     const startBtn = (
-      <button onClick={startBtnOnClick}>Set begin position</button>
+      <Button
+        variant="primary"
+        onClick={startBtnOnClick}
+        size="sm"
+        style={{ width: "100%" }}
+      >
+        Set begin position
+      </Button>
     );
-    const endBtn = <button onClick={endBtnOnClick}>Set end position</button>;
+    const endBtn = (
+      <Button
+        onClick={endBtnOnClick}
+        variant="primary"
+        size="sm"
+        style={{ width: "100%" }}
+      >
+        Set end position
+      </Button>
+    );
     const children = (
       <div>
         {startBtn}
+        <br /> <br />
         {endBtn}
       </div>
     );
