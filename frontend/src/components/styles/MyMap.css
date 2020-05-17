@@ -37,3 +37,6 @@ body {
   right: 0;
   opacity: 0.9;
 }
+.prev-button {
+  margin: 1px;
+}
