@@ -5,8 +5,9 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from emas.config import Config
 from flask_admin import Admin
-
-
+from flask_cors import CORS
+from sqlalchemy import create_engine
+from os import environ
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -19,13 +20,17 @@ mail = Mail()
 
 admin = Admin()
 
+db_uri = environ.get('SQLALCHEMY_DATABASE_URI')
+engine = create_engine(db_uri,echo=True)
 
 
 def create_app(config_class = Config):
     app = Flask(__name__)
+    cors = CORS(app, supports_credentials=True)
     app.config.from_object(Config)
     
     db.init_app(app)
+    db.create_all(engine)
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)

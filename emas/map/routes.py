@@ -7,7 +7,12 @@ import sqlalchemy as sa
 from sqlalchemy.exc import IntegrityError
 from flask import app
 import math
+<<<<<<< HEAD
 my_map = Blueprint('my_map', __name__)
+=======
+import emas.map.MyMap
+from flask_cors import CORS
+>>>>>>> origin/maduwantha
 
 def distance(center_lat, center_lng, end_lat, end_lng):
     # convert to radian
@@ -16,6 +21,7 @@ def distance(center_lat, center_lng, end_lat, end_lng):
     rad_end_lat = math.pi * end_lat / 180
     rad_end_lng = math.pi * end_lng / 180
 
+<<<<<<< HEAD
     theta= center_lng-end_lng
     radtheta = math.pi * theta /180
     dist= math.sin(rad_center_lat) * math.sin(rad_end_lat) + math.cos(rad_center_lat) * math.cos(rad_end_lat) * math.cos(radtheta)
@@ -33,6 +39,11 @@ def getrecievers(center_lat, center_lng, end_lat, end_lng, radius, user_id):
         return True
     else:
         return False
+=======
+my_map = Blueprint('my_map', __name__)
+# CORS(my_map)
+
+>>>>>>> origin/maduwantha
 
 @my_map.route("/map")
 def index():
@@ -74,10 +85,58 @@ def message():
             mimetype='aplication/json',
             headers={
                 'Cache-Control' : 'no-cache',
+                'Access-Control-Allow-Origin':'http://localhost:3000'
+            }
+        )
+
+##################################################################################################
+#route notifyUser
+
+
+
+@my_map.route("/map/notify", methods=['GET','POST'])
+def notify():
+    resp={
+    }
+    
+    # if request.method == 'POST':
+    #     request_data=request.get_json()
+
+    #     user_id=request_data['user_id']
+    #     subject=request_data['subject']
+    #     message=request_data['message']
+    #     radius=request_data['radius']
+    #     user_type=request_data['user_type']
+    #     location=request_data['my_location']
+        
+    #     print(request_data)
+    #     # try:
+        #     mapMessage = MapMessage(name=name, message=message, longitude=longitude, lattitude= lattitude)
+        #     db.session.add(mapMessage)
+        #     db.session.commit()
+        #     resp={
+        #     "status":"success",
+        #     "data":{ "message sent":'ok'
+        #     }
+        #     }
+
+        # except sa.exc.SQLAlchemyError:
+        #     db.session.rollback()
+        #     resp={
+        #     "status":"db_fail",
+        #     "data":{}
+        #     }
+
+    return Response(
+            json.dumps(resp),
+            mimetype='aplication/json',
+            headers={
+                'Cache-Control' : 'no-cache',
                 'Access-Control-Allow-Origin':'*'
             }
         )
 
+<<<<<<< HEAD
 ##################################################################################################
 #route notifyUser
 
@@ -127,6 +186,8 @@ def notify():
             }
         )
 
+=======
+>>>>>>> origin/maduwantha
 @my_map.route('/map/addUserLocation', methods=['GET,POST'])
 def addLocation():
     resp={
@@ -162,6 +223,10 @@ def addLocation():
             mimetype='aplication/json',
             headers={
                 'Cache-Control' : 'no-cache',
+<<<<<<< HEAD
                 'Access-Control-Allow-Origin':'*'
+=======
+                'Access-Control-Allow-Origin':'http://localhost:3000'
+>>>>>>> origin/maduwantha
             }
         )

@@ -14,7 +14,8 @@ class App extends Component {
     return (
       <Provider store={Store}>
         <div id="leafletmap">
-          <SideNavBar />
+          {/* <SideNavBar /> */}
+          <LeafletMap/>
         </div>
       </Provider>
     );

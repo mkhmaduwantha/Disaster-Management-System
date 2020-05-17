@@ -225,19 +225,19 @@ export class LeafletMap extends Component {
     const position = [this.props.location.lat, this.props.location.lng];
     const markerPosition = [this.props.marker.lat, this.props.marker.lng];
     return (
-      <div>
+      <div className="map-container">
         <Map
           center={position}
           zoom={this.state.zoom}
           ref={this.saveMap}
-          onClick={this.handleClick}
+          // onClick={this.handleClick}
         >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
 
-          {this.state.isMapInit && <Routing map={this.map} />}
+          {this.state.isMapInit && <Routing name="ishara" map={this.map} />}
 
           {/* Position On click on map  */}
           {this.state.currentPos && (

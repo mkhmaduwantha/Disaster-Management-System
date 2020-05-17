@@ -187,6 +187,7 @@ class UserLocation(db.Model):
     lng =db.Column(db.Integer)
     lat = db.Column(db.Integer)
     time_stamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+<<<<<<< HEAD
     
     def __repr__(self):
         return f"UserLocation('{self.user_id}')"
@@ -204,3 +205,28 @@ class NotifyMessage(db.Model):
     
     def __repr__(self):
         return f"UserLocation('{self.user_id}','{self.message_id}','{self.subject}','{self.message}')"
+=======
+    
+    def __repr__(self):
+        return f"UserLocation('{self.user_id}')"
+
+
+class NotifyMessage(db.Model):
+    __tablename__= 'notify_messages'
+    message_id= db.Column(db.Integer, primary_key=True)
+    user_id= db.Column(db.Integer)
+    user_type=db.Column(db.String(100))
+    subject=db.Column(db.String(400))
+    message=db.Column(db.String(1000))
+    radius =db.Column(db.Integer)
+    time_stamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f"UserLocation('{self.user_id}','{self.message_id}','{self.subject}','{self.message}')"
+
+# new map modules
+
+class UserMarker(db.Model):
+    __tablename__='user_marker'
+    
+>>>>>>> origin/maduwantha

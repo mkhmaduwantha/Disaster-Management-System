@@ -5,22 +5,10 @@ import {
   TileLayer,
   Marker,
   Popup,
-  LayersControl,
-  LayerGroup,
-  FeatureGroup,
   CircleMarker,
-  Rectangle,
   Circle,
 } from "react-leaflet";
-import {
-  Button,
-  OverlayTrigger,
-  Tooltip,
-  ButtonGroup,
-  Card,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip, ButtonGroup } from "react-bootstrap";
 import {
   FaLocationArrow,
   FaLayerGroup,
@@ -39,14 +27,6 @@ import "./styles/MyMap.css";
 import circle_icon from "./img/marker-circle.png";
 import red_icon from "./img/marker-red.png";
 import Message from "./Message";
-import MyMarker from "./MyMarker";
-
-const { BaseLayer, Overlay } = LayersControl;
-
-const rectangle = [
-  [51.49, -0.08],
-  [51.5, -0.06],
-];
 
 const marker_data = {
   markerId: "1",
@@ -198,10 +178,6 @@ class Chat extends Component {
     this.setState({ showDetailBar: !this.state.showDetailBar });
   };
 
-  addMyMarker = (data) => {
-    console.log("hi", data, "hello");
-  };
-
   render() {
     const position = [this.state.location.lat, this.state.location.lng];
 
@@ -214,89 +190,62 @@ class Chat extends Component {
     } = this.state;
     return (
       <div className="map-container">
-        <div className="button-container">
-          <div className="button-bar">
-            <ButtonGroup vertical size="lg">
-              {[
-                {
-                  name: "showPopup1",
-                  value: "notify nearby",
-                  icon: <FaBullhorn />,
-                },
-                {
-                  name: "showPopup2",
-                  value: "tile layers",
-                  icon: <FaLayerGroup />,
-                },
-                {
-                  name: "showPopup3",
-                  value: "add a comment",
-                  icon: <FaComment />,
-                },
-                {
-                  name: "showPopup4",
-                  value: "add a flag",
-                  icon: <FaFlag />,
-                },
-                {
-                  name: "showPopup5",
-                  value: "find directions",
-                  icon: <FaDirections />,
-                },
-              ].map((data, idx) => (
-                <>
-                  <OverlayTrigger
-                    key={idx}
-                    placement="left"
-                    overlay={
-                      <Tooltip className="tooltip-right" id="tooltip-top">
-                        <strong>{data["value"]}</strong>.
-                      </Tooltip>
-                    }
+        <div className="button-bar">
+          <ButtonGroup vertical size="lg">
+            {[
+              {
+                name: "showPopup1",
+                value: "notify nearby",
+                icon: <FaBullhorn />,
+              },
+              {
+                name: "showPopup2",
+                value: "tile layers",
+                icon: <FaLayerGroup />,
+              },
+              {
+                name: "showPopup3",
+                value: "add a comment",
+                icon: <FaComment />,
+              },
+              {
+                name: "showPopup4",
+                value: "add a flag",
+                icon: <FaFlag />,
+              },
+              {
+                name: "showPopup5",
+                value: "find directions",
+                icon: <FaDirections />,
+              },
+            ].map((data, idx) => (
+              <>
+                <OverlayTrigger
+                  key={idx}
+                  placement="left"
+                  overlay={
+                    <Tooltip className="tooltip-right" id="tooltip-top">
+                      <strong>{data["value"]}</strong>.
+                    </Tooltip>
+                  }
+                >
+                  <Button
+                    onClick={() => this.togglePopup(data["name"])}
+                    variant="secondary"
+                    style={{ height: "3.75em" }}
                   >
-                    <Button
-                      onClick={() => this.togglePopup(data["name"])}
-                      variant="secondary"
-                      style={{ height: "3.75em" }}
-                    >
-                      {data["icon"]}
-                      {/* Tooltip on {data["value"]} */}
-                    </Button>
-                  </OverlayTrigger>{" "}
-                </>
-              ))}
-            </ButtonGroup>
-            {showPopup2 ? (
-              <div className="tile-layers">
-                <h1>Tile-Layers</h1>
-              </div>
-            ) : null}
-          </div>
+                    {data["icon"]}
+                    {/* Tooltip on {data["value"]} */}
+                  </Button>
+                </OverlayTrigger>{" "}
+              </>
+            ))}
+          </ButtonGroup>
         </div>
+
         {this.state.showDetailBar ? (
           <div className={"detail-bar"}>
-            <Card>
-              <Card.Img
-                variant="top"
-                src={require("./img/default_disaster.jpg")}
-              />
-              <Card.Body>
-                <Card.Title>Car Accident</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-              <ListGroup className="list-group-flush">
-                <ListGroupItem>Cras justo odio</ListGroupItem>
-                <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                <ListGroupItem>Vestibulum at eros</ListGroupItem>
-              </ListGroup>
-              <Card.Body>
-                <Card.Link href="#">Card Link</Card.Link>
-                <Card.Link href="#">Another Link</Card.Link>
-              </Card.Body>
-            </Card>
+            <h1>HEllo I am new DIV</h1>
           </div>
         ) : null}
         <Map
@@ -342,6 +291,58 @@ class Chat extends Component {
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker>
+          {/* ///////////////////////////////////////////////////////////////////// */}
+
+          {/* https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png
+            https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png */}
+
+          <LayersControl position="topright">
+            <BaseLayer checked name="OpenStreetMap.Mapnik">
+              <TileLayer
+                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+            </BaseLayer>
+            <BaseLayer name="OpenStreetMap.BlackAndWhite">
+              <TileLayer
+                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+              />
+            </BaseLayer>
+            <Overlay name="Marker with popup">
+              <Marker position={center}>
+                <Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+              </Marker>
+            </Overlay>
+            <Overlay checked name="Layer group with circles">
+              <LayerGroup>
+                <Circle center={center} fillColor="blue" radius={200} />
+                <Circle
+                  center={center}
+                  fillColor="red"
+                  radius={100}
+                  stroke={false}
+                />
+                <LayerGroup>
+                  <Circle
+                    center={[51.51, -0.08]}
+                    color="green"
+                    fillColor="green"
+                    radius={100}
+                  />
+                </LayerGroup>
+              </LayerGroup>
+            </Overlay>
+            <Overlay name="Feature group">
+              <FeatureGroup color="purple">
+                <Popup>Popup in FeatureGroup</Popup>
+                <Circle center={[51.51, -0.06]} radius={200} />
+                <Rectangle bounds={rectangle} />
+              </FeatureGroup>
+            </Overlay>
+          </LayersControl>
         </Map>
 
         {showPopup1 ? (
@@ -352,17 +353,8 @@ class Chat extends Component {
             />
           </div>
         ) : null}
-
-        {showPopup3 ? (
-          <div className="marker-form">
-            <MyMarker
-              props={this.props}
-              closePopup={this.togglePopup.bind(this, "showPopup3")}
-              addMyMarker={this.addMyMarker.bind(this)}
-            />
-          </div>
-        ) : null}
-
+        {showPopup2 ? <div className="message-form"></div> : null}
+        {showPopup3 ? <div className="message-form"></div> : null}
         {showPopup4 ? <div className="message-form"></div> : null}
         {showPopup5 ? <div className="message-form"></div> : null}
       </div>
