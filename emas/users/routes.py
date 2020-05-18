@@ -32,10 +32,10 @@ def register():
                     password=hashed_password,
                     )
         # print('hey1')
-        #user.confirmed = True
+        user.confirmed = True
         db.session.add(user)
         db.session.commit()
-        send_confirmation_email(user)
+        #send_confirmation_email(user)
         # print('hey2')
 
         flash(

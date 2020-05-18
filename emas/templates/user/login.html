@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,20 +7,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="static/assets/login/images/icons/favicon.ico" />
+	<link rel="icon" type="image/png" href="{{url_for('static', filename = '/assets/login/images/icons/favicon.ico')}}" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="static/assets/login/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/assets/login/vendor/bootstrap/css/bootstrap.min.css')}}">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="static/assets/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/assets/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="static/assets/login/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/assets/login/vendor/animate/animate.css')}}">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="static/assets/login/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/assets/login/vendor/css-hamburgers/hamburgers.min.css')}}">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="static/assets/login/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/assets/login/vendor/select2/select2.min.css')}}">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="static/assets/login/css/util.css">
-	<link rel="stylesheet" type="text/css" href="static/assets/login/css/home.css">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/assets/login/css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/assets/login/css/main.css')}}">
 	<!--===============================================================================================-->
 </head>
 
@@ -40,7 +41,7 @@
 					{% with messages = get_flashed_messages(with_categories=true) %}
 					{% if messages %}
 					{% for category, message in messages %}
-					<div class="alert alert-{{ category }}">
+					<div id = "alert" class="alert alert-{{ category }}">
 						{{ message }}
 					</div>
 					{% endfor %}
@@ -50,7 +51,7 @@
 						{% if form.email.errors %}
 						<div class="txt2">
 							{% for error in form.email.errors %}
-							<span>{{ error }}</span>
+							<span id = "error_email">{{ error }}</span>
 							{% endfor %}
 						</div>
 						{{ form.email(class="input100-error",placeholder = "Email") }}
@@ -113,21 +114,21 @@
 
 
 	<!--===============================================================================================-->
-	<script src="static/assets/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="{{url_for('static', filename = '/assets/login/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
 	<!--===============================================================================================-->
-	<script src="static/assets/login/vendor/bootstrap/js/popper.js"></script>
-	<script src="static/assets/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="{{url_for('static', filename = '/assets/login/vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{url_for('static', filename = '/assets/login/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 	<!--===============================================================================================-->
-	<script src="static/assets/login/vendor/select2/select2.min.js"></script>
+	<script src="{{url_for('static', filename = '/assets/login/vendor/select2/select2.min.js')}}"></script>
 	<!--===============================================================================================-->
-	<script src="static/assets/login/vendor/tilt/tilt.jquery.min.js"></script>
+	<script src="{{url_for('static', filename = '/assets/login/vendor/tilt/tilt.jquery.min.js')}}"></script>
 	<script>
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
 	</script>
 	<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<script src="{url_for('static', filename = '/assets/login/js/main.js{')}}"></script>
 
 </body>
 
