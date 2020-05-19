@@ -151,7 +151,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: ease all 0.3s;
   border-radius: 15px;
   margin-top: 5px;
-  transition-delay: 0.7s;
+  transition-delay: 0.0s;
 }
 
 .nav-menu .drop-down:hover > ul {

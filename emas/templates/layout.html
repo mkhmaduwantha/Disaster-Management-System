@@ -105,7 +105,7 @@
                             {% if current_user.is_authenticated %}
                             <li id="account_link" ><a href="{{ url_for('users.account') }}">Account</a></li>
                             {% endif %}
-                            <li class="drop-down"><a href="#">User</a>
+                            <li id = "user_link" class="drop-down"><a href="#">User</a>
                                 <ul>
                                     {% if not current_user.is_authenticated %}
                                     <li id="register_link" ><a href="{{ url_for('users.register') }}">Register</a></li>
@@ -150,7 +150,7 @@
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                 {% for category, message in messages %}
-                <div class="alert alert-dismissible fade show alert-{{ category }}">
+                <div id = "alert" class="alert alert-dismissible fade show alert-{{ category }}">
                     {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
