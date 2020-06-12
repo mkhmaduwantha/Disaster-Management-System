@@ -42,6 +42,8 @@ class User(db.Model,UserMixin):
     #email confirmation
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
+    #marker details
+    marker=db.relationship('Marker', backref='user', lazy='dynamic')
 
     #generatin reset token for password
     def get_reset_token(self, expires_sec = 1800):
@@ -207,6 +209,18 @@ class NotifyMessage(db.Model):
 
 # new map modules
 
-class UserMarker(db.Model):
-    __tablename__='user_marker'
-    
+class Marker(db.Model):
+    __tablename__='marker'
+    id = db.Column(db.Integer, primary_key=True)
+    lng = db.Column(db.Float, nullable = False)
+    lat = db.Column(db.Float, nullable = False)
+    color = db.Column(db.String(255), nullable = False, default='red')
+    name = db.Column(db.String(255), nullable= False, default='temp')
+    type = db.Column(db.String(255), nullable = False)
+    radius = db.Column(db.Float, nullable = False, default=0)
+    subject =db.Column(db.String(400))
+    description = db.Column(db.String(1000))
+    address = db.Column(db.String(400))
+    time_stamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
