@@ -1,0 +1,18 @@
+class TestLogin(TestBase):
+    def test_login(self):
+        element = WebDriverWait(self.driver, 20).until(
+        EC.element_to_be_clickable((By.ID, "reglogin_link")))
+        element.click()
+        
+        time.sleep(1)
+
+        self.driver.find_element_by_id("email").send_keys(test_user2_email)
+        self.driver.find_element_by_id("passwod").send_keys(test_user2_password)
+        self.driver.find_element_by_id("submit").click()
+
+        time.sleep(2)
+
+        assert url_for('home.home_page') in self.driver.current_url
+
+        login_message = self.driver.find_element_by_id("alert").text
+        assert "Login successful" in login_message

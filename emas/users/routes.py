@@ -15,12 +15,12 @@ users = Blueprint('users', __name__)
 
 @users.route("/register", methods=['GET', 'POST'])
 def register():
-    print('hey')
+    # print('hey')
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        print('hey1.5')
+        # print('hey1.5')
         hashed_password = bcrypt.generate_password_hash(
             form.password.data).decode('utf-8')
         user = User(title=form.title.data,
@@ -31,17 +31,17 @@ def register():
                     user_type=form.user_type.data,
                     password=hashed_password,
                     )
-        print('hey1')
-        #user.confirmed = True
+        # print('hey1')
+        user.confirmed = True
         db.session.add(user)
         db.session.commit()
-        # send_confirmation_email(user)
-        print('hey2')
+        #send_confirmation_email(user)
+        # print('hey2')
 
         flash(
             f'Account created for {form.fname.data}!. A confirmation email has been sent via email.', 'success')
         return redirect(url_for('users.login'))
-    return render_template('user/register_new.html', title='Register', form=form)
+    return render_template('user/register.html', title='Register', form=form)
 
 
 @users.route("/confirm_email", methods=['GET', 'POST'])
@@ -76,7 +76,7 @@ def confirm_email(token):
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -84,16 +84,18 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('main.home'))
+            flash('Login Successful. Welcome!', 'success')
+            return redirect(next_page) if next_page else redirect(url_for('home.home_page'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('user/login_new.html', title='Login', form=form)
+    return render_template('user/login.html', title='Login', form=form)
 
 
 @users.route("/logout")
+@login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.home'))
+    return redirect(url_for('home.home_page'))
 
 
 @users.route("/account", methods=['GET', 'POST'])
@@ -133,7 +135,7 @@ def account():
         flash('User information has not been updated', 'danger')
         return redirect(url_for('users.account'))
 
-    return render_template('user/account_new.html', title='Account', is_confirmed=user_confirmed, image_file=image_file, form=form,)
+    return render_template('user/account.html', title='Account', is_confirmed=user_confirmed, image_file=image_file, form=form,)
 
    # elif request.method == 'GET':
 
@@ -244,13 +246,13 @@ def account_contact():
         flash('Contact information has not been updated', 'danger')
         return redirect(url_for('users.account_contact'))
 
-    return render_template('user/contact_new.html', title='Contact', image_file=image_file, is_confirmed=user_confirmed, form=form, user_type=user_type)
+    return render_template('user/contact.html', title='Contact', image_file=image_file, is_confirmed=user_confirmed, form=form, user_type=user_type)
 
 
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -263,7 +265,7 @@ def reset_request():
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     user = User.verify_reset_token(token)
     if user is None:
         flash('That is an invalidor expired token', 'warning')
@@ -346,7 +348,7 @@ def messages():
     messages = current_user.messages_received
     messages_out = current_user.messages_sent
 
-    return render_template('user/message_new.html', messages=messages, messages_out=messages_out)
+    return render_template('user/message.html', messages=messages, messages_out=messages_out)
 
 
 @users.route('/notifications')
