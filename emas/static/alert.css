@@ -1,0 +1,18 @@
+.body-f {
+    background-color: black;
+    margin-top: 5rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+    color: #fff;
+  }
+  
+ #overlay {
+  margin-left:380px;
+  margin-top: 5rem;
+  position: fixed; /* Sit on top of the page content */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+  animation: css 0s 5s forwards;
+}
+
+@keyframes css  { to { visibility: hidden; } }
+                    /* visibility / overflow: hidden; */

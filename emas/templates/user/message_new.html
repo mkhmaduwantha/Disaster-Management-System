@@ -1,0 +1,98 @@
+{% extends "layout_new.html" %}
+{% block content %}
+
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>User Requests</h2>
+            <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>User Requests</li>
+            </ol>
+        </div>
+
+    </div>
+</section>
+
+
+
+<section id="contact" class="contact">
+    <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+            <h2>Pending Requests</h2>
+        </div>
+
+        <div class="col-lg-13" data-aos="fade-right">
+
+            {% for message in messages %}
+            <div class="responsive">
+                <div class="gallery">
+                    <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}"
+                        alt="Northern Lights" width="600" height="400">
+
+                    <div class="desc">
+                        <div class="article-metadata">
+                            <a class="mr-2"
+                                href="{{ url_for('users.user', email=message.author.email) }}">{{ message.author.fname}}</a>
+                            <small class="text-muted">Last Seen: {{ message.author.last_seen}}</small>
+                        </div>
+                        <p class="article-content">Message: <br>{{message.body}}</p>
+
+                        <p class="article-content">Time: <br>{{ message.timestamp }}</p>
+                        <a class="btn btn-primary"
+                            href="{{ url_for('users.send_message', recipient = message.author.email)}}">
+                            Accept</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+</section>
+
+<section id="contact" class="contact">
+    <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+            <h2>Accepted Requests</h2>
+        </div>
+
+        <div class="col-lg-13" data-aos="fade-right">
+
+            {% for message in messages_out %}
+            <div class="responsive">
+                <div class="gallery">
+                    <img src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}"
+                        alt="Northern Lights" width="600" height="400">
+
+                    <div class="desc">
+                        <div class="article-metadata">
+                            <a class="mr-2"
+                                href="{{ url_for('users.user', email=message.author.email) }}">{{ message.author.fname}}</a>
+                            <small class="text-muted">Last Seen: {{ message.author.last_seen}}</small>
+                        </div>
+                        <p class="article-content">Message: <br>{{message.body}}</p>
+
+                        <p class="article-content">Time: <br>{{ message.timestamp }}</p>
+                        <a class="btn btn-primary"
+                            href="{{ url_for('users.send_message', recipient = message.author.email)}}">
+                            Send a Message</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+</section>
+{% endblock %}

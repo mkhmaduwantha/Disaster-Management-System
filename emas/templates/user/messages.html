@@ -1,16 +1,55 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>{{ 'Messages' }}</h1>
-    {% for message in messages %}
- 
-        
-        <p>{{ message.author.username }}</p>
-        <p>{{ message.body }}</p>
-        <p>{{ message.timestamp }}</p>
-        <p><a href="{{ url_for('users.send_message', recipient = message.author.username)}}"> Reply to {{ message.author.username }}</a></p>
-    
+<h1>Messages</h1>
+<h2>Inbox</h2>
+{% for message in messages %}
 
-    {% endfor %}
-    
+
+<article class="media content-section">
+    <img class="rounded-circle article-img"
+        src="{{ url_for('static', filename='profile_pics/' + message.author.image_file) }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="{{ url_for('users.user', email=message.author.email) }}">{{ message.author.fname}}</a>
+            <small class="text-muted">Last Seen: {{ message.author.last_seen}}</small>
+        </div>
+        <p class="article-content">Message: <br>{{message.body}}</p>
+
+        <p class="article-content">Time: <br>{{ message.timestamp }}</p>
+        <a class="btn btn-primary" href="{{ url_for('users.send_message', recipient = message.author.email)}}">
+            Reply to
+            this
+            message {{ message.author.username }}</a>
+
+
+    </div>
+
+</article>
+{% endfor %}
+<h2>Outbox</h2>
+{% for message in messages_out %}
+
+
+<article class="media content-section">
+    <img class="rounded-circle article-img"
+        src="{{ url_for('static', filename='profile_pics/' + message.recipient.image_file) }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2"
+                href="{{ url_for('users.user', email=message.recipient.email) }}">{{ message.recipient.fname}}</a>
+            <small class="text-muted">Last Seen: {{ message.recipient.last_seen}}</small>
+        </div>
+        <p class="article-content">Message: <br>{{message.body}}</p>
+
+        <p class="article-content">Time: <br>{{ message.timestamp }}</p>
+        <a class="btn btn-primary" href="{{ url_for('users.send_message', recipient = message.recipient.email)}}">
+            Send Message {{ message.recipient.username }}</a>
+
+
+    </div>
+
+</article>
+{% endfor %}
+
 {% endblock %}

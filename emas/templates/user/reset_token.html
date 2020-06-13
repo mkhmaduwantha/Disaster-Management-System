@@ -1,42 +1,138 @@
-{% extends "layout.html" %}
-{% block content %}
-    <div class="content-section">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Reset password</legend>
-                <div class="form-group">
-                    {{ form.password.label(class="form-control-label") }}
-                    {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Reset Password</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png"
+        href="{{ url_for('static', filename='/assets/login/images/icons/favicon.ico') }}" />
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='/assets/login/vendor/bootstrap/css/bootstrap.min.css') }}" />
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='assets/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}" />
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='/assets/login/vendor/animate/animate.css') }}" />
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='/assets/login/vendor/css-hamburgers/hamburgers.min.css') }}" />
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='/assets/login/vendor/select2/select2.min.css') }}" />
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/assets/login/css/util.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/assets/login/css/main.css') }}" />
+
+    <!--===============================================================================================-->
+</head>
+
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-pic-rest js-tilt" data-tilt>
+                    <img src="{{ url_for('static', filename='/assets/login/images/img-01.png') }}" alt=" IMG">
+                </div>
+                <form class="login100-form validate-form" method="POST">
+                    {{ form.hidden_tag() }}
+                    <span class=" login100-form-title">
+                        Password Reset
+                    </span>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <div class="wrap-input100">
+                        {% if form.password.errors %}
+                        <div class="txt2">
                             {% for error in form.password.errors %}
-                                <span>{{ error }}</span>
+                            <span>{{ error }}</span>
                             {% endfor %}
                         </div>
-                    {% else %}
-                        {{ form.password(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.confirm_password.label(class="form-control-label") }}
-                    {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
+
+                        {{ form.password(class="input100-error",placeholder = "Password") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+
+                        {% else %}
+                        {{ form.password(class="input100",placeholder = "Password") }}
+                        {% endif %}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                        {% if form.confirm_password.errors %}
+                        <div class="txt2">
                             {% for error in form.confirm_password.errors %}
-                                <span>{{ error }}</span>
+                            <span>{{ error }}</span>
                             {% endfor %}
                         </div>
-                    {% else %}
-                        {{ form.confirm_password(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+
+                        {{ form.confirm_password(class="input100-error",placeholder = "Confirm Password") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+
+                        {% else %}
+                        {{ form.confirm_password(class="input100",placeholder = "Confirm Password") }}
+                        {% endif %}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+
+
+                    <div class="container-login100-form-btn">
+                        {{ form.submit(class="login100-form-btn") }}
+                    </div>
+
+
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-    
-{% endblock content %}
+
+
+
+
+    <!--===============================================================================================-->
+    <script src="{{ url_for('static', filename='/assets/login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ url_for('static', filename='/assets/login/vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='/assets/login/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ url_for('static', filename='/assets/login/vendor/select2/select2.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ url_for('static', filename='/assets/login/vendor/tilt/tilt.jquery.min.js') }}"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
