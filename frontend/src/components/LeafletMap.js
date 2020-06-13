@@ -34,6 +34,7 @@ import otherIcon from "leaflet/dist/images/other.png";
 import AntPath from "react-leaflet-ant-path";
 import { antPath } from "leaflet-ant-path";
 import "leaflet-routing-machine";
+import { setLocation, setMarker } from "../redux/actions/Location";
 import { connect } from "react-redux";
 import Routing from "./RoutingMachine";
 import { storage, firebasedb } from "../config/firebasedb";
@@ -149,13 +150,24 @@ export class LeafletMap extends Component {
     //////////////////
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        this.props.setLocation({
+          location: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
+        });
         this.setState({
           currentPos: {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           },
         });
-
+        this.props.setMarker({
+          marker: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
+        });
         this.setState({
           haveUsersLocation: true,
           zoom: 13,
@@ -214,6 +226,8 @@ export class LeafletMap extends Component {
   };
 
   render() {
+    const position = [this.props.location.lat, this.props.location.lng];
+    const markerPosition = [this.props.marker.lat, this.props.marker.lng];
     return (
       <div className="map-container">
         <Map
@@ -311,4 +325,17 @@ export class LeafletMap extends Component {
   }
 }
 
-export default LeafletMap;
+const mapStateToProps = (state) => {
+  return {
+    location: state.LocationReducer.location,
+    marker: state.LocationReducer.marker,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLocation: (data) => dispatch(setLocation(data)),
+    setMarker: (data) => dispatch(setMarker(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeafletMap);
