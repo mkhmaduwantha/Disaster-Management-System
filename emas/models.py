@@ -12,7 +12,7 @@ from itsdangerous import URLSafeTimedSerializer
 @login_manager.user_loader 
 def load_user(user_id):
     return User.query.get(int(user_id))
-#User,HUser,MUser,CUser,Address,Role,UserRoles,Message,Notification
+
 #basic_user
 class User(db.Model,UserMixin):  
     __tablename__ = 'users'
@@ -32,7 +32,6 @@ class User(db.Model,UserMixin):
     roles = db.relationship('Role', secondary='user_roles')
     #user type ready for inheritance
     user_type = db.Column(db.String(32), nullable=False, server_default='user')
-    __mapper_args__ = {'polymorphic_on': user_type}
     #for messaging funciton
     messages_sent = db.relationship('Message', foreign_keys='Message.sender_id', backref='author', lazy='dynamic')
     messages_received = db.relationship('Message', foreign_keys='Message.recipient_id', backref='recipient', lazy='dynamic')
@@ -42,6 +41,24 @@ class User(db.Model,UserMixin):
     #email confirmation
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
+    #marker details
+    marker=db.relationship('Marker', backref='user', lazy='dynamic')
+
+    #contact information
+    #for home user
+    home_address = db.relationship('Address', foreign_keys='Address.user_id',  lazy='dynamic')
+    home_number = db.Column(db.String(12))
+    #for military
+    designation = db.Column(db.String(255))
+    office_address = db.relationship('Address', foreign_keys='Address.user_id',  lazy='dynamic')
+    office_number = db.Column(db.String(12))
+    #for camps
+    total_number = db.Column(db.String(255))
+    occupied_number = db.Column(db.String(255))
+    camp_name = db.Column(db.String(255))
+    camp_number = db.Column(db.String(12))
+    camp_address = db.relationship('Address', foreign_keys='Address.user_id', backref='user_address', lazy='dynamic')
+    camp_needs = db.Column(db.String(255))
 
     #generatin reset token for password
     def get_reset_token(self, expires_sec = 1800):
@@ -76,44 +93,7 @@ class User(db.Model,UserMixin):
     def __repr__(self):
         return f"User('{self.fname}','{self.lname}', '{self.email}', '{self.image_file}','{self.confirmed}','{self.confirmed_on}')"
 
-class EUser(User):
-    __mapper_args__ = {'polymorphic_identity': 'euser'}
 
-    def __repr__(self):
-        return f"Role('{self.user}','{self.home_address}','{self.mobile_number}','{self.home_number}')"
-
-
-#home user
-class HUser(User):
-    __mapper_args__ = {'polymorphic_identity': 'huser'}
-    home_address = db.relationship('Address', foreign_keys='Address.user_id',  lazy='dynamic')
-    home_number = db.Column(db.String(12))
-
-    def __repr__(self):
-        return f"Role('{self.user}','{self.home_address}','{self.mobile_number}','{self.home_number}')"
-
-#military user
-class MUser(User):
-    __mapper_args__ = {'polymorphic_identity': 'muser'}
-    designation = db.Column(db.String(255))
-    office_address = db.relationship('Address', foreign_keys='Address.user_id',  lazy='dynamic')
-    office_number = db.Column(db.String(12))
-
-    def __repr__(self):
-        return f"Role('{self.user}','{self.designation}','{self.mobile_number}','{self.office_number}','{self.office_address}')"
-
-#camp user
-class CUser(User):
-    __mapper_args__ = {'polymorphic_identity': 'cuser'}
-    total_number = db.Column(db.Integer())
-    occupied_number = db.Column(db.Integer())
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))    
-    camp_number = db.Column(db.String(12))
-    camp_address = db.relationship('Address', foreign_keys='Address.user_id', backref='user_address', lazy='dynamic')
-
-
-    def __repr__(self):
-        return f"Role('{self.user}','{self.total_beds}','{self.occupied_beds}','{self.mobile_number}','{self.office_number}','{self.office_address}')"
 
 class Address(db.Model):
     __tablename__ = 'addresses'
@@ -176,7 +156,7 @@ class MapMessage(db.Model):
     longitude =db.Column(db.Integer)
     lattitude = db.Column(db.Integer)
     time_stamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    
+
     def __repr__(self):
         return f"MapMessage('{self.name}', '{self.message}')"
 
@@ -187,8 +167,7 @@ class UserLocation(db.Model):
     lng =db.Column(db.Integer)
     lat = db.Column(db.Integer)
     time_stamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-<<<<<<< HEAD
-    
+
     def __repr__(self):
         return f"UserLocation('{self.user_id}')"
 
@@ -202,31 +181,24 @@ class NotifyMessage(db.Model):
     message=db.Column(db.String(1000))
     radius =db.Column(db.Integer)
     time_stamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    
-    def __repr__(self):
-        return f"UserLocation('{self.user_id}','{self.message_id}','{self.subject}','{self.message}')"
-=======
-    
-    def __repr__(self):
-        return f"UserLocation('{self.user_id}')"
 
-
-class NotifyMessage(db.Model):
-    __tablename__= 'notify_messages'
-    message_id= db.Column(db.Integer, primary_key=True)
-    user_id= db.Column(db.Integer)
-    user_type=db.Column(db.String(100))
-    subject=db.Column(db.String(400))
-    message=db.Column(db.String(1000))
-    radius =db.Column(db.Integer)
-    time_stamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    
     def __repr__(self):
         return f"UserLocation('{self.user_id}','{self.message_id}','{self.subject}','{self.message}')"
 
 # new map modules
 
-class UserMarker(db.Model):
-    __tablename__='user_marker'
-    
->>>>>>> origin/maduwantha
+class Marker(db.Model):
+    __tablename__='marker'
+    id = db.Column(db.Integer, primary_key=True)
+    lng = db.Column(db.Float, nullable = False)
+    lat = db.Column(db.Float, nullable = False)
+    color = db.Column(db.String(255), nullable = False, default='red')
+    name = db.Column(db.String(255), nullable= False, default='temp')
+    type = db.Column(db.String(255), nullable = False)
+    radius = db.Column(db.Float, nullable = False, default=0)
+    subject =db.Column(db.String(400))
+    description = db.Column(db.String(1000))
+    address = db.Column(db.String(400))
+    time_stamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+

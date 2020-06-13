@@ -32,7 +32,7 @@ a:hover {
 html,
 body {
 /*css for full size background image*/
- 
+  background-color: black;
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
@@ -173,6 +173,8 @@ body {
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 700px;
+    width: 1000px;
   }
 }
+
+

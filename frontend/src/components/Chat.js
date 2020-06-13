@@ -20,6 +20,7 @@ import {
   Card,
   ListGroup,
   ListGroupItem,
+  Alert,
 } from "react-bootstrap";
 import {
   FaLocationArrow,
@@ -94,7 +95,7 @@ var redIcon = L.icon({
 class Chat extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    // console.log(this.props);
     this.state = {
       showPopup1: false,
       showPopup2: false,
@@ -112,6 +113,17 @@ class Chat extends Component {
         message: "",
       },
       showDetailBar: false,
+      alertColor: "",
+      alertVisible: true,
+      alertMessage: "",
+      pList: [],
+
+      mId: "",
+      mSubject: "",
+      mDescription: "",
+      mUserID: "",
+      mDate: "",
+      mTime: "",
     };
   }
   togglePopup(name) {
@@ -131,6 +143,10 @@ class Chat extends Component {
       case "showPopup5":
         this.setState({ showPopup5: !this.state.showPopup5 });
         break;
+      case "showDetailBar":
+        this.setState({ showDetailBar: !this.state.showDetailBar });
+        break;
+
       default:
         return null;
     }
@@ -167,6 +183,8 @@ class Chat extends Component {
           });
       }
     );
+    // setInterval(() => this.getMarkersFromDB(), 3000);
+    this.getMarkersFromDB();
   }
   //no need to bind since we use arrow functions
   formSubmitted = (event) => {
@@ -194,14 +212,56 @@ class Chat extends Component {
   };
 
   showMarkerDetails = (event) => {
-    console.log(event.target.options);
-    this.setState({ showDetailBar: !this.state.showDetailBar });
+    console.log(event.target.options.marker_id, "bshbfhsjdB");
+    let mId = event.target.options.marker_id;
+    this.state.pList.map((value, key) => {
+      if (value["marker_id"] === mId) {
+        this.setState({
+          showDetailBar: true,
+          mSubject: value["subject"],
+          mDescription: value["description"],
+          mUserID: value["user_id"],
+          mDate: value["date"],
+          mTime: value["time"],
+        });
+      }
+    });
   };
 
   addMyMarker = (data) => {
     console.log("hi", data, "hello");
   };
 
+  getMarkersFromDB = () => {
+    axios.post("http://localhost:5000/map/getMarkers", {}).then((res) => {
+      console.log(res.data);
+      if (res.data.query == "not ok") {
+        console.log("not ok");
+        return null;
+      } else if (res.data.query == "ok") {
+        this.setState({
+          pList: res.data.data.permanantList,
+        });
+        // console.log(res.data.data.permanantList);
+        // const pList = [];
+        // pList = res.data.data.permanantList;
+        console.log(this.state.pList[0]);
+        // this.setState(
+        //   {
+        //     alertVisible: true,
+        //     alertColor: "success",
+        //     alertMessage: "Alerts are awesome!",
+        //   },
+
+        //   () => {
+        //     window.setTimeout(() => {
+        //       this.setState({ alertVisible: false });
+        //     }, 3000);
+        //   }
+        // );
+      }
+    });
+  };
   render() {
     const position = [this.state.location.lat, this.state.location.lng];
 
@@ -214,6 +274,18 @@ class Chat extends Component {
     } = this.state;
     return (
       <div className="map-container">
+        {console.log(this.state.pList[0])}
+        {this.state.alertVisible ? (
+          <Alert
+            className="alert-container"
+            variant={this.state.alertColor}
+            isOpen={this.state.alertVisible}
+            toggle={(e) => this.setState({ alertVisible: false })}
+          >
+            {/*  */} {this.state.alertMessage}{" "}
+          </Alert>
+        ) : null}
+
         <div className="button-container">
           <div className="button-bar">
             <ButtonGroup vertical size="lg">
@@ -281,20 +353,25 @@ class Chat extends Component {
                 src={require("./img/default_disaster.jpg")}
               />
               <Card.Body>
-                <Card.Title>Car Accident</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
+                <Card.Title>{this.state.mSubject}</Card.Title>
+                <Card.Text>{this.state.mDescription}</Card.Text>
               </Card.Body>
               <ListGroup className="list-group-flush">
-                <ListGroupItem>Cras justo odio</ListGroupItem>
-                <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                <ListGroupItem>Vestibulum at eros</ListGroupItem>
+                <ListGroupItem>Phone Number: 0772342342</ListGroupItem>
+                <ListGroupItem>Updated Date: {this.state.mDate}</ListGroupItem>
+                <ListGroupItem>Updated Time: {this.state.mTime}</ListGroupItem>
               </ListGroup>
               <Card.Body>
-                <Card.Link href="#">Card Link</Card.Link>
-                <Card.Link href="#">Another Link</Card.Link>
+                <Card.Link href="#">Message</Card.Link>
+
+                <br></br>
+                <br></br>
+                <Button
+                  onClick={() => this.togglePopup("showDetailBar")}
+                  variant="secondary"
+                >
+                  Close
+                </Button>
               </Card.Body>
             </Card>
           </div>
@@ -330,18 +407,18 @@ class Chat extends Component {
           ) : (
             ""
           )}
-          <Marker
-            position={[6.245681049537433, 80.34301757812501]}
-            icon={redIcon}
-            props={marker_data}
-            onClick={(e) => {
-              this.showMarkerDetails(e);
-            }}
-          >
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
+          {this.state.pList.map((value, key) => (
+            <Marker
+              position={[value["lat"], value["lng"]]}
+              icon={redIcon}
+              marker_id={value["marker_id"]}
+              onClick={(e) => {
+                this.showMarkerDetails(e);
+              }}
+            >
+              <Popup>{value["subject"]}</Popup>
+            </Marker>
+          ))}
         </Map>
 
         {showPopup1 ? (
@@ -371,4 +448,3 @@ class Chat extends Component {
 }
 
 export default Chat;
-// I WILL DO MY BEST
