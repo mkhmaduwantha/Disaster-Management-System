@@ -35,10 +35,10 @@ import AntPath from "react-leaflet-ant-path";
 import { antPath } from "leaflet-ant-path";
 import "leaflet-routing-machine";
 import { setLocation, setMarker } from "../redux/actions/Location";
-import { connect } from "react-redux";
 import Routing from "./RoutingMachine";
 import { storage, firebasedb } from "../config/firebasedb";
 import LeafltMapModal from "./LeafltMapModal";
+import EditSafeLocation from "./EditSafeLocation";
 
 //Icons
 var myIcon = L.icon({
@@ -90,7 +90,7 @@ var iconOther = L.icon({
   popupAnchor: [0, -41],
 });
 
-export class LeafletMap extends Component {
+export class AdminMap extends Component {
   constructor(props) {
     super(props);
 
@@ -105,10 +105,12 @@ export class LeafletMap extends Component {
       isMapInit: false,
       currentPos: null,
       modalShow: false,
+      editModalShow: false,
       detailsmodalShow: false,
       safeLocations: [],
       currentSafeLocation: {},
       isLoadingImages: true,
+      currentSafeLocation: null,
     };
   }
 
@@ -150,23 +152,15 @@ export class LeafletMap extends Component {
     //////////////////
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.props.setLocation({
-          location: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          },
-        });
-        this.props.setMarker({
-          marker: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          },
-        });
         this.setState({
+          currentPos: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
           haveUsersLocation: true,
           zoom: 13,
         });
-        console.log(position);
+        console.log(position.coords.latitude, position.coords.longitude);
       },
       () => {
         console.log("no given location!");
@@ -174,21 +168,13 @@ export class LeafletMap extends Component {
           .then((res) => res.json())
           .then((location) => {
             console.log(location);
-            this.props.setLocation({
+            this.setState({
               location: {
                 lat: location.latitude,
                 lng: location.longitude,
               },
-            });
-            this.props.setMarker({
-              marker: {
-                lat: location.latitude,
-                lng: location.longitude,
-              },
-            });
-            this.setState({
               haveUsersLocation: true,
-              zoom: 10,
+              zoom: 13,
             });
           });
       }
@@ -220,22 +206,20 @@ export class LeafletMap extends Component {
   };
 
   render() {
-    const position = [this.props.location.lat, this.props.location.lng];
-    const markerPosition = [this.props.marker.lat, this.props.marker.lng];
     return (
       <div className="map-container">
         <Map
-          center={position}
+          center={this.state.currentPos}
           zoom={this.state.zoom}
           ref={this.saveMap}
-          // onClick={this.handleClick}
+          onClick={this.handleClick}
         >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
 
-          {this.state.isMapInit && <Routing name="ishara" map={this.map} />}
+          {/* {this.state.isMapInit && <Routing name="ishara" map={this.map} />} */}
 
           {/* Position On click on map  */}
           {this.state.currentPos && (
@@ -271,8 +255,16 @@ export class LeafletMap extends Component {
                 icon = iconOther;
               }
               return (
-                <Marker position={location.position} icon={icon}>
-                  <Popup>
+                <Marker
+                  position={location.position}
+                  icon={icon}
+                  onclick={() =>
+                    this.setState({ currentSafeLocation: location }, () =>
+                      this.setState({ editModalShow: true })
+                    )
+                  }
+                >
+                  {/* <Popup>
                     <div>
                       <h5 style={{ width: "300px", textAlign: "center" }}>
                         {location.name}
@@ -299,25 +291,30 @@ export class LeafletMap extends Component {
                                 />
                               </div>
 
-                              <Carousel.Caption>
-                                {/* <h3>First slide label</h3>
-                            <p>
-                              Nulla vitae elit libero, a pharetra augue mollis
-                              interdum.
-                            </p> */}
-                              </Carousel.Caption>
+                              <Carousel.Caption></Carousel.Caption>
                             </Carousel.Item>
                           );
                         })}
                       </Carousel>
                     </div>
-                  </Popup>
+                  </Popup> */}
                 </Marker>
               );
             })}
         </Map>
 
         {/* Modal */}
+        {this.state.editModalShow && (
+          <EditSafeLocation
+            position={this.state.currentPos}
+            // show={this.state.modalShow}
+            currentSafeLocation={this.state.currentSafeLocation}
+            show={true}
+            onHide={() => this.setState({ editModalShow: false })}
+            currentSafeLocation={this.state.currentSafeLocation}
+          />
+        )}
+
         <LeafltMapModal
           position={this.state.currentPos}
           show={this.state.modalShow}
@@ -328,17 +325,4 @@ export class LeafletMap extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    location: state.LocationReducer.location,
-    marker: state.LocationReducer.marker,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setLocation: (data) => dispatch(setLocation(data)),
-    setMarker: (data) => dispatch(setMarker(data)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LeafletMap);
+export default AdminMap;

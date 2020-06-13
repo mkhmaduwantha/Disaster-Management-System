@@ -90,7 +90,7 @@ var iconOther = L.icon({
   popupAnchor: [0, -41],
 });
 
-export class LeafletMap extends Component {
+export class UserMap extends Component {
   constructor(props) {
     super(props);
 
@@ -124,6 +124,8 @@ export class LeafletMap extends Component {
   };
 
   componentDidMount() {
+    /////////////////////
+
     firebasedb.ref("/places").on("value", (querySnapshot) => {
       let data = querySnapshot.val() ? querySnapshot.val() : {};
       let safeLocations = { ...data };
@@ -274,12 +276,18 @@ export class LeafletMap extends Component {
                 <Marker position={location.position} icon={icon}>
                   <Popup>
                     <div>
-                      <h5 style={{ width: "300px", textAlign: "center" }}>
+                      <h4 style={{ width: "300px", textAlign: "center" }}>
                         {location.name}
+                      </h4>
+                      <Row style={{ margin: "auto" }}>
+                        <FaPhoneAlt size={19} /> &nbsp; &nbsp;
+                        <h5>{location.phoneNo}</h5>
+                      </Row>
+                      <h5>
+                        No. of refugees that can be retained :{" "}
+                        {location.noOfRefugees}
                       </h5>
-                      {location.phoneNo} <br />
-                      No. of refugees that can be retained :{" "}
-                      {location.noOfRefugees}
+
                       <Carousel>
                         {location.imagesUrls.map((url) => {
                           return (
@@ -341,4 +349,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeafletMap);
+export default connect(mapStateToProps, mapDispatchToProps)(UserMap);

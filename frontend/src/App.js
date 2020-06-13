@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import MyMap from "./components/MyMap";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { SideNavBar } from "./components/SideNavBar";
 import Test from "./components/Test";
 import { Provider } from "react-redux";
 import configureStore from "./redux/Store";
 import LeafletMap from "./components/LeafletMap";
+import Chat from "./components/Chat";
+import { UserMap } from "./components/UserMap";
+import { AdminMap } from "./components/AdminMap";
 
 const Store = configureStore();
 
@@ -15,7 +17,9 @@ class App extends Component {
       <Provider store={Store}>
         <div id="leafletmap">
           {/* <SideNavBar /> */}
-          <LeafletMap/>
+          {/* <LeafletMap /> */}
+          <AdminMap />
+          {/* <Chat /> */}
         </div>
       </Provider>
     );
