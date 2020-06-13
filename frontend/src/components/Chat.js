@@ -143,6 +143,10 @@ class Chat extends Component {
       case "showPopup5":
         this.setState({ showPopup5: !this.state.showPopup5 });
         break;
+      case "showDetailBar":
+        this.setState({ showDetailBar: !this.state.showDetailBar });
+        break;
+
       default:
         return null;
     }
@@ -213,6 +217,7 @@ class Chat extends Component {
     this.state.pList.map((value, key) => {
       if (value["marker_id"] === mId) {
         this.setState({
+          showDetailBar: true,
           mSubject: value["subject"],
           mDescription: value["description"],
           mUserID: value["user_id"],
@@ -221,7 +226,6 @@ class Chat extends Component {
         });
       }
     });
-    this.setState({ showDetailBar: !this.state.showDetailBar });
   };
 
   addMyMarker = (data) => {
@@ -354,11 +358,20 @@ class Chat extends Component {
               </Card.Body>
               <ListGroup className="list-group-flush">
                 <ListGroupItem>Phone Number: 0772342342</ListGroupItem>
-                <ListGroupItem>Date: {this.state.mDate}</ListGroupItem>
-                <ListGroupItem>Time: {this.state.mTime}</ListGroupItem>
+                <ListGroupItem>Updated Date: {this.state.mDate}</ListGroupItem>
+                <ListGroupItem>Updated Time: {this.state.mTime}</ListGroupItem>
               </ListGroup>
               <Card.Body>
                 <Card.Link href="#">Message</Card.Link>
+
+                <br></br>
+                <br></br>
+                <Button
+                  onClick={() => this.togglePopup("showDetailBar")}
+                  variant="secondary"
+                >
+                  Close
+                </Button>
               </Card.Body>
             </Card>
           </div>
