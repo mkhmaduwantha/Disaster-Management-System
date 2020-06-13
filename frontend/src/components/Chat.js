@@ -41,6 +41,25 @@ import circle_icon from "./img/marker-circle.png";
 import red_icon from "./img/marker-red.png";
 import Message from "./Message";
 import MyMarker from "./MyMarker";
+import { createRef } from "react";
+import { Modal, Row, Col, Carousel, Spinner } from "react-bootstrap";
+import { FaPhoneAlt } from "react-icons/fa";
+
+import "./styles/MyMap.css";
+import iconFixed from "leaflet/dist/images/marker-icon.png";
+import iconDrag from "leaflet/dist/images/drag-location.png";
+import iconUser from "leaflet/dist/images/marker-icon.png";
+import templeIcon from "leaflet/dist/images/temple.png";
+import schoolIcon from "leaflet/dist/images/school.png";
+import militaryIcon from "leaflet/dist/images/military.png";
+import otherIcon from "leaflet/dist/images/other.png";
+import AntPath from "react-leaflet-ant-path";
+import { antPath } from "leaflet-ant-path";
+import "leaflet-routing-machine";
+import { connect } from "react-redux";
+import Routing from "./RoutingMachine";
+import { storage, firebasedb } from "../config/firebasedb";
+import LeafltMapModal from "./LeafltMapModal";
 
 const { BaseLayer, Overlay } = LayersControl;
 
@@ -69,6 +88,34 @@ var redIcon = L.icon({
   iconUrl: red_icon,
   iconSize: [41, 41],
   iconAnchor: [20.5, 41],
+  popupAnchor: [0, -41],
+});
+
+var iconSchool = L.icon({
+  iconUrl: schoolIcon,
+  iconSize: [60, 51],
+  iconAnchor: [28, 41],
+  popupAnchor: [0, -41],
+});
+
+var iconTemple = L.icon({
+  iconUrl: templeIcon,
+  iconSize: [60, 51],
+  iconAnchor: [28, 41],
+  popupAnchor: [0, -41],
+});
+
+var iconMilitary = L.icon({
+  iconUrl: militaryIcon,
+  iconSize: [60, 51],
+  iconAnchor: [28, 41],
+  popupAnchor: [0, -41],
+});
+
+var iconOther = L.icon({
+  iconUrl: otherIcon,
+  iconSize: [60, 51],
+  iconAnchor: [28, 41],
   popupAnchor: [0, -41],
 });
 // var options = {
@@ -124,6 +171,16 @@ class Chat extends Component {
       mUserID: "",
       mDate: "",
       mTime: "",
+
+      //Ishara's state
+      draggable: true,
+      isMapInit: false,
+      currentPos: null,
+      modalShow: false,
+      detailsmodalShow: false,
+      safeLocations: [],
+      currentSafeLocation: {},
+      isLoadingImages: true,
     };
   }
   togglePopup(name) {
@@ -154,6 +211,29 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    firebasedb.ref("/places").on("value", (querySnapshot) => {
+      let data = querySnapshot.val() ? querySnapshot.val() : {};
+      let safeLocations = { ...data };
+      let newState = [];
+      for (let location in safeLocations) {
+        newState.push({
+          id: location,
+          name: safeLocations[location].name,
+          phoneNo: safeLocations[location].phoneNo,
+          category: safeLocations[location].category,
+          noOfRefugees: safeLocations[location].noOfRefugees,
+          imagesUrls: safeLocations[location].imagesUrls,
+          position: safeLocations[location].position,
+        });
+      }
+      this.setState(
+        {
+          safeLocations: newState,
+        },
+        () => console.log(this.state.safeLocations)
+      );
+    });
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
@@ -419,6 +499,64 @@ class Chat extends Component {
               <Popup>{value["subject"]}</Popup>
             </Marker>
           ))}
+
+          {this.state.safeLocations &&
+            this.state.safeLocations.map((location) => {
+              let icon = null;
+              if (location.category == "Temple") {
+                icon = iconTemple;
+              } else if (location.category == "School") {
+                icon = iconSchool;
+              } else if (location.category == "Military Camp") {
+                icon = iconMilitary;
+              } else {
+                icon = iconOther;
+              }
+              return (
+                <Marker position={location.position} icon={icon}>
+                  <Popup>
+                    <div>
+                      <h5 style={{ width: "300px", textAlign: "center" }}>
+                        {location.name}
+                      </h5>
+                      {location.phoneNo} <br />
+                      No. of refugees that can be retained :{" "}
+                      {location.noOfRefugees}
+                      <Carousel>
+                        {location.imagesUrls.map((url) => {
+                          return (
+                            <Carousel.Item>
+                              <div
+                                style={{
+                                  width: "300px",
+                                  height: "200px",
+                                  textAlign: "center",
+                                }}
+                              >
+                                <img
+                                  width="100%"
+                                  className="d-block w-100"
+                                  src={url}
+                                  alt="First slide"
+                                />
+                              </div>
+
+                              <Carousel.Caption>
+                                {/* <h3>First slide label</h3>
+                            <p>
+                              Nulla vitae elit libero, a pharetra augue mollis
+                              interdum.
+                            </p> */}
+                              </Carousel.Caption>
+                            </Carousel.Item>
+                          );
+                        })}
+                      </Carousel>
+                    </div>
+                  </Popup>
+                </Marker>
+              );
+            })}
         </Map>
 
         {showPopup1 ? (

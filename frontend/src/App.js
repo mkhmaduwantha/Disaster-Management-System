@@ -8,6 +8,7 @@ import LeafletMap from "./components/LeafletMap";
 import Chat from "./components/Chat";
 import { UserMap } from "./components/UserMap";
 import { AdminMap } from "./components/AdminMap";
+import SideNavBar from "./components/SideNavBar";
 
 const Store = configureStore();
 
@@ -16,9 +17,9 @@ class App extends Component {
     return (
       <Provider store={Store}>
         <div id="leafletmap">
-          {/* <SideNavBar /> */}
+          <SideNavBar />
           {/* <AdminMap /> */}
-          <LeafletMap />
+          {/* <LeafletMap /> */}
           {/* <Chat /> */}
         </div>
       </Provider>
