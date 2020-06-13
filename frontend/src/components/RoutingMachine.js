@@ -127,6 +127,10 @@ class Routing extends Component {
     this.setState({ routingPopUp });
   };
 
+  testF = () => {
+    alert("Child");
+  };
+
   render() {
     const { routingPopUp } = this.state;
     if (routingPopUp) return <Popup {...this.state.routingPopUp} />;

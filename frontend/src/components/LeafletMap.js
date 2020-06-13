@@ -156,6 +156,12 @@ export class LeafletMap extends Component {
             lng: position.coords.longitude,
           },
         });
+        this.setState({
+          currentPos: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
+        });
         this.props.setMarker({
           marker: {
             lat: position.coords.latitude,
@@ -225,7 +231,7 @@ export class LeafletMap extends Component {
     return (
       <div className="map-container">
         <Map
-          center={position}
+          center={this.state.currentPos}
           zoom={this.state.zoom}
           ref={this.saveMap}
           // onClick={this.handleClick}
@@ -244,16 +250,7 @@ export class LeafletMap extends Component {
               draggable={true}
               icon={myIcon}
             >
-              <Popup position={this.state.currentPos}>
-                <Button
-                  variant="primary"
-                  onClick={() => this.setState({ modalShow: true })}
-                >
-                  Set This Place As A Safe Location
-                </Button>
-                {/* Current location:{" "} */}
-                {/* <pre>{JSON.stringify(this.state.currentPos, null, 2)}</pre> */}
-              </Popup>
+              <Popup position={this.state.currentPos}>Your Location</Popup>
             </Marker>
           )}
 
