@@ -150,12 +150,6 @@ export class LeafletMap extends Component {
     //////////////////
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.props.setLocation({
-          location: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          },
-        });
         this.setState({
           currentPos: {
             lat: position.coords.latitude,
@@ -226,8 +220,6 @@ export class LeafletMap extends Component {
   };
 
   render() {
-    const position = [this.props.location.lat, this.props.location.lng];
-    const markerPosition = [this.props.marker.lat, this.props.marker.lng];
     return (
       <div className="map-container">
         <Map

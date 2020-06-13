@@ -19,8 +19,8 @@ class App extends Component {
         <div id="leafletmap">
           {/* <SideNavBar /> */}
           {/* <AdminMap /> */}
-          <LeafletMap />
-          {/* <Chat /> */}
+          {/* <LeafletMap /> */}
+          <Chat />
         </div>
       </Provider>
     );
