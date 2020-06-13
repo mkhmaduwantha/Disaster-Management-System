@@ -16,8 +16,9 @@ class RegistrationForm(FlaskForm):
     mobile_number = StringField('Mobile Number',
                                 validators=[DataRequired(), Length(min=2, max=20)])
     user_type = SelectField(
-        u'User Type',
-        choices=[('None', 'none'), ('Military', 'military'), ('Camp', 'camp')]
+        'User Type',
+        choices=[('None', 'User Type'),
+                 ('Military', 'Military'), ('Camp', 'Camp')]
     )
     email = StringField('Email',
                         validators=[DataRequired(), Email()])

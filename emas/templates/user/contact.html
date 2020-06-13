@@ -28,8 +28,12 @@
 <div class="inline-left"><a href="{{ url_for('users.account') }}" class="btn btn-outline-primary">User Details</a>
 </div>
 <div class="inline-right"><a href="{{ url_for('users.account_contact') }}" class="btn btn-primary">Contact
-        Details</a>
-</div>
+        Details</a></div>
+
+{% if current_user.user_type == 'Camp' %}
+<div class="inline-right"><a href="{{ url_for('users.messages') }}" class="btn btn-outline-primary">Requests</a>
+    {% endif %} </div>
+
 <section id="contact" class="contact">
     <div class="container">
 

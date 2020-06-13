@@ -28,135 +28,135 @@
 <div class="inline-left"><a href="{{ url_for('users.account') }}" class="btn btn-primary">User Details</a>
 </div>
 <div class="inline-right"><a href="{{ url_for('users.account_contact') }}" class="btn btn-outline-primary">Contact
-        Details</a>
+        Details</a></div>
+</div>
+{% if current_user.user_type == 'Camp' %}
+<div class="inline-right"><a href="{{ url_for('users.messages') }}" class="btn btn-outline-primary">Requests</a></div>
+{% endif %}
 
-    {% if current_user.user_type == 'Camp' %}
-    <div class="inline-right"><a href="{{ url_for('users.messages') }}" class="btn btn-outline-primary">Requests</a>
-        {% endif %}
+<section id="contact" class="contact">
+    <div class="container">
 
-        <section id="contact" class="contact">
-            <div class="container">
+        <div class="section-title" data-aos="zoom-out">
+            <h2>User Information</h2>
+        </div>
+        <div class="row mt-13">
+            <div class="col-lg-10" data-aos="fade-right">
+                <div class="info">
+                    {% if is_confirmed %}
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                {{ form.picture.label() }}
+                                {{ form.picture(class="form-control-file") }}
+                                {% if form.picture.errors %}
+                                {% for error in form.picture.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                                {% endif %}
 
-                <div class="section-title" data-aos="zoom-out">
-                    <h2>User Information</h2>
-                </div>
-                <div class="row mt-13">
-                    <div class="col-lg-10" data-aos="fade-right">
-                        <div class="info">
-                            {% if is_confirmed %}
-                            <form method="POST" action="" enctype="multipart/form-data">
-                                {{ form.hidden_tag() }}
-                                <fieldset class="form-group">
-                                    <div class="form-group">
-                                        {{ form.picture.label() }}
-                                        {{ form.picture(class="form-control-file") }}
-                                        {% if form.picture.errors %}
-                                        {% for error in form.picture.errors %}
-                                        <span class="text-danger">{{ error }}</span>
-                                        {% endfor %}
-                                        {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.title.label(class="form-control-label") }}
 
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form.title.label(class="form-control-label") }}
-
-                                        {% if form.title.errors %}
-                                        {{ form.title(class="form-control form-control-lg is-invalid") }}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.title.errors %}
-                                            <span>{{ error }}</span>
-                                            {% endfor %}
-                                        </div>
-                                        {% else %}
-                                        {{ form.title(class="form-control form-control-lg") }}
-                                        {% endif %}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form.fname.label(class="form-control-label") }}
-
-                                        {% if form.fname.errors %}
-                                        {{ form.fname(class="form-control form-control-lg is-invalid") }}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.fname.errors %}
-                                            <span>{{ error }}</span>
-                                            {% endfor %}
-                                        </div>
-                                        {% else %}
-                                        {{ form.fname(class="form-control form-control-lg") }}
-                                        {% endif %}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form.lname.label(class="form-control-label") }}
-
-                                        {% if form.lname.errors %}
-                                        {{ form.lname(class="form-control form-control-lg is-invalid") }}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.lname.errors %}
-                                            <span>{{ error }}</span>
-                                            {% endfor %}
-                                        </div>
-                                        {% else %}
-                                        {{ form.lname(class="form-control form-control-lg") }}
-                                        {% endif %}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form.email.label(class="form-control-label") }}
-                                        {% if form.email.errors %}
-                                        {{ form.email(class="form-control form-control-lg is-invalid") }}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.email.errors %}
-                                            <span>{{ error }}</span>
-                                            {% endfor %}
-                                        </div>
-                                        {% else %}
-                                        {{ form.email(class="form-control form-control-lg") }}
-                                        {% endif %}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form.mobile_number.label(class="form-control-label") }}
-                                        {% if form.mobile_number.errors %}
-                                        {{ form.mobile_number(class="form-control form-control-lg is-invalid") }}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.mobile_number.errors %}
-                                            <span>{{ error }}</span>
-                                            {% endfor %}
-                                        </div>
-                                        {% else %}
-                                        {{ form.mobile_number(class="form-control form-control-lg") }}
-                                        {% endif %}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form.user_type.label(class="form-control-label") }}
-
-                                        {% if form.user_type.errors %}
-                                        {{ form.user_type(class="form-control form-control-lg is-invalid") }}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.user_type.errors %}
-                                            <span>{{ error }}</span>
-                                            {% endfor %}
-                                        </div>
-                                        {% else %}
-                                        {{ form.user_type(class="form-control form-control-lg") }}
-                                        {% endif %}
-                                    </div>
-
-                                </fieldset>
-                                <div class="form-group">
-                                    {{ form.submit(class="btn btn-outline-info") }}
+                                {% if form.title.errors %}
+                                {{ form.title(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.title.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
                                 </div>
-                            </form>
+                                {% else %}
+                                {{ form.title(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.fname.label(class="form-control-label") }}
 
+                                {% if form.fname.errors %}
+                                {{ form.fname(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.fname.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.fname(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.lname.label(class="form-control-label") }}
 
-                            {% else %}
-                            <p class="text-secondary">Please confirm your email to proceed.</p>
-                            <a href="{{ url_for('users.request_confirm') }}" class="btn btn-primary">Resend.</a>
+                                {% if form.lname.errors %}
+                                {{ form.lname(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.lname.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.lname(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email.label(class="form-control-label") }}
+                                {% if form.email.errors %}
+                                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.email(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.mobile_number.label(class="form-control-label") }}
+                                {% if form.mobile_number.errors %}
+                                {{ form.mobile_number(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.mobile_number.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.mobile_number(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.user_type.label(class="form-control-label") }}
 
-                            {% endif %}
-                            </a>
+                                {% if form.user_type.errors %}
+                                {{ form.user_type(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.user_type.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.user_type(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
 
-
+                        </fieldset>
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-outline-info") }}
                         </div>
+                    </form>
 
-                    </div>
-        </section>
-        {% endblock %}
+
+                    {% else %}
+                    <p class="text-primary">Please confirm your email to proceed.</p>
+                    <a href="{{ url_for('users.request_confirm') }}" class="btn btn-primary">Resend.</a>
+
+                    {% endif %}
+                    </a>
+
+
+                </div>
+
+            </div>
+</section>
+{% endblock %}

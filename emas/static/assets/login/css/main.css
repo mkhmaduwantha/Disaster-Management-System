@@ -191,7 +191,12 @@ iframe {
   justify-content: space-between;
   padding: 177px 130px 33px 95px;
 }
+@media screen and (max-width: 479px) {
+    .wrap-login100 {
+      padding: 0;
 
+    }
+}
 .wrap-reg100 {
   width: 960px;
   background: #fff;
@@ -206,6 +211,12 @@ iframe {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 40px 130px 33px 95px;
+}
+@media screen and (max-width: 479px) {
+    .wrap-reg100 {
+      padding: 0;
+
+    }
 }
 
 /*------------------------------------------------------------------
@@ -226,6 +237,18 @@ iframe {
 
 }
 
+@media screen and (max-width: 479px) {
+    .login100-pic-reg img{
+      padding: 0;
+
+    }
+}
+@media screen and (max-width: 479px) {
+    .login100-pic img{
+      padding: 0;
+
+    }
+}
 
 /*------------------------------------------------------------------
 [  ]*/
@@ -252,6 +275,7 @@ iframe {
   width: 100%;
   z-index: 1;
   margin-bottom: 10px;
+  padding: auto;
 }
 
 .input100 {
