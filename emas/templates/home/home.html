@@ -21,7 +21,7 @@
         <h2 class="animated fadeInDown">Need of this</h2>
         <p class="animated fadeInUp">Many lives are lost because of the lack of communication methods when a disaster
           happens. This app will help to minimize those challenegs.</p>
-        <a href="#" class="btn-get-started animated fadeInUp scrollto">Read More</a>
+        <a href="#about" class="btn-get-started animated fadeInUp scrollto">Read More</a>
       </div>
     </div>
 
@@ -31,7 +31,7 @@
         <h2 class="animated fadeInDown">Emergency Map</h2>
         <p class="animated fadeInUp">A map with disaster locations, details about refugee camp, real-time images, and
           safest routes for location</p>
-        <a href="{{ url_for('home.getmap') }}" class="btn-get-started animated fadeInUp scrollto">Open Map</a>
+        <a href="#about" class="btn-get-started animated fadeInUp scrollto">Open Map</a>
       </div>
     </div>
 
@@ -68,7 +68,7 @@
 <main id="main">
 
   <!-- ======= About Section ======= -->
-  <section id="about" class="about">
+  <section id="about" class="about" style="padding-bottom: 0.05%;">
     <div class="container">
 
       <div class="section-title" data-aos="zoom-out">
@@ -92,7 +92,7 @@
           <p>
             This app is made for use in low data mode without depending on the mobile performance. This will support
             considerable amount of concurrent users.
-            <!--a href="#" class="btn-learn-more">Learn More</a-->
+
         </div>
       </div>
 
@@ -105,25 +105,25 @@
 
       <ul class="nav nav-tabs row d-flex">
         <li class="nav-item col-3" data-aos="zoom-in">
-          <a class="nav-link active show" data-toggle="tab" href="#tab-1">
+          <a class="nav-link active show " style="border-radius: 20px;" data-toggle="tab" href="#tab-1">
             <i class="ri-gps-line"></i>
             <h4 class="d-none d-lg-block">Ambulance Service</h4>
           </a>
         </li>
         <li class="nav-item col-3" data-aos="zoom-in" data-aos-delay="100">
-          <a class="nav-link" data-toggle="tab" href="#tab-2">
+          <a class="nav-link" data-toggle="tab" style="border-radius: 20px;" href="#tab-2">
             <i class="ri-body-scan-line"></i>
             <h4 class="d-none d-lg-block">Emergency Map</h4>
           </a>
         </li>
         <li class="nav-item col-3" data-aos="zoom-in" data-aos-delay="200">
-          <a class="nav-link" data-toggle="tab" href="#tab-3">
+          <a class="nav-link" data-toggle="tab" style="border-radius: 20px;" href="#tab-3">
             <i class="ri-sun-line"></i>
             <h4 class="d-none d-lg-block">Disaster Details</h4>
           </a>
         </li>
         <li class="nav-item col-3" data-aos="zoom-in" data-aos-delay="300">
-          <a class="nav-link" data-toggle="tab" href="#tab-4">
+          <a class="nav-link" data-toggle="tab" style="border-radius: 20px;" href="#tab-4">
             <i class="ri-store-line"></i>
             <h4 class="d-none d-lg-block">Refugee Camps Details</h4>
           </a>
@@ -133,7 +133,7 @@
       <div class="tab-content" data-aos="fade-up">
         <div class="tab-pane active show" id="tab-1">
           <div class="row">
-            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0" style="padding-top: 6%; padding-left: 10%;">
               <h3>Contact සුවසැරිය Ambulance Service</h3>
               <p class="font-italic">
                 You can contact suwasariya by clicking the link here. No need of login or registering.
@@ -157,7 +157,7 @@
         </div>
         <div class="tab-pane" id="tab-2">
           <div class="row">
-            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0" style="padding-top: 6%;">
               <h3>Aceess more information with Emergency Map</h3>
               <p>
                 You can have more information about ongoing disasters and their locations by using our emergency map.
@@ -180,7 +180,7 @@
         </div>
         <div class="tab-pane" id="tab-3">
           <div class="row">
-            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0" style="padding-top: 6%;">
               <h3>Have knowledge about Disasters</h3>
               <p>
                 From our disaster details section you can have knowledge about disasters.
@@ -203,7 +203,7 @@
         </div>
         <div class="tab-pane" id="tab-4">
           <div class="row">
-            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0" style="padding-top: 6%;">
               <h3>Know about nearby refugee camps</h3>
               <p>
                 You can get details about refugee camps nearby.
@@ -235,11 +235,11 @@
 
       <div class="row" data-aos="zoom-out">
         <div class="col-lg-9 text-center text-lg-left">
-          <h3>Call සුවසැරිය</h3>
-          <p> Emergency? Call සුවසැරිය ambulance, press this button. No need of login.</p>
+          <h3>Open Emergency Map</h3>
+          <p> Use our emergency map to find out more.</p>
         </div>
         <div class="col-lg-3 cta-btn-container text-center">
-          <a class="cta-btn align-middle" href="tel:+941990">Call සුවසැරිය</a>
+          <a class="cta-btn align-middle" href="openmap">Emergency Map</a>
         </div>
       </div>
 
@@ -247,8 +247,9 @@
   </section>
   <!-- End Cta Section -->
 
-  <!--======= Pricing Section=======-->
-  {% if is_empty %}
+  <!--======= Disasters Section=======-->
+  {% if is_authenticated %}
+  {% if not is_empty %}
   <section id="pricing" class="pricing">
     <div class="container">
 
@@ -261,29 +262,33 @@
 
 
         {% for camp in camps %}
+        {% if camp.camp_name == None %}
+        {% else %}
+
         <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
           <div class="box featured" data-aos="zoom-in" data-aos-delay="100">
+
             <h3>{{ camp.camp_name }}</h3>
             <h4>{{camp.camp_address[0].city}}</span></h4>
             <ul>
               <li>Total: {{camp.total_number}}</li>
-              <li>Nec feugiat nisl</li>
-              <li>Nulla at volutpat dola</li>
-              <li>Pharetra massa</li>
-              <li class="na">Massa ultricies mi</li>
+              <li>Remaining: {{camp.occupied_number}}</li>
+              <li>Distance: {{ camp.id}}km</li>
+
             </ul>
             <div class="btn-wrap">
-              <a href="{{ url_for('users.user', email=camp.email) }}" class="btn-buy">View</a>
+              <a href="{{ url_for('users.user', id=camp.id) }}" class="btn-buy">View</a>
             </div>
           </div>
         </div>
-
+        {% endif %}
         {% endfor %}
 
       </div>
 
     </div>
   </section>
+  {% endif %}
   {% endif %}
   <!-- End Pricing Section -->
 
@@ -306,9 +311,11 @@
       <div class="row portfolio-container" data-aos="fade-up">
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-1.jpg" class="img-fluid"
-              alt="">
-          </div>
+          <a href="{{ url_for('home.disaster', name = 'covid') }}" class="details-link" title="More Details">
+            <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-1.jpg" class="img-fluid"
+                alt="">
+            </div>
+          </a>
           <div class="portfolio-info">
             <h4>covid-19</h4>
             <p>Man-Made</p>
@@ -319,23 +326,14 @@
           </div>
         </div>
 
-        <!--div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-2.jpg" class="img-fluid"
-              alt="">
-          </div>
-          <div class="portfolio-info">
-            <h4>Web 3</h4>
-            <p>Web</p>
-            <a href="static/assets/index/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery"
-              class="venobox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div-->
+
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-3.jpg" class="img-fluid"
-              alt="">
-          </div>
+          <a href="{{ url_for('home.disaster', name = 'bomb-blasts') }}" class="details-link" title="More Details">
+            <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-3.jpg" class="img-fluid"
+                alt="">
+            </div>
+          </a>
           <div class="portfolio-info">
             <h4>Bomb Blasts</h4>
             <p>Man-Made</p>
@@ -347,9 +345,11 @@
         </div>
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-4.jpg" class="img-fluid"
-              alt="">
-          </div>
+          <a href="{{ url_for('home.disaster', name = 'floods') }}" class="details-link" title="More Details">
+            <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-4.jpg" class="img-fluid"
+                alt="">
+            </div>
+          </a>
           <div class="portfolio-info">
             <h4>Floods</h4>
             <p>Natural</p>
@@ -360,23 +360,14 @@
           </div>
         </div>
 
-        <!--div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-5.jpg" class="img-fluid"
-              alt="">
-          </div>
-          <div class="portfolio-info">
-            <h4>Web 2</h4>
-            <p>Web</p>
-            <a href="static/assets/index/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery"
-              class="venobox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div-->
+
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-6.jpg" class="img-fluid"
-              alt="">
-          </div>
+          <a href="{{ url_for('home.disaster', name = 'bio-weapons') }}" class="details-link" title="More Details">
+            <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-6.jpg" class="img-fluid"
+                alt="">
+            </div>
+          </a>
           <div class="portfolio-info">
             <h4>Bio-Weapons</h4>
             <p>Man-Made</p>
@@ -388,9 +379,11 @@
         </div>
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-7.jpg" class="img-fluid"
-              alt="">
-          </div>
+          <a href="{{ url_for('home.disaster', name = 'tsunami') }}" class="details-link" title="More Details">
+            <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-7.jpg" class="img-fluid"
+                alt="">
+            </div>
+          </a>
           <div class="portfolio-info">
             <h4>Tsunami</h4>
             <p>Natural</p>
@@ -402,9 +395,11 @@
         </div>
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-8.jpg" class="img-fluid"
-              alt="">
-          </div>
+          <a href="{{ url_for('home.disaster', name = 'landslides') }}" class="details-link" title="More Details">
+            <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-8.jpg" class="img-fluid"
+                alt="">
+            </div>
+          </a>
           <div class="portfolio-info">
             <h4>Landslides</h4>
             <p>Natural</p>
@@ -415,18 +410,7 @@
           </div>
         </div>
 
-        <!--div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-img"><img src="static/assets/index/img/portfolio/portfolio-9.jpg" class="img-fluid"
-              alt="">
-          </div>
-          <div class="portfolio-info">
-            <h4>Web 3</h4>
-            <p>Web</p>
-            <a href="static/assets/index/img/portfolio/portfolio-9.jpg" data-gall="portfolioGallery"
-              class="venobox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div-->
+
 
       </div>
     </div>
@@ -482,7 +466,7 @@
   <section id="contact" class="contact">
     <div class="container">
 
-      <div class="section-title" data-aos="zoom-out">
+      <div class="section-title" data-aos="zoom-out" style="padding-bottom: 0.1%;">
         <h2>Contact</h2>
         <p>Contact Us</p>
       </div>
@@ -513,7 +497,7 @@
 
         </div>
 
-        <div class="col-lg-8 mt-5 mt-lg-0" data-aos="fade-left">
+        <div class="col-lg-8 mt-5 mt-lg-0" data-aos="fade-left" style="padding-top: 0.5%;">
 
           <form method="POST" class="php-email-form">
             {{ form.hidden_tag() }}
@@ -526,10 +510,10 @@
                   <span>{{ error }}</span>
                   {% endfor %}
                 </div>
-                {{ form.name(class="form-control-error",placeholder = "Your Name") }}
+                {{ form.name(class="form-control-error",placeholder = "Your Name",style ="border-radius: 20px;") }}
 
                 {% else %}
-                {{ form.name(class="form-control",placeholder = "Your Name") }}
+                {{ form.name(class="form-control",placeholder = "Your Name",style ="border-radius: 20px;") }}
                 {% endif %}
               </div>
               <div class="col-md-6 form-group">
@@ -539,10 +523,10 @@
                   <span>{{ error }}</span>
                   {% endfor %}
                 </div>
-                {{ form.email(class="form-control-error",placeholder = "Your Email") }}
+                {{ form.email(class="form-control-error",placeholder = "Your Email",style ="border-radius: 20px;") }}
 
                 {% else %}
-                {{ form.email(class="form-control",placeholder = "Your Email") }}
+                {{ form.email(class="form-control",placeholder = "Your Email",style ="border-radius: 20px;") }}
                 {% endif %}
               </div>
             </div>
@@ -553,10 +537,10 @@
                 <span>{{ error }}</span>
                 {% endfor %}
               </div>
-              {{ form.subject(class="form-control-error",placeholder = "Subject") }}
+              {{ form.subject(class="form-control-error",placeholder = "Subject",style ="border-radius: 20px;") }}
 
               {% else %}
-              {{ form.subject(class="form-control",placeholder = "Subject") }}
+              {{ form.subject(class="form-control",placeholder = "Subject",style ="border-radius: 20px;") }}
               {% endif %}
             </div>
             <div class="form-group">
@@ -566,14 +550,15 @@
                 <span>{{ error }}</span>
                 {% endfor %}
               </div>
-              {{ form.message(class="form-control-error",placeholder = "Message") }}
+              {{ form.message(class="form-control-error",placeholder = "Message",style ="border-radius: 20px;") }}
 
               {% else %}
-              {{ form.message(class="form-control",placeholder = "Message") }}
+              {{ form.message(class="form-control",placeholder = "Message",style ="border-radius: 20px;") }}
               {% endif %}
             </div>
 
-            <div class="text-center">{{ form.submit(class = "btnsub") }}
+            <div class="text-center">
+              {{ form.submit(class = "btn btn-lg btn-outline-primary",style ="border-radius: 16px; width: 25%; height: 100%; ") }}
             </div>
         </div>
         </form>

@@ -1,42 +1,48 @@
-from flask import render_template, request, Blueprint, flash, url_for, redirect
+from flask import render_template, request, Blueprint, flash, url_for, redirect, abort
 from emas.models import User
-from emas.home.forms import ContactUs
+from emas.home.forms import ContactUsForm
 from emas.users.utils import send_email
 import requests
 import json
 import folium
 import pandas as pd
+from flask_login import current_user
+import logging
+import json, os
+from emas.config import Config
+from flask import request, Response, render_template, jsonify, Flask
+from pywebpush import webpush, WebPushException
 home = Blueprint('home', __name__)
 
 
 @home.route("/", methods=['GET', 'POST'])
 @home.route("/home", methods=['GET', 'POST'])
 def home_page():
-    form = ContactUs()
+    form = ContactUsForm()
     camps = User.query.filter_by(user_type='Camp').all()
+    is_authenticated = current_user.is_authenticated
     is_empty = True
     if len(camps) != 0:
         is_empty = False
-    if form.validate_on_submit:
-        if request.method == 'POST':
 
-            name = form.name.data
-            email = form.email.data
-            subject = form.subject.data
-            message = form.message.data
-            # send_email(name=name, email=email,
-            # subject=subject, message=message)
-            flash(
-                f'Thank you for your feedback', 'success')
+    if form.validate_on_submit and request.method == 'POST':
+        name = form.name.data
+        email = form.email.data
+        subject = form.subject.data
+        message = form.message.data
+        send_email(name=name, email=email,
+                   subject=subject, message=message)
+        flash(
+            f'Thank you for your feedback', 'success')
+        form.name.data = ''
+        form.email.data = ''
+        form.subject.data = ''
+        form.message.data = ''
+        return redirect(url_for('home.home_page'))
 
-            form.name.data = ''
-            form.email.data = ''
-            form.subject.data = ''
-            form.message.data = ''
-            return rediretc('home.home_page')
     # flash(
     # f'Thank you for your feedback', 'success')
-    return render_template('home/home.html', form=form, camps=camps, is_true=True, is_empty=is_empty)
+    return render_template('home/home.html', form=form, camps=camps, is_true=True, is_empty=is_empty, is_authenticated=is_authenticated)
 
 
 @home.route("/about")
@@ -343,7 +349,7 @@ def disaster(name):
         data = pd.DataFrame({
             'lat': [79.8612, 79.9607, 80.2210,  80.5550, 81.1212,   80.6337, 80.6234, 80.3464, 80.3847,  80.7891],
             'lon': [6.9271, 6.5854, 6.0535, 5.9549, 6.1429,   7.2906, 7.4675, 7.2513, 6.7056, 6.9497],
-            'name': ['Colombo', 'Kaluthara', 'Galle', 'Mathara', 'Hambanthota',   'Kandy', 'Matale', 'Kegalle', 'Ratnapura', 'Nuwara Eliya'],
+            'name': ['Colombo', 'Kaluthara', 'Galle', 'Mathara', 'Hambanthota',  'Kandy', 'Matale', 'Kegalle', 'Ratnapura', 'Nuwara Eliya'],
             'value': [8, 45, 25, 30, 8, 70, 40, 78, 100, 200]
         })
 
@@ -381,8 +387,8 @@ def disaster(name):
                'If  get caught in the path, curl yourself up in a ball',
                'appearance of unstable ground'
                ]
-        donts = ['last:2017 in Sri Lanka',
-                 'landslides and floods in Sri Lanka have killed at least 151 people',
+        donts = ['Last:2017 in Sri Lanka',
+                 'Landslides and floods in Sri Lanka have killed at least 151 people',
                  'More than 100 still missing after the worst rains in the Indian Ocean island since 2003',
                  'death toll 151, 111 missing and 95 injured',
                  '500, 000 affected'
@@ -391,6 +397,9 @@ def disaster(name):
             'static', filename='disaster_pics/' + name + '_1.jpg')
         image_files = [image_file_1, image_file_1, image_file_1]
         return render_template('home/disaster_details.html', values=values, labels=labels_split, legend=legend, details=details, reference=reference, dos=dos, donts=donts, html=html, image_files=image_files, type=dtype, title=title, subtitle1=subtitle1, subtitle2=subtitle2)
+
+    else:
+        abort(404)
 
 
 @home.route("/getmap")
@@ -419,4 +428,49 @@ def getmap():
 
     # Save it as html
 
-    return render_template('http://lcoalhost:3000/Chat')
+    return render_template('home/map.html', html=m.get_root().render())
+
+def send_web_push(subscription_information, message_body):
+    return webpush(
+        subscription_info=subscription_information,
+        data=message_body,
+        vapid_private_key=Config.VAPID_PRIVATE_KEY,
+        vapid_claims=Config.VAPID_CLAIMS
+    )
+
+@home.route('/testpush')
+def index():
+    return render_template('push.html')
+
+@home.route("/subscription/", methods=["GET", "POST"])
+def subscription():
+    """
+        POST creates a subscription
+        GET returns vapid public key which clients uses to send around push notification
+    """
+
+    if request.method == "GET":
+        return Response(response=json.dumps({"public_key": Config.VAPID_PUBLIC_KEY}),
+            headers={"Access-Control-Allow-Origin": "*"}, content_type="application/json")
+
+    subscription_token = request.get_json("subscription_token")
+    return Response(status=201, mimetype="application/json")
+
+@home.route("/push_v1/",methods=['POST'])
+def push_v1():
+    message = "You may have new messages."
+    print("is_json",request.is_json)
+
+    if not request.json or not request.json.get('sub_token'):
+        return jsonify({'failed':1})
+
+    print("request.json",request.json)
+
+    token = request.json.get('sub_token')
+    try:
+        token = json.loads(token)
+        send_web_push(token, message)
+        return jsonify({'success':1})
+    except Exception as e:
+        print("error",e)
+        return jsonify({'failed':str(e)})

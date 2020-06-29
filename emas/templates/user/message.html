@@ -15,14 +15,14 @@
 
     </div>
 </section>
-{% if current_user.camp_address != None %}
+
 <div class="container">
     <div class="media">
         <img class="rounded-circle account-img" src="{{ image_file }}">
         <div class="media-body">
 
-            <h2 class="account-heading">{{ current_user.camp_name }}</h2>
-            <p class="text-secondary">{{ current_user.camp_address[0].city }}</p>
+            <h2 class="account-heading">{{ current_user.fname }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
         </div>
     </div>
 </div>
@@ -30,17 +30,15 @@
 </div>
 <div class="inline-right"><a href="{{ url_for('users.account_contact') }}" class="btn btn-outline-primary">Contact
         Details</a></div>
-
-{% if current_user.user_type == 'Camp' %}
-<div class="inline-right"><a href="{{ url_for('users.messages') }}" class="btn btn-primary">Requests</a>
-    {% endif %}</div>
+</div>
+<div class="inline-right"><a href="{{ url_for('users.messages') }}" class="btn btn-primary">Requests</a></div>
 
 
 <section id="contact" class="contact">
     <div class="container">
 
         <div class="section-title" data-aos="zoom-out">
-            <h2>Pending Requests</h2>
+            <h2>Received Request Messages</h2>
         </div>
 
         <div class="col-lg-13" data-aos="fade-right">
@@ -54,15 +52,14 @@
                     <div class="desc">
                         <div class="article-metadata">
                             <a class="mr-2"
-                                href="{{ url_for('users.user', email=message.author.email) }}">{{ message.author.fname}}</a>
+                                href="{{ url_for('users.user', id=message.author.id) }}">{{ message.author.fname}}</a>
                             <small class="text-muted">Last Seen: {{ message.author.last_seen}}</small>
                         </div>
                         <p class="article-content">Message: <br>{{message.body}}</p>
 
                         <p class="article-content">Time: <br>{{ message.timestamp }}</p>
-                        <a class="btn btn-primary"
-                            href="{{ url_for('users.send_message', recipient = message.author.email)}}">
-                            Accept</a>
+                        <a class="btn btn-primary" href="{{ url_for('users.user', id = message.author.id)}}">
+                            Reply</a>
                     </div>
                 </div>
             </div>
@@ -79,7 +76,7 @@
     <div class="container">
 
         <div class="section-title" data-aos="zoom-out">
-            <h2>Accepted Requests</h2>
+            <h2>Sent Replies for Messages </h2>
         </div>
 
         <div class="col-lg-13" data-aos="fade-right">
@@ -93,14 +90,13 @@
                     <div class="desc">
                         <div class="article-metadata">
                             <a class="mr-2"
-                                href="{{ url_for('users.user', email=message.author.email) }}">{{ message.author.fname}}</a>
+                                href="{{ url_for('users.user', id=message.author.id) }}">{{ message.author.fname}}</a>
                             <small class="text-muted">Last Seen: {{ message.author.last_seen}}</small>
                         </div>
                         <p class="article-content">Message: <br>{{message.body}}</p>
 
                         <p class="article-content">Time: <br>{{ message.timestamp }}</p>
-                        <a class="btn btn-primary"
-                            href="{{ url_for('users.send_message', recipient = message.author.email)}}">
+                        <a class="btn btn-primary" href="{{ url_for('users.user', id = message.author.id)}}">
                             Send a Message</a>
                     </div>
                 </div>
@@ -113,6 +109,4 @@
     </div>
 
 </section>
-{% else %}
-{% endif %}
 {% endblock %}

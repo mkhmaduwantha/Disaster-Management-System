@@ -69,7 +69,7 @@ def confirm_token(token, expiration=3600):
 
 def send_email(name, email, subject, message):
     msg = Message(subject,
-                  sender='shawnmars9390@gmail.com', recipients=[email])
+                  recipients=['shawnmars9390@gmail.com'], sender=email)
     msg.body = message + '   ' + name
 
     mail.send(msg)

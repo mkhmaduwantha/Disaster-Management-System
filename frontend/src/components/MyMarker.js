@@ -25,6 +25,7 @@ class MyMarker extends Component {
       user_id: 1,
       currentStep: 1,
       //marker states
+      mType: "permanant",
       dType: "vAccident",
       subject: "",
       description: "",
@@ -55,6 +56,12 @@ class MyMarker extends Component {
       subject: this.state.subject,
       message: this.state.message,
       radius: this.state.radius,
+      mtype: "permanant",
+      address: "default",
+      color: "red",
+      name: "default",
+      radius: 0,
+      description: this.state.description,
       user_type: {
         military: this.state.military,
         ref_camp: this.state.ref_camp,
@@ -67,12 +74,7 @@ class MyMarker extends Component {
     // axios({
     //   method: "post",
     //   url: "http://localhost:5000/map/notify",
-    //   data: data,
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //   },
+    //   data: data
     // })
     //   .then(function (response) {
     //     console.log(response);
@@ -160,7 +162,7 @@ class MyMarker extends Component {
         >
           <FaWindowClose style={{ height: "1.5rem", width: "1.5rem" }} />
         </Button>
-        <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           {/* 
           render the form steps and pass required props in
         */}
@@ -182,7 +184,7 @@ class MyMarker extends Component {
           />
           {this.previousButton()}
           {this.nextButton()}
-        </form>
+        </Form>
       </React.Fragment>
     );
   }
@@ -206,12 +208,17 @@ function Step2(props) {
       />
       <label htmlFor="description">Description</label>
       <Form.Control
+        as="textarea"
+        rows="3"
+        name="description"
         placeholder="Enter Description"
         value={props.description}
         onChange={props.handleChange}
-        as="textarea"
-        rows="3"
+        required
       />
+      <Form.Control.Feedback type="invalid">
+        Please provide a Subject.
+      </Form.Control.Feedback>
     </div>
   );
 }

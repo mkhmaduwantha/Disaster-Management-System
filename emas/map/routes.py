@@ -12,7 +12,7 @@ from flask_cors import CORS
 import emas.map.MyMap
 
 my_map = Blueprint('my_map', __name__)
-# CORS(my_map)
+CORS(my_map)
 
 
 @my_map.route("/map")
@@ -26,8 +26,8 @@ def addMarker():
         request_data=request.get_json()
 
         user_id=request_data['user_id']
-        lng=request_data['longitude']
-        lat=request_data['lattitude']
+        lng=request_data['lng']
+        lat=request_data['lat']
         mtype=request_data['mtype']
         subject=request_data['subject']
         color=request_data['color']
@@ -40,7 +40,7 @@ def addMarker():
                 marker1=Marker(lng=lng,lat=lat,color=color,name=name,type=mtype,radius=radius,subject=subject,description=description,address=address,user_id=user_id)
                 db.session.add(marker1)
                 db.session.commit()
-                resp={'ok':1} 
+                resp={'query':'ok'} 
 
         except sa.exc.SQLAlchemyError:
                 db.session.rollback()
@@ -144,7 +144,7 @@ def getMarkerDetails():
 def delMarker():
     resp={'query':''}
     if request.method == 'GET':
-        id = request.args.get('id')
+        id = int(request.args.get('id'))
         try:
             marker = Marker.query.filter_by(id=id).first()
             db.session.delete(marker)

@@ -8,10 +8,10 @@
     <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-            <h2>Camp Profile</h2>
+            <h2>Profile</h2>
             <ol>
                 <li><a href=""></a>Home</li>
-                <li>Camp Details</li>
+                <li>Profile</li>
             </ol>
         </div>
 
@@ -25,10 +25,14 @@
         <div class="portfolio-details-container" data-aos="fade-up">
 
             <div class="owl-carousel portfolio-details-carousel">
+                {% if user.user_type == 'Camp' %}
 
                 <img src="{{ url_for('static', filename='/assets/index/img/portfolio/portfolio-details-1.jpg') }}"
                     class="img-fluid" alt="">
-
+                {% else %}
+                <img src="{{ url_for('static', filename='/assets/index/img/portfolio/portfolio-details1-1.jpg') }}"
+                    class="img-fluid" alt="">
+                {% endif %}
             </div>
 
             <div class="portfolio-info">
@@ -63,6 +67,7 @@
                 {% if user.user_type == 'Camp' %}
                 <h3>Camp Information</h3>
                 <ul>
+
                     <li><strong>Name</strong>: {{ user.camp_name }}</li>
                     <li><strong>City</strong>: {{ user.camp_address[0].city}}</li>
                     <li><strong>Total beds</strong>: {{ user.total_number }}</li>
@@ -71,26 +76,45 @@
                     <li>{% if user != current_user %}
                         <p>
                             <button class="btn btn-primary" id="getform" onclick="openForm()">
-                                Send a Request
+                                Send a Request Message
                             </button>
                         </p>
-                        {% endif %}</li>
-                    <li>Last Seen: {{ user.last_seen}}</li>
-                </ul>
+                    </li>{% endif %}
+                    {% else %}
+                    <h3>User Information</h3>
+
+                    <ul>
+                        <li><strong>Name</strong>: {{ user.fname }}</li>
+                        <li><strong>City</strong>: {{ user.home_address.city}}</li>
+                        <li><strong>Mobile</strong>: {{ user.mobile_number}}</li>
+
+
+
+                        <li>{% if user != current_user %}
+                            <p>
+                                <button class="btn btn-primary" id="getform" onclick="openForm()">
+                                    Send a Message
+                                </button>
+                            </p>
+                        </li>
+                        {% endif %}
+                        {% endif %}
+
+                        <li>Last Seen: {{ user.last_seen}}</li>
+                    </ul>
             </div>
 
         </div>
 
-        <div class="portfolio-description">
+        <!--div class="portfolio-description">
             <h2>Location details</h2>
             <p>
                 Location
             </p>
-        </div>
+        </div-->
 
     </div>
 </section><!-- End Portfolio Details Section -->
-{% endif %}
 
 
 

@@ -15,12 +15,10 @@ users = Blueprint('users', __name__)
 
 @users.route("/register", methods=['GET', 'POST'])
 def register():
-    # print('hey')
     if current_user.is_authenticated:
         return redirect(url_for('home.home_page'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        # print('hey1.5')
         hashed_password = bcrypt.generate_password_hash(
             form.password.data).decode('utf-8')
         user = User(title=form.title.data,
@@ -31,12 +29,10 @@ def register():
                     user_type=form.user_type.data,
                     password=hashed_password,
                     )
-        # print('hey1')
         #user.confirmed = True
         db.session.add(user)
         db.session.commit()
         send_confirmation_email(user)
-        # print('hey2')
 
         flash(
             f'Account created for {form.fname.data}!. A confirmation email has been sent via email.', 'success')
@@ -109,7 +105,6 @@ def account():
     if form.validate_on_submit():
 
         if form.picture.data:
-            # print('Hey')
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
 
@@ -291,10 +286,10 @@ admin.add_view(Controller(User, db.session))
 admin.add_view(Controller(Role, db.session))
 
 
-@users.route('/send_message/<recipient>', methods=['GET', 'POST'])
+@users.route('/send_message/<id>', methods=['GET', 'POST'])
 @login_required
-def send_message(recipient):
-    user = User.query.filter_by(email=recipient).first_or_404()
+def send_message(id):
+    user = User.query.filter_by(id=id).first_or_404()
     form = MessageForm()
     if form.validate_on_submit():
         msg = Message(author=current_user, recipient=user,
@@ -304,16 +299,17 @@ def send_message(recipient):
         db.session.add(msg)
         db.session.commit()
         flash('Your message has been sent.', 'success')
-        return redirect(url_for('users.user', email=recipient))
+        return redirect(url_for('users.account'))
     return render_template('user/send_message.html', title='Send Message',
                            form=form, recipient=recipient, user=user)
 
 
-@users.route('/user/<email>', methods=['GET', 'POST'])
+@users.route('/user/<id>', methods=['GET', 'POST'])
 @login_required
-def user(email):
-    user = User.query.filter_by(email=email).first_or_404()
-
+def user(id):
+    user = User.query.filter_by(id=id).first_or_404()
+    image_file = url_for(
+        'static', filename='profile_pics/' + user.image_file)
     form = MessageForm()
     if form.validate_on_submit():
         msg = Message(author=current_user, recipient=user,
@@ -323,8 +319,8 @@ def user(email):
         db.session.add(msg)
         db.session.commit()
         flash('Your message has been sent.', 'success')
-        return redirect(url_for('users.user', email=user.email))
-    return render_template('user/profile.html', user=user, posts=posts, form=form)
+        return redirect(url_for('users.user', id=user.id))
+    return render_template('user/profile.html', user=user, form=form, image_file=image_file)
 
 
 @users.before_request
@@ -339,13 +335,23 @@ def before_request():
 def messages():
     image_file = url_for(
         'static', filename='profile_pics/' + current_user.image_file)
+
     current_user.last_message_read_time = datetime.utcnow()
     current_user.add_notification('unread_message_count', 0)
     db.session.commit()
     messages = current_user.messages_received
     messages_out = current_user.messages_sent
-
-    return render_template('user/message.html', messages=messages, messages_out=messages_out, image_file=image_file)
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user,
+                      body=form.message.data)
+        current_user.messages_sent.append(msg)
+        user.add_notification('unread_message_count', user.new_messages())
+        db.session.add(msg)
+        db.session.commit()
+        flash('Your message has been sent.', 'success')
+        return redirect(url_for('users.user', email=user.email))
+    return render_template('user/message.html', messages=messages, messages_out=messages_out, image_file=image_file, form=form)
 
 
 @users.route('/notifications')

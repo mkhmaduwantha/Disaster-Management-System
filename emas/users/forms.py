@@ -63,13 +63,13 @@ class UpdateAccountForm(FlaskForm):
 
     submit = SubmitField('Update')
 
-    def validate_fname(self, fname):
-        if fname.data != current_user.fname:
-            user = User.query.filter_by(fname=fname.data).first()
+    # def validate_fname(self, fname):
+    # if fname.data != current_user.fname:
+    #user = User.query.filter_by(fname=fname.data).first()
 
-            if user:
-                raise ValidationError(
-                    'That fname is taken please choose a different one.')
+    # if user:
+    # raise ValidationError(
+    # 'That fname is taken please choose a different one.')
 
     def validate_email(self, email):
         if email.data != current_user.email:
@@ -83,7 +83,7 @@ class UpdateAccountForm(FlaskForm):
 class RequestResetForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    submit = SubmitField('request Passworrd Reset')
+    submit = SubmitField('Request Password Reset')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()

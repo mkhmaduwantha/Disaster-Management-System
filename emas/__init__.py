@@ -47,7 +47,7 @@ def create_app(config_class=Config):
     app.register_blueprint(home)
     app.register_blueprint(errors)
     app.register_blueprint(my_map)
-    db.create_all(app=app)
+    # db.create_all(app=app)
 
 
     return app

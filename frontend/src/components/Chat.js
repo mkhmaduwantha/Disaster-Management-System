@@ -67,7 +67,7 @@ var myIcon = L.icon({
 });
 var redIcon = L.icon({
   iconUrl: red_icon,
-  iconSize: [41, 41],
+  iconSize: [25, 25],
   iconAnchor: [20.5, 41],
   popupAnchor: [0, -41],
 });
@@ -118,12 +118,17 @@ class Chat extends Component {
       alertMessage: "",
       pList: [],
 
-      mId: "",
+      mID: "",
       mSubject: "",
       mDescription: "",
       mUserID: "",
       mDate: "",
       mTime: "",
+
+      onOffpopup5: false,
+      addingLocation: false,
+      newLocLat: 0,
+      newLocLng: 0,
     };
   }
   togglePopup(name) {
@@ -135,7 +140,10 @@ class Chat extends Component {
         this.setState({ showPopup2: !this.state.showPopup2 });
         break;
       case "showPopup3":
-        this.setState({ showPopup3: !this.state.showPopup3 });
+        this.setState({ addingLocation: !this.state.addingLocation });
+        break;
+      case "closePopup3":
+        this.setState({ showPopup3: false, addingLocation: false });
         break;
       case "showPopup4":
         this.setState({ showPopup4: !this.state.showPopup4 });
@@ -183,7 +191,7 @@ class Chat extends Component {
           });
       }
     );
-    // setInterval(() => this.getMarkersFromDB(), 3000);
+    //setInterval(() => this.getMarkersFromDB(), 1000);
     this.getMarkersFromDB();
   }
   //no need to bind since we use arrow functions
@@ -207,17 +215,28 @@ class Chat extends Component {
     }));
   };
 
-  getPosition = (event) => {
+  addMyLocation = (event) => {
+    if (this.state.addingLocation) {
+      this.setState({
+        showPopup3: true,
+        addingLocation: false,
+        newLocLat: event.latlng.lat,
+        newLocLng: event.latlng.lng,
+      });
+    } else {
+      console.log("off");
+    }
     console.log(`lat: ${event.latlng.lat} , lng: ${event.latlng.lng}`);
   };
 
   showMarkerDetails = (event) => {
     console.log(event.target.options.marker_id, "bshbfhsjdB");
-    let mId = event.target.options.marker_id;
+    let mID = event.target.options.marker_id;
     this.state.pList.map((value, key) => {
-      if (value["marker_id"] === mId) {
+      if (value["marker_id"] === mID) {
         this.setState({
           showDetailBar: true,
+          mID: value["marker_id"],
           mSubject: value["subject"],
           mDescription: value["description"],
           mUserID: value["user_id"],
@@ -227,13 +246,83 @@ class Chat extends Component {
       }
     });
   };
+  deleteMarker = () => {
+    axios
+      .get("http://127.0.0.1:5000/map/delMarker", {
+        params: { id: this.state.mID },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.query == "not ok") {
+          console.log("not ok");
+          return null;
+        } else {
+          this.setState(
+            {
+              showDetailBar: false,
+              alertVisible: true,
+              alertColor: "success",
+              alertMessage: "Marker Deleted SuccessFully!",
+            },
 
+            () => {
+              window.setTimeout(() => {
+                this.setState({ alertVisible: false });
+              }, 3000);
+            }
+          );
+
+          console.log("marker added");
+        }
+      });
+  };
   addMyMarker = (data) => {
+    this.setState({
+      showPopup3: false,
+      addingLocation: false,
+    });
     console.log("hi", data, "hello");
+    let sendingData = {
+      user_id: data["user_id"],
+      lng: this.state.newLocLng,
+      lat: this.state.newLocLat,
+      mtype: data["mtype"],
+      subject: data["subject"],
+      color: data["color"],
+      name: data["name"],
+      radius: data["radius"],
+      description: data["description"],
+      address: data["address"],
+    };
+    axios
+      .post("http://127.0.0.1:5000/map/addMarker", sendingData)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.query == "not ok") {
+          console.log("not ok");
+          return null;
+        } else {
+          this.setState(
+            {
+              alertVisible: true,
+              alertColor: "success",
+              alertMessage: "Marker Added SuccessFully!",
+            },
+
+            () => {
+              window.setTimeout(() => {
+                this.setState({ alertVisible: false });
+              }, 3000);
+            }
+          );
+
+          console.log("marker added");
+        }
+      });
   };
 
   getMarkersFromDB = () => {
-    axios.post("http://localhost:5000/map/getMarkers", {}).then((res) => {
+    axios.post("http://127.0.0.1:5000/map/getMarkers", {}).then((res) => {
       console.log(res.data);
       if (res.data.query == "not ok") {
         console.log("not ok");
@@ -274,7 +363,7 @@ class Chat extends Component {
     } = this.state;
     return (
       <div className="map-container">
-        {console.log(this.state.pList[0])}
+        {console.log(this.state.pList)}
         {this.state.alertVisible ? (
           <Alert
             className="alert-container"
@@ -302,8 +391,9 @@ class Chat extends Component {
                 },
                 {
                   name: "showPopup3",
-                  value: "add a comment",
-                  icon: <FaComment />,
+                  value:
+                    "click here and then click on the map to add a Locaion",
+                  icon: <FaLocationArrow />,
                 },
                 {
                   name: "showPopup4",
@@ -366,6 +456,11 @@ class Chat extends Component {
 
                 <br></br>
                 <br></br>
+                <Button onClick={() => this.deleteMarker()} variant="danger">
+                  Delete Marker
+                </Button>
+                <br></br>
+                <br></br>
                 <Button
                   onClick={() => this.togglePopup("showDetailBar")}
                   variant="secondary"
@@ -380,12 +475,16 @@ class Chat extends Component {
           className="map"
           center={position}
           zoom={this.state.zoom}
-          onclick={this.getPosition}
+          onclick={this.addMyLocation}
           minZoom={3}
         >
-          <TileLayer
+          {/* <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          /> */}
+          <TileLayer
+            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
           />
           {this.state.haveUsersLocation ? (
             <>
@@ -434,7 +533,7 @@ class Chat extends Component {
           <div className="marker-form">
             <MyMarker
               props={this.props}
-              closePopup={this.togglePopup.bind(this, "showPopup3")}
+              closePopup={this.togglePopup.bind(this, "closePopup3")}
               addMyMarker={this.addMyMarker.bind(this)}
             />
           </div>
