@@ -15,12 +15,12 @@ users = Blueprint('users', __name__)
 
 @users.route("/register", methods=['GET', 'POST'])
 def register():
-    print('hey')
+    # print('hey')
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        print('hey1.5')
+        # print('hey1.5')
         hashed_password = bcrypt.generate_password_hash(
             form.password.data).decode('utf-8')
         user = User(title=form.title.data,
@@ -31,12 +31,12 @@ def register():
                     user_type=form.user_type.data,
                     password=hashed_password,
                     )
-        print('hey1')
+        # print('hey1')
         #user.confirmed = True
         db.session.add(user)
         db.session.commit()
         send_confirmation_email(user)
-        print('hey2')
+        # print('hey2')
 
         flash(
             f'Account created for {form.fname.data}!. A confirmation email has been sent via email.', 'success')
@@ -76,23 +76,25 @@ def confirm_email(token):
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
+
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('main.home'))
+            return redirect(next_page) if next_page else redirect(url_for('home.home_page'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('user/login.html', title='Login', form=form)
 
 
 @users.route("/logout")
+@login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.home'))
+    return redirect(url_for('home.home_page'))
 
 
 @users.route("/account", methods=['GET', 'POST'])
@@ -144,7 +146,7 @@ def account():
     #        print (user.roles[0].name)
 
 
-@users.route("/account/contact", methods=['GET', 'POST'])
+@users.route("/contact", methods=['GET', 'POST'])
 @login_required
 def account_contact():
     user_confirmed = current_user.confirmed
@@ -249,7 +251,7 @@ def account_contact():
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -262,7 +264,7 @@ def reset_request():
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('home.home_page'))
     user = User.verify_reset_token(token)
     if user is None:
         flash('That is an invalidor expired token', 'warning')
@@ -302,20 +304,27 @@ def send_message(recipient):
         db.session.add(msg)
         db.session.commit()
         flash('Your message has been sent.', 'success')
-        return redirect(url_for('main.home', email=recipient))
+        return redirect(url_for('users.user', email=recipient))
     return render_template('user/send_message.html', title='Send Message',
                            form=form, recipient=recipient, user=user)
 
 
-@users.route('/user/<email>')
+@users.route('/user/<email>', methods=['GET', 'POST'])
 @login_required
 def user(email):
     user = User.query.filter_by(email=email).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('user/profile.html', user=user, posts=posts)
+
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user,
+                      body=form.message.data)
+        current_user.messages_sent.append(msg)
+        user.add_notification('unread_message_count', user.new_messages())
+        db.session.add(msg)
+        db.session.commit()
+        flash('Your message has been sent.', 'success')
+        return redirect(url_for('users.user', email=user.email))
+    return render_template('user/profile.html', user=user, posts=posts, form=form)
 
 
 @users.before_request
@@ -328,13 +337,15 @@ def before_request():
 @users.route('/messages')
 @login_required
 def messages():
+    image_file = url_for(
+        'static', filename='profile_pics/' + current_user.image_file)
     current_user.last_message_read_time = datetime.utcnow()
     current_user.add_notification('unread_message_count', 0)
     db.session.commit()
     messages = current_user.messages_received
     messages_out = current_user.messages_sent
 
-    return render_template('user/messages.html', messages=messages, messages_out=messages_out)
+    return render_template('user/message.html', messages=messages, messages_out=messages_out, image_file=image_file)
 
 
 @users.route('/notifications')

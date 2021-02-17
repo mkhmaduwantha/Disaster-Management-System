@@ -11,6 +11,7 @@ import SideNav, {
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MyMap from "./MyMap";
+import MapDev from "./MapDev";
 import Test from "./Test";
 import { FaHome, FaMapMarkerAlt, FaPhone, FaMapPin } from "react-icons/fa";
 import { GiPathDistance } from "react-icons/gi";
@@ -19,6 +20,8 @@ import Home from "./Home";
 import PhoneBook from "./PhoneBook";
 import Chat from "./Chat";
 import LeafletMap from "./LeafletMap";
+
+// import { history } from "../redux/Store";
 
 export class SideNavBar extends Component {
   render() {
@@ -53,7 +56,9 @@ export class SideNavBar extends Component {
                     </NavItem>
                     <NavItem eventKey="path">
                       <NavIcon>
-                        <GiPathDistance style={{ fontSize: "2.15em", fontWeight : 'bold' }} />
+                        <GiPathDistance
+                          style={{ fontSize: "2.15em", fontWeight: "bold" }}
+                        />
                       </NavIcon>
                       <NavText>Path Distance</NavText>
                     </NavItem>
@@ -73,14 +78,27 @@ export class SideNavBar extends Component {
                   </SideNav.Nav>
                 </SideNav>
                 <main>
-                  <Route path="/" exact component={(props) => <Home />} />
-                  <Route path="/map" component={(props) => <MyMap />} />
-                  <Route path="/path" component={(props) => <LeafletMap />} />
+                  <Route
+                    path="/"
+                    exact
+                    component={(props) => <Home {...props} />}
+                  />
+                  <Route
+                    path="/map"
+                    component={(props) => <MapDev {...props} />}
+                  />
+                  <Route
+                    path="/path"
+                    component={(props) => <LeafletMap {...props} />}
+                  />
                   <Route
                     path="/phonebook"
-                    component={(props) => <PhoneBook />}
+                    component={(props) => <PhoneBook {...props} />}
                   />
-                  <Route path="/chat" component={(props) => <Chat />} />
+                  <Route
+                    path="/chat"
+                    component={(props) => <Chat {...props} />}
+                  />
                 </main>
               </React.Fragment>
             )}

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d56cae43-0650-434b-9c8f-9d149ea5bdc7" name="Default Changelist" comment="merged version">
+      <change afterPath="$PROJECT_DIR$/.idea/Disaster-Management-System.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/assets/index/img/backuo/features-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/assets/index/img/backuo/features-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/assets/index/img/backuo/features-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/assets/index/img/backuo/features-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/disaster_pics/bio-weapons_1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/disaster_pics/bomb-blasts_1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/disaster_pics/floods_1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/disaster_pics/landslides_1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/disaster_pics/tsunami_1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/emas/static/profile_pics/94aa7a4a3a36dbb9.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/App.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Home.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/PhoneBook.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/RoutingMachine.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/styles/MyMap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/actions/Location.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/actions/Types.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/reducers/LocationReducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/serviceWorker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/yarn.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/site_old.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/errors/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/errors/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/home/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/home/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/home/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/home/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/posts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/posts/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/posts/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/posts/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/emas/site.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/Chart.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/Chart.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/alert.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/alert.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/css/style-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/css/style-dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/features-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/features-1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/features-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/features-2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/features-3.png" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/features-3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/features-4.png" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/features-4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-6.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-7.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/img/portfolio/portfolio-8.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/animate.css/animate.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/animate.css/animate.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/animate.css/animate.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/animate.css/animate.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap-grid.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap-reboot.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap-reboot.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/js/bootstrap.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/boxicons/css/boxicons.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/boxicons/css/boxicons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/boxicons/fonts/boxicons.svg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/boxicons/fonts/boxicons.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/icofont/icofont.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/icofont/icofont.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/isotope-layout/isotope.pkgd.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/isotope-layout/isotope.pkgd.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/isotope-layout/isotope.pkgd.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/isotope-layout/isotope.pkgd.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/jquery/jquery-3.2.1.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/jquery/jquery-3.2.1.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/jquery/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/jquery/jquery.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/css/line-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/css/line-awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/css/line-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/css/line-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/fonts/la-brands-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/fonts/la-brands-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/fonts/la-regular-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/fonts/la-regular-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/fonts/la-solid-900.svg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/line-awesome/fonts/la-solid-900.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.carousel.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.carousel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.carousel.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.carousel.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.theme.default.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.theme.default.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.theme.default.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.theme.default.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.theme.green.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.theme.green.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.theme.green.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/assets/owl.theme.green.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/owl.carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/owl.carousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/owl.carousel.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/owl.carousel/owl.carousel.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/remixicon/remixicon.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/remixicon/remixicon.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/remixicon/remixicon.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/remixicon/remixicon.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/remixicon/remixicon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/remixicon/remixicon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/remixicon/remixicon.symbol.svg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/remixicon/remixicon.symbol.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/venobox/venobox.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/venobox/venobox.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/venobox/venobox.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/venobox/venobox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/venobox/venobox.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/venobox/venobox.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/index/vendor/venobox/venobox.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/index/vendor/venobox/venobox.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/HELP-US-OUT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/HELP-US-OUT.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/css/font-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/css/font-awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/animated.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/animated.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/bordered-pulled.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/bordered-pulled.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/core.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/core.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/fixed-width.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/fixed-width.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/font-awesome.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/font-awesome.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/icons.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/icons.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/larger.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/larger.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/list.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/list.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/mixins.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/mixins.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/path.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/path.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/rotated-flipped.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/rotated-flipped.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/screen-reader.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/screen-reader.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/stacked.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/stacked.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/variables.less" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/less/variables.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_animated.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_animated.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_bordered-pulled.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_bordered-pulled.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_core.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_core.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_fixed-width.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_fixed-width.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_icons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_icons.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_larger.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_larger.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_list.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_list.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_mixins.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_path.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_path.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_rotated-flipped.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_rotated-flipped.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_screen-reader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_screen-reader.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_stacked.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_stacked.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/font-awesome.scss" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/fonts/font-awesome-4.7.0/scss/font-awesome.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/animate/animate.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/animate/animate.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap-grid.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap-reboot.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap-reboot.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/popper.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/popper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/popper.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/popper.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/tooltip.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/bootstrap/js/tooltip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/jquery/jquery-3.2.1.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/jquery/jquery-3.2.1.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/select2/select2.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/select2/select2.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/assets/login/vendor/select2/select2.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/assets/login/vendor/select2/select2.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/static/homecss.css" beforeDir="false" afterPath="$PROJECT_DIR$/emas/static/homecss.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/home/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/home/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/home/disaster_details.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/home/disaster_details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/home/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/contact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/message.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/message.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/reset_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/reset_email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/reset_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/reset_request.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/reset_token.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/reset_token.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/templates/user/send_message.html" beforeDir="false" afterPath="$PROJECT_DIR$/emas/templates/user/send_message.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/test2.db" beforeDir="false" afterPath="$PROJECT_DIR$/emas/test2.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/tests/clipboard" beforeDir="false" afterPath="$PROJECT_DIR$/emas/tests/clipboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/tests/test_front_end.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/tests/test_front_end.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/users/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/users/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emas/users/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/emas/users/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Chat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/LeafletMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LeafletMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MapDev.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MapDev.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Message.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Message.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MyMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MyMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MyMarker.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MyMarker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/RoutingMachine2.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RoutingMachine2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SideNavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SideNavBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/testChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/testChat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Store.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/site.db" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/Chat.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/emas/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-510" />
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="maduwantha" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/emas/__init__.py" />
+        <option value="$PROJECT_DIR$/frontend/src/components/Chat.js" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="width" value="980" />
+    <option name="height" value="1040" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Disaster-Management-System" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Disaster-Management-System" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Disaster-Management-System" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Disaster-Management-System" type="462c0819:PsiDirectoryNode" />
+              <item name="emas" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Disaster-Management-System" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Disaster-Management-System" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Disaster-Management-System" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Disaster-Management-System" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Disaster-Management-System" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Disaster-Management-System" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d56cae43-0650-434b-9c8f-9d149ea5bdc7" name="Default Changelist" comment="" />
+      <created>1592026801499</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592026801499</updated>
+      <workItem from="1592026802745" duration="1604000" />
+      <workItem from="1592050598531" duration="494000" />
+    </task>
+    <task id="LOCAL-00001" summary="Merge remote-tracking branch 'remotes/origin/master' into maduwantha&#10;&#10;# Conflicts:&#10;#&#9;emas/__init__.py&#10;#&#9;emas/__pycache__/__init__.cpython-37.pyc&#10;#&#9;emas/__pycache__/config.cpython-37.pyc&#10;#&#9;emas/__pycache__/models.cpython-37.pyc&#10;#&#9;emas/errors/__pycache__/__init__.cpython-37.pyc&#10;#&#9;emas/errors/__pycache__/handlers.cpython-37.pyc&#10;#&#9;emas/main/__pycache__/__init__.cpython-37.pyc&#10;#&#9;emas/main/__pycache__/routes.cpython-37.pyc&#10;#&#9;emas/models.py&#10;#&#9;emas/site.db&#10;#&#9;emas/users/__pycache__/__init__.cpython-37.pyc&#10;#&#9;emas/users/__pycache__/forms.cpython-37.pyc&#10;#&#9;emas/users/__pycache__/routes.cpython-37.pyc&#10;#&#9;emas/users/__pycache__/utils.cpython-37.pyc&#10;#&#9;frontend/package-lock.json&#10;#&#9;frontend/package.json&#10;#&#9;frontend/src/components/Chat.js&#10;#&#9;frontend/src/components/LeafletMap.js&#10;#&#9;frontend/src/components/MyMap.js&#10;#&#9;frontend/src/components/RoutingMachine2.js&#10;#&#9;frontend/src/components/SideNavBar.js&#10;#&#9;frontend/src/components/styles/MyMap.css&#10;#&#9;frontend/src/redux/Store.js">
+      <created>1592027236964</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592027236964</updated>
+    </task>
+    <task id="LOCAL-00002" summary="merged version">
+      <created>1592027803830</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1592027803830</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="2098000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25302014" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Maven" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Database" order="8" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge remote-tracking branch 'remotes/origin/master' into maduwantha&#10;&#10;# Conflicts:&#10;#&#9;emas/__init__.py&#10;#&#9;emas/__pycache__/__init__.cpython-37.pyc&#10;#&#9;emas/__pycache__/config.cpython-37.pyc&#10;#&#9;emas/__pycache__/models.cpython-37.pyc&#10;#&#9;emas/errors/__pycache__/__init__.cpython-37.pyc&#10;#&#9;emas/errors/__pycache__/handlers.cpython-37.pyc&#10;#&#9;emas/main/__pycache__/__init__.cpython-37.pyc&#10;#&#9;emas/main/__pycache__/routes.cpython-37.pyc&#10;#&#9;emas/models.py&#10;#&#9;emas/site.db&#10;#&#9;emas/users/__pycache__/__init__.cpython-37.pyc&#10;#&#9;emas/users/__pycache__/forms.cpython-37.pyc&#10;#&#9;emas/users/__pycache__/routes.cpython-37.pyc&#10;#&#9;emas/users/__pycache__/utils.cpython-37.pyc&#10;#&#9;frontend/package-lock.json&#10;#&#9;frontend/package.json&#10;#&#9;frontend/src/components/Chat.js&#10;#&#9;frontend/src/components/LeafletMap.js&#10;#&#9;frontend/src/components/MyMap.js&#10;#&#9;frontend/src/components/RoutingMachine2.js&#10;#&#9;frontend/src/components/SideNavBar.js&#10;#&#9;frontend/src/components/styles/MyMap.css&#10;#&#9;frontend/src/redux/Store.js" />
+    <MESSAGE value="merged version" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged version" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emas/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510" />
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

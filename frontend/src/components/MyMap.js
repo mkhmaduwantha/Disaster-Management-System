@@ -23,9 +23,9 @@ import {
   Input,
 } from "reactstrap";
 import "./styles/MyMap.css";
-import iconFixed from "leaflet/dist/images/fixed-location.png";
-import iconDrag from "leaflet/dist/images/drag-location.png";
-import iconUser from "leaflet/dist/images/user-location.png";
+import iconFixed from "leaflet/dist/images/marker-icon.png";
+import iconDrag from "leaflet/dist/images/marker-icon.png";
+import iconUser from "leaflet/dist/images/marker-icon.png";
 import AntPath from "react-leaflet-ant-path";
 import { antPath } from "leaflet-ant-path";
 import "leaflet-routing-machine";
@@ -67,6 +67,7 @@ export class MyMap extends Component {
   };
 
   componentDidMount() {
+    this.geoCoder();
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.props.setLocation({
@@ -86,6 +87,7 @@ export class MyMap extends Component {
           zoom: 13,
         });
         console.log(position);
+        console.log("");
       },
       () => {
         console.log("no given location!");
@@ -114,12 +116,34 @@ export class MyMap extends Component {
     );
   }
 
-  saveMap = (map) => {
-    this.map = map;
-    this.setState({
-      isMapInit: true,
+  geoCoder() {
+    const map = this.leafletMap.leafletElement;
+    const geocoder = L.Control.Geocoder.nominatim();
+    let marker;
+
+    map.on("click", (e) => {
+      geocoder.reverse(
+        e.latlng,
+        map.options.crs.scale(map.getZoom()),
+        (results) => {
+          var r = results[0];
+          if (r) {
+            if (marker) {
+              marker
+                .setLatLng(r.center)
+                .setPopupContent(r.html || r.name)
+                .openPopup();
+            } else {
+              marker = L.marker(r.center)
+                .bindPopup(r.name)
+                .addTo(map)
+                .openPopup();
+            }
+          }
+        }
+      );
     });
-  };
+  }
 
   // $FlowFixMe: ref
   refmarker = createRef();
@@ -162,7 +186,9 @@ export class MyMap extends Component {
     return (
       <div style={{ marginLeft: 64 }} id="map">
         <Map
-          ref={this.saveMap}
+          ref={(m) => {
+            this.leafletMap = m;
+          }}
           className="map"
           id="mapid"
           center={position}

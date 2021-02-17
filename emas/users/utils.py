@@ -65,3 +65,11 @@ def confirm_token(token, expiration=3600):
     except:
         return False
     return email
+
+
+def send_email(name, email, subject, message):
+    msg = Message(subject,
+                  sender='shawnmars9390@gmail.com', recipients=[email])
+    msg.body = message + '   ' + name
+
+    mail.send(msg)

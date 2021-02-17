@@ -3,36 +3,107 @@
 {% block content %}
 
 
-<article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
-    <div class="media-body">
-        <div class="article-metadata">
-            <a class="mr-2" href="">{{ user.camp_name }}</a>
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
 
-
-
-            {% if user.user_type == 'Camp' %}
-            <small class="text-muted">{{ user.camp_address[0].city}}</small>
-            <br>
-            <small class="text-muted">Last Seen: {{ user.last_seen}}</small>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Camp Profile</h2>
+            <ol>
+                <li><a href=""></a>Home</li>
+                <li>Camp Details</li>
+            </ol>
         </div>
-        <p class="article-content">Total Beds: {{ user.total_number }}</p>
 
-        <p class="article-content">Ocuupied Beds: {{ user.occupied }}</p>
-        <p class="article-content">Distance: {{ user.no }}</p>
-
-
-
-        {% endif %}
-        {% if user != current_user %}
-        <p>
-            <a class="btn btn-primary" href="{{ url_for('users.send_message', recipient=user.email) }}">
-                {{'Send private message' }}
-            </a>
-        </p>
-        {% endif %}
     </div>
+</section><!-- End Breadcrumbs -->
 
-</article>
->>>>>>> e7ed1caa2fef5124d1bd21f8de3737a2d1569673
+<!-- ======= Portfolio Details Section ======= -->
+<section id="portfolio-details" class="portfolio-details">
+    <div class="container">
+
+        <div class="portfolio-details-container" data-aos="fade-up">
+
+            <div class="owl-carousel portfolio-details-carousel">
+
+                <img src="{{ url_for('static', filename='/assets/index/img/portfolio/portfolio-details-1.jpg') }}"
+                    class="img-fluid" alt="">
+
+            </div>
+
+            <div class="portfolio-info">
+                <div class="form-popup" id="myForm">
+                    <form action="" method="POST" class="form-container" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">{{'Send Message to ' + user.fname}}</legend>
+                            <div class="form-group">
+                                {{ form.message.label(class="form-control-label") }}
+
+                                {% if form.message.errors %}
+                                {{ form.message(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.message.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.message(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                        </fieldset>
+
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-outline-info") }}
+
+                            <button type="button" class="btn btn-outline-danger" onclick="closeForm()">Close</button>
+                        </div>
+                    </form>
+                </div>
+                {% if user.user_type == 'Camp' %}
+                <h3>Camp Information</h3>
+                <ul>
+                    <li><strong>Name</strong>: {{ user.camp_name }}</li>
+                    <li><strong>City</strong>: {{ user.camp_address[0].city}}</li>
+                    <li><strong>Total beds</strong>: {{ user.total_number }}</li>
+                    <li><strong>Occupied beds</strong>: {{ user.occupied_number }}</li>
+
+                    <li>{% if user != current_user %}
+                        <p>
+                            <button class="btn btn-primary" id="getform" onclick="openForm()">
+                                Send a Request
+                            </button>
+                        </p>
+                        {% endif %}</li>
+                    <li>Last Seen: {{ user.last_seen}}</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="portfolio-description">
+            <h2>Location details</h2>
+            <p>
+                Location
+            </p>
+        </div>
+
+    </div>
+</section><!-- End Portfolio Details Section -->
+{% endif %}
+
+
+
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
+
+
 {% endblock %}

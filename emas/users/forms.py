@@ -16,8 +16,9 @@ class RegistrationForm(FlaskForm):
     mobile_number = StringField('Mobile Number',
                                 validators=[DataRequired(), Length(min=2, max=20)])
     user_type = SelectField(
-        u'User Type',
-        choices=[('None', 'none'), ('Military', 'military'), ('Camp', 'camp')]
+        'User Type',
+        choices=[('None', 'User Type'),
+                 ('Military', 'Military'), ('Camp', 'Camp')]
     )
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
@@ -26,13 +27,6 @@ class RegistrationForm(FlaskForm):
                                      validators=[DataRequired(), EqualTo('password')])
 
     submit = SubmitField('Sign Up')
-
-    def validate_fname(self, fname):
-        user = User.query.filter_by(fname=fname.data).first()
-
-        if user:
-            raise ValidationError(
-                'That fname is taken please choose a different one.')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
@@ -68,6 +62,7 @@ class UpdateAccountForm(FlaskForm):
                         validators=[FileAllowed(['jpg', 'png'])])
 
     submit = SubmitField('Update')
+
     def validate_fname(self, fname):
         if fname.data != current_user.fname:
             user = User.query.filter_by(fname=fname.data).first()
